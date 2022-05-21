@@ -62,7 +62,7 @@ function Usuarios({ irAtras }) {
 
   const obtenerUsuarios = () => {
     $.ajax({
-      url: `${dominio}/api/tabla_personas`,
+      url: `http://${dominio}/api/tabla_personas`,
       type: "get",
       dataType: "json",
       contentType: "application/json",
