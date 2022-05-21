@@ -4,7 +4,7 @@ import ContInput from "../generic/ContInput";
 import Modal from "../generic/Modal";
 import SearchBar from "../generic/SearchBar";
 import $ from "jquery";
-import { host, port } from "../../helpers/Dbdata";
+import { host, port, dominio } from "../../helpers/Dbdata";
 
 import "./Usuarios.css";
 import FormUsuario from "./usuarios/FormUsuario";
@@ -62,7 +62,7 @@ function Usuarios({ irAtras }) {
 
   const obtenerUsuarios = () => {
     $.ajax({
-      url: `http://apinode-env.eba-pexpsn2k.us-east-1.elasticbeanstalk.com/api/tabla_personas`,
+      url: `${dominio}/api/tabla_personas`,
       type: "get",
       dataType: "json",
       contentType: "application/json",
