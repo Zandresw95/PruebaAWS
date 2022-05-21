@@ -1,0 +1,302 @@
+.loader {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+}
+.loader:after {
+  content: " ";
+  display: block;
+  width: 19px;
+  height: 19px;
+  /* margin: 8px; */
+  border-radius: 50%;
+  border: 4px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: animacionLoader 1.2s linear infinite;
+}
+@keyframes animacionLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.ico-fecha {
+  content: url(../media/ico/calendar.svg);
+}
+
+.ico-balanza {
+  content: url(../media/ico/scale.svg);
+}
+
+.ico-desplegar {
+  content: url(../media/ico/expandir.svg);
+}
+
+.ico-lista {
+  content: url(../media/ico/lista.svg);
+}
+
+.ico-ciudad {
+  content: url(../media/ico/tierra.svg);
+}
+
+/* Iconos de estado */
+.ico-aprobado {
+  content: url(../media/ico/check.svg);
+}
+
+.ico-exito {
+  content: url(../media/ico/check.svg);
+}
+
+.ico-error {
+  content: url(../media/ico/error.svg);
+}
+
+.ico-advertencia {
+  content: url(../media/ico/advertencia.svg);
+}
+/* Fin iconos de estado */
+
+/* iconos de acción */
+.ico-lapiz {
+  content: url(../media/ico/lapiz.svg);
+}
+
+.ico-documento {
+  content: url(../media/ico/documento.svg);
+}
+
+.ico-estrella {
+  content: url(../media/ico/estrella.svg);
+}
+/* iconos de acción */
+
+.ico-casa {
+  content: url(../media/ico/casa.svg);
+}
+
+.ico-phone {
+  content: url(../media/ico/phone.svg);
+}
+
+.ico-ruc {
+  content: url(../media/ico/ruc.svg);
+}
+
+.ico-fecha {
+  content: url(../media/ico/calendar.svg);
+}
+
+.ico-lupa {
+  content: url(../media/ico/lupa.svg);
+}
+
+.ico-empresa {
+  content: url(../media/ico/edificio.svg);
+}
+
+.ico-email {
+  content: url(../media/ico/email.svg);
+}
+
+.ico-eliminar {
+  content: url(../media/ico/basurero.svg);
+}
+
+.ico-guardar {
+  content: url(../media/ico/guardar.svg);
+}
+
+.ico-anadir {
+  content: url(../media/ico/plus.svg);
+}
+
+.ico-cerrar {
+  content: url(../media/ico/close.svg);
+}
+
+.ico-tecnico {
+  content: url(../media/ico/tecnico.svg);
+}
+
+.ico-descargar2 {
+  content: url(../media/ico/flechaAbajo.svg);
+}
+.ico-cargar {
+  content: url(../media/ico/upload.svg);
+}
+.ico-descargar {
+  content: url(../media/ico/download.svg);
+}
+
+.ico-filtro {
+  content: url(../media/ico/embudo.svg);
+}
+
+.ico-atras {
+  content: url(../media/ico/flechaAtras.svg);
+}
+
+.ico-reloj {
+  content: url(../media/ico/reloj.svg);
+}
+
+.ico-marcas {
+  content: url(../media/ico/marca2.svg);
+}
+
+.ico-candado {
+  content: url(../media/ico/candado.svg);
+}
+
+.ico-machine {
+  content: url(../media/ico/machine.svg);
+}
+.ico-product {
+  content: url(../media/ico/product.svg);
+}
+.ico-room {
+  content: url(../media/ico/room.svg);
+}
+
+.ico-configuracion {
+  content: url(../media/ico/engranaje.svg);
+}
+
+.ico-termometro {
+  content: url(../media/ico/termometro.svg);
+}
+
+.ico-humedad {
+  content: url(../media/ico/humedad.svg);
+}
+
+.ico-peso-patron {
+  content: url(../media/ico/pesa.svg);
+}
+
+.ico-login {
+  content: url(../media/ico/login.svg);
+}
+
+.ico-cerrar-sesion {
+  content: url(../media/ico/flechaAbajo.svg);
+  transform: rotate(-90deg);
+}
+
+.ico-usuarios {
+  content: url(../media/ico/usuarios.svg);
+}
+
+.ico-usuario {
+  content: url(../media/ico/usuario.svg);
+}
+
+.ico-estado-activo {
+  border-radius: 50%;
+  background-color: rgb(31, 206, 54);
+}
+
+.ico-estado-inactivo {
+  border-radius: 50%;
+  background-color: var(--eliminar);
+}
+
+.ico-cambiar {
+  content: url(../media/ico/repeat.svg);
+}
+
+.ico-copiar {
+  content: url(../media/ico/copiar.svg);
+}
+
+.ico-flecha-desplegar {
+  content: url(../media/ico/flechaDesplegar.svg);
+}
+
+.ico-chart {
+  content: url(../media/ico/chart.svg);
+}
+
+.ico-martillo {
+  content: url(../media/ico/martillo.svg);
+}
+
+/* formatos */
+
+.format-ico-form {
+  width: 17px;
+  max-height: 17px;
+  /* filter: invert(70%); */
+  margin: 0 10px;
+}
+
+.format-ico-form-validacion {
+  width: 17px;
+  max-height: 17px;
+  margin: 0 10px;
+}
+
+.format-ico-busqueda {
+  height: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.format-ico-btn {
+  width: 20px;
+  max-height: 20px;
+  margin-right: 5px;
+}
+
+.format-ico-btn-rojo {
+  width: 17px;
+  max-height: 17px;
+  -webkit-filter: invert(1) brightness(0.4) sepia(1) hue-rotate(320deg)
+    saturate(4);
+  filter: invert(1) brightness(0.4) sepia(1) hue-rotate(320deg) saturate(4);
+  margin-right: 5px;
+}
+
+.format-ico-app {
+  width: 70px;
+}
+
+.format-ico-titulo-form {
+  padding: 3px;
+  filter: invert(1);
+  background-color: rgb(220, 100, 100);
+  border-radius: 6px;
+}
+
+.format-ico-loader {
+  height: calc(var(--radio-input) * 2);
+  /* filter: invert(1); */
+  -webkit-filter: invert(80%) sepia(95%) saturate(7091%) hue-rotate(347deg)
+    brightness(92%) contrast(101%);
+  filter: invert(80%) sepia(95%) saturate(7091%) hue-rotate(347deg)
+    brightness(92%) contrast(101%);
+}
+
+.format-ico-navbar {
+  width: 40px;
+  margin: 0 auto;
+}
+
+.format-ico-sesion {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+}
+
+.format-ico-resumen-magnitud {
+  width: 20px;
+}
+
+.format-ico-usuario-card {
+  height: 50px;
+}

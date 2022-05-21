@@ -1,0 +1,65 @@
+.btn {
+  border-radius: calc(var(--radio-input) / 4);
+  outline: none;
+  border: none;
+  background-color: var(--color-fondo-button);
+  color: black;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  height: calc(var(--radio-input) * 2);
+  align-items: center;
+  padding: 0 var(--padding-btn);
+  padding-right: calc(var(--padding-btn) * 1.5);
+  width: 100%;
+  justify-content: center;
+}
+
+.btn:hover {
+  /* background-color: var(--color-principal); */
+  box-shadow: var(--borde-input);
+  color: var(--color-texto-active);
+}
+
+.btn:hover .format-ico-btn {
+  -webkit-filter: invert(20%) sepia(95%) saturate(7091%) hue-rotate(347deg)
+    brightness(92%) contrast(101%);
+  filter: invert(20%) sepia(95%) saturate(7091%) hue-rotate(347deg)
+    brightness(92%) contrast(101%);
+}
+
+/* .btn span {
+  padding-top: 2px;
+} */
+
+.disabled {
+  background-color: var(--fondo);
+  color: var(--suave2);
+  /* border-radius: 15px; */
+  filter: unset;
+  cursor: default;
+  /* box-shadow: none; */
+}
+
+.btn:hover .btn-label-rojo {
+  color: var(--color-texto-active);
+}
+
+.btn-label-rojo {
+  color: var(--color-eliminar);
+}
+
+input.disabled,
+button.disabled {
+  box-shadow: none;
+}
+
+input.disabled:hover,
+button.disabled:hover,
+button.disabled:focus {
+  box-shadow: none;
+}
+
+.disabled:focus-within {
+  box-shadow: none;
+}

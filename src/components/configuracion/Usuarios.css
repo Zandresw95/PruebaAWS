@@ -1,0 +1,13 @@
+.cont-usuarios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* height: 100%; */
+}
+
+.cont-contenido-usuarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  /* height: 100%; */
+}

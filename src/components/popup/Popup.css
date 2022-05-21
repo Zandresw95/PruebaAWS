@@ -1,0 +1,83 @@
+.modalSobrepuestoInput {
+  z-index: 1021;
+}
+
+.popup,
+.inputPopup {
+  z-index: 1100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+  align-items: center;
+  justify-items: center;
+  max-width: 360px;
+  width: 95%;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  background-color: var(--color-fondo-popup);
+  border-radius: var(--radio-popup);
+  /* -webkit-backdrop-filter: var(--desenfoque-principal);
+    backdrop-filter: var(--desenfoque-principal); */
+  box-shadow: var(--sombra-popup);
+  transition: transform var(--transicion-popup);
+  transform: translateY(-300%);
+  padding: 10px;
+}
+
+.popup {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+}
+
+.inputPopup {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputPopup .form2col {
+  grid-template-columns: 1fr max-content;
+  width: 100%;
+}
+
+.popup.mostrarpopup,
+.inputPopup.mostrarpopup {
+  transform: translateY(10px);
+}
+
+.inputPopup.mostrarpopup + .modalSobrepuesto {
+  visibility: visible;
+  opacity: 1;
+}
+
+.icoPopup {
+  width: 40px;
+  margin-left: 10px;
+  margin-right: 15px;
+}
+
+.inputPopup .icoPopup {
+  grid-row: 1/3;
+}
+
+.inputPopup .mensajePopup {
+  padding: 10px;
+}
+
+/* .inputPopup input{
+    background-color: white;
+    outline: none;
+    border-radius: var(--radio-input);
+    height: calc(var(--radio-input) * 2);
+    width: 90%;
+    grid-column: 2/3;
+    border:none;
+    box-shadow: var(--sombra-elemento-primario);
+    margin-top: 10px;
+    padding: 0 10px;
+} */

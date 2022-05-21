@@ -1,38 +1,185 @@
-.App {
+:root {
+  /* colores */
+  --color-fondo-app: rgb(205, 205, 205);
+  --color-fondo-seccion: rgb(235, 235, 235);
+  --color-fondo-card: rgb(255, 255, 255);
+  --color-foco-links: rgb(245, 245, 245);
+  --color-fondo-modal: rgba(0, 0, 0, 0.5);
+  --color-principal: rgb(236, 9, 40);
+  --color-secundario: rgb(212, 9, 36);
+  --color-texto-low: #585858;
+  --color-texto-lowest: rgb(131, 131, 131);
+  --color-texto-active: rgb(236, 9, 40);
+  --color-eliminar: rgb(206, 65, 65);
+  --color-eliminar-hover: rgb(218, 71, 71);
+  --color-fondo-focus: rgb(245, 245, 245);
+  --color-fondo-button: rgb(255, 255, 255);
+  --color-fondo-input: rgb(238, 238, 238);
+  --color-sombras: rgb(220, 220, 220);
+  --color-error: rgb(180, 38, 38);
+  --color-contenido-modal: rgb(240, 240, 240);
+  --color-fondo-tab: rgb(255, 255, 255);
+  --color-placeholder: rgb(200, 200, 200);
+  --color-fondo-popup: rgb(240, 240, 240);
+
+  /* transiciones */
+  --transicion-rapida: 0.1s ease-in-out;
+  --transicion-moderada: 0.3s ease-in-out;
+  --transicion-popup: 0.65s ease-in-out;
+
+  /* Desenfoques */
+  --desenfoque-principal: blur(20px);
+
+  --padding-card: 15px;
+  --padding-input: 5px;
+  --padding-btn: 8px;
+  --padding-contenido-modal: 25px;
+  --padding-tabs: 5px;
+  --padding-seccion: 15px;
+
+  /* --sombra-card: 4px 4px 8px 2px rgba(0, 0, 0, 0.1); */
+  --sombra-card: 4px 4px 8px 2px rgba(150, 150, 150, 0.1);
+  --sombra-contenedor-principal: 0px 10px 12px 5px rgba(0, 0, 0, 0.1);
+  /* --sombra-elemento-primario:10px 10px 20px 4px rgba(0, 0, 0, 0.15); */
+  --sombra-elemento-primario: 0px 10px 10px 1px rgba(0, 0, 0, 0.05);
+  --sombra-navbar: 0px 0px 12px 0 var(--fondo);
+  --sombra-popup: 0px 0px 50px 40px rgba(0, 0, 0, 0.15);
+  --sombra-contenedor-sobrepuesto: 0px 0px 200px 40px rgba(0, 0, 0, 0.2);
+
+  /* radios */
+  --radio-seccion: 20px;
+  --radio-card: 15px;
+  --radio-input: 15px;
+  --radio-modal: 20px;
+  --radio-popup: 30px;
+
+  /* bordes */
+  --borde-input: 0 0 0 1px var(--color-sombras);
+  --borde-input-focus: 0 0 0 1px var(--color-secundario);
+
+  /* tiempos animaciones */
+  --animacion-rapida: 0.15s;
+  --animacion-media: 0.3s;
+  --animacion-normal: 0.5s;
+  --animacion-lenta: 1s;
+}
+
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: url("./fuentes/Montserrat-Regular.ttf");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Montserrat-Medium";
+  src: url("./fuentes/Montserrat-Medium.ttf");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Quicksand-Regular";
+  src: url(./fuentes/Quicksand-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Quicksand-Medium";
+  src: url(./fuentes/Quicksand-Medium.ttf);
+}
+
+* {
+  font-family: "Quicksand-Medium", sans-serif;
+}
+
+body {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+  background-color: var(--color-fondo-app);
+}
+
+input,
+select {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  padding: var(--padding-input);
+  border-radius: calc(var(--radio-input) / 4);
+}
+
+input::placeholder {
+  color: var(--color-placeholder);
+}
+
+.texto-validacion {
+  width: 100%;
+  grid-column: 1/-1;
   text-align: center;
+  font-size: 0.8em;
+  color: var(--color-error);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.animar-entrada {
+  animation-name: animacion-bottom-to-top;
+  animation-duration: var(--animacion-media);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes animacion-bottom-to-top {
   from {
-    transform: rotate(0deg);
+    transform: translateX(300px) scale(0.7);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: translate(0) scale(1);
+    opacity: 1;
   }
+}
+
+.animar-zoom {
+  animation-name: animacion-zoom-max-to-min;
+  animation-duration: var(--animacion-media);
+}
+
+@keyframes animacion-zoom-max-to-min {
+  from {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animar-zoom-min-to-max {
+  animation-name: animacion-zoom-min-to-max;
+  animation-duration: var(--animacion-media);
+}
+
+@keyframes animacion-zoom-min-to-max {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.rotar {
+  transform: rotate(-180deg);
+  transition: transform var(--transicion-rapida);
+}
+
+.rotar-volver {
+  transform: rotate(0deg);
+  transition: transform var(--transicion-rapida);
 }

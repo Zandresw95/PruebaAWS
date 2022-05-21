@@ -1,0 +1,23 @@
+.cont-area {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  max-width: 400px;
+  height: 400px;
+  background: linear-gradient(
+    -45deg,
+    rgba(235, 235, 235, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.area-maquinas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(95%, 1fr));
+  align-items: center;
+  gap: 10px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  overflow-y:scroll;
+}
+  

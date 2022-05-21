@@ -1,0 +1,58 @@
+.cont-menu-sesion {
+  height: 0px;
+  width: 0px;
+  overflow: hidden;
+  border-radius: var(--radio-input);
+  background-color: var(--color-fondo-tab);
+  margin-left: 25px;
+  visibility: hidden;
+  bottom: 70px;
+  transition: height var(--transicion-rapida), width var(--transicion-rapida),
+    visibility var(--transicion-rapida);
+  box-shadow: var(--sombra-card), var(--borde-input);
+  z-index: 10;
+  position: absolute;
+}
+
+.cont-menu-sesion.active {
+  height: 90px;
+  width: 200px;
+  /* box-shadow: var(--borde-input-focus); */
+  visibility: visible;
+}
+
+.menu-sesion-lista {
+  list-style: none;
+  cursor: pointer;
+}
+
+.menu-sesion-lista li {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.menu-sesion-lista li:hover {
+  background-color: var(--color-foco-links);
+}
+
+.menu-sesion-flecha {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  /* padding: 10px; */
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.menu-sesion-flecha {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  /* padding: 10px; */
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}

@@ -1,0 +1,30 @@
+.cont-ico-app {
+  width: 110px;
+  height: 125px;
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  cursor: pointer;
+  background-color: transparent;
+  box-shadow: none;
+  transition: transform var(--transicion-rapida);
+}
+
+.cont-ico-app:hover {
+  transform: scale(1.05);
+  color: var(--color-principal);
+}
+
+.cont-ico-app:hover > div {
+  -webkit-filter: invert(20%) sepia(95%) saturate(7091%) hue-rotate(347deg)
+    brightness(92%) contrast(101%);
+  filter: invert(20%) sepia(95%) saturate(7091%) hue-rotate(347deg)
+    brightness(92%) contrast(101%);
+}
+
+.cont-ico-app > div {
+  justify-self: center;
+}
+
+.cont-ico-app > p {
+  text-align: center;
+}

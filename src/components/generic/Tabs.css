@@ -1,0 +1,36 @@
+.cont-tabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3px;
+  list-style: none;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.cont-tabs li {
+  padding: var(--padding-tabs) calc(var(--padding-tabs) * 2);
+  background-color: var(--color-fondo-tab);
+  padding-top: 5px;
+  font-size: 1.05em;
+  cursor: pointer;
+}
+
+.cont-tabs li:first-child {
+  border-radius: var(--radio-card) 0 0 var(--radio-card);
+}
+
+.cont-tabs li:last-child {
+  border-radius: 0 var(--radio-card) var(--radio-card) 0;
+}
+
+.cont-tabs li.active {
+  background-color: var(--color-principal);
+  color: white;
+}
+
+.cont-tabs li:hover {
+  background-color: var(--color-secundario);
+  color: white;
+  box-shadow: var(--borde-input);
+}

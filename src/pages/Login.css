@@ -1,0 +1,33 @@
+.cont-login0 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 260px;
+  height: max-content;
+  margin: auto;
+  padding: var(--padding-seccion);
+  background-color: var(--color-fondo-seccion);
+  border-radius: var(--radio-seccion);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.cont-login {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-items: center;
+
+  /* transform: translate(-50%,-60%); */
+  gap: 20px;
+}
+
+.login-logo {
+  height: 40px;
+  content: url(../media/img/logoPinprexatColor.svg);
+}

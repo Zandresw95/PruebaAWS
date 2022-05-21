@@ -1,0 +1,33 @@
+.cont-modal {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  z-index: 110;
+  transform: scaleX(0) scaleY(0) translateX(-50%) translateY(-200px);
+  transform-origin: 0% 0;
+  transition: transform var(--transicion-moderada);
+  background-color: var(--color-contenido-modal);
+  padding: var(--padding-contenido-modal);
+  border-radius: var(--radio-modal);
+  display: block;
+  margin: 0 auto;
+}
+
+.cont-modal.active {
+  transform: scaleX(1) scaleY(1) translateX(-50%) translateY(20px);
+}
+
+.modal-fondo {
+  background-color: var(--color-fondo-modal);
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.modal-fondo.active {
+  display: block;
+}
