@@ -148,7 +148,7 @@ function App() {
           />
         </div>
         <br/>
-        <button className="btn btn-primary" onclick={crearUsuario}>Enviar</button>
+        <button className="btn btn-primary" onClick={crearUsuario}>Enviar</button>
         <br />
         {person}
       </form>
