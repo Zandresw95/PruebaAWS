@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
 
+let initialUsuario = {
+  nombre_persona: "",
+  apellido_persona: "",
+  edad_persona: 0,
+  fecha_nacimiento_persona: "",
+  cedula_persona: ""
+};
+
 function App() {
   const [values, setValues] = React.useState({
     name: "",
@@ -10,6 +18,8 @@ function App() {
     ci: ""
   });
   const [person, setPerson] = React.useState("");
+  const [usuario, setUsuario] = useState(initialUsuario);
+
   function handleSubmit(evt) {
     /*
       Previene el comportamiento default de los
@@ -48,6 +58,35 @@ function App() {
     // Sincroniza el estado de nuevo
     setValues(newValues);
   }
+
+  const crearUsuario = () => {
+    console.log("creando");
+    $.ajax({
+      url: `http://apinode-env.eba-pexpsn2k.us-east-1.elasticbeanstalk.com/api/tabla_personas/agregar`,
+      type: "post",
+      dataType: "json",
+      contentType: "application/json",
+      data: JSON.stringify({ ...usuario }),
+      beforeSend: function () {
+        setMostrarCargando(true);
+      },
+      success: function (data) {
+        console.log(data);
+        setMostrarCargando(false);
+        mostrarPopup(1, data.mensaje);
+        cerrar();
+      },
+      error: function (data) {
+        setMostrarCargando(false);
+        console.log(data.responseJSON.data);
+        let mensaje = data.responseJSON.data;
+        if (data.status === 0)
+          mostrarPopup(0, "No es posible conectarse al servidor Node JS");
+        else mostrarPopup(2, mensaje);
+      },
+    });
+  };
+
   return (
     <div className="container">
       <h1>CRUD PERSONAS</h1>
@@ -108,7 +147,7 @@ function App() {
           />
         </div>
         <br/>
-        <button type="submit" className="btn btn-primary">Enviar</button>
+        <button type="submit" className="btn btn-primary" onclick={crearUsuario}>Enviar</button>
         <br />
         {person}
       </form>
