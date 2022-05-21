@@ -68,21 +68,21 @@ function App() {
       contentType: "application/json",
       data: JSON.stringify({ ...usuario }),
       beforeSend: function () {
-        setMostrarCargando(true);
+        //setMostrarCargando(true);
       },
       success: function (data) {
         console.log(data);
-        setMostrarCargando(false);
-        mostrarPopup(1, data.mensaje);
-        cerrar();
+        //setMostrarCargando(false);
+        //mostrarPopup(1, data.mensaje);
+        //cerrar();
       },
       error: function (data) {
-        setMostrarCargando(false);
+        //setMostrarCargando(false);
         console.log(data.responseJSON.data);
         let mensaje = data.responseJSON.data;
-        if (data.status === 0)
-          mostrarPopup(0, "No es posible conectarse al servidor Node JS");
-        else mostrarPopup(2, mensaje);
+        //if (data.status === 0)
+         // mostrarPopup(0, "No es posible conectarse al servidor Node JS");
+        //else //mostrarPopup(2, mensaje);
       },
     });
   };
