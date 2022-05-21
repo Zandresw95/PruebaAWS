@@ -53,7 +53,7 @@ function App() {
       <h1>CRUD PERSONAS</h1>
       <form onSubmit={handleSubmit}>
         <div className="ab-3">
-          <label htmlFor="name" className="form-label">Nombre</label>
+          <label htmlFor="name" className="form-label">NombrePrueba</label>
           <input
             id="name"
             name="name"
