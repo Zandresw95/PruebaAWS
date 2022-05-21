@@ -5,9 +5,11 @@ function App() {
   const [values, setValues] = React.useState({
     name: "",
     lastname: "",
-    age:0,
+    age: 0,
+    fnac: "",
+    ci: ""
   });
-  const [fullData,setFullData]= React.useState("");
+  const [person, setPerson] = React.useState("");
   function handleSubmit(evt) {
     /*
       Previene el comportamiento default de los
@@ -15,8 +17,16 @@ function App() {
     */
     evt.preventDefault();
     // Aquí puedes usar values para enviar la información
-    setFullData("valores: " + values.name + " " +values.lastname + " " + values.age);
-    console.log("valores: " + values.name + " " +values.lastname + " " + values.age);
+    setPerson("Data: {\n Nombre: " + values.name + 
+        "\nApellido: " + values.lastname + 
+        "\nEdad: " + values.age + 
+        "\nFecha de Nacimiento: "+values.fnac + 
+        "\nCedula: " + values.ci);
+    console.log("Data: {\n Nombre: " + values.name + 
+    "\nApellido: " + values.lastname + 
+    "\nEdad: " + values.age + 
+    "\nFecha de Nacimiento: "+values.fnac + 
+    "\nCedula: " + values.ci);
   }
   function handleChange(evt) {
     /*
@@ -39,38 +49,72 @@ function App() {
     setValues(newValues);
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Nombre</label>
-      <input
-        id="name"
-        name="name"
-        type="name"
-        value={values.name}
-        onChange={handleChange}
-      />
-      <br/>
-      <label htmlFor="password">Apellido</label>
-      <input
-        id="lastname"
-        name="lastname"
-        type="lastname"
-        value={values.lastname}
-        onChange={handleChange}
-      />
-      <br/>
-      <label htmlFor="password">Edad</label>
-      <input
-        id="age"
-        name="age"
-        type="age"
-        value={values.age}
-        onChange={handleChange}
-      />
-      <button type="submit">Enviar</button>
-      <br/>
-      {fullData}
-    </form>
-      
+    <div className="container">
+      <h1>CRUD PERSONAS</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="ab-3">
+          <label htmlFor="name" className="form-label">Nombre</label>
+          <input
+            id="name"
+            name="name"
+            type="name"
+            value={values.name}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="ab-3">
+          <label htmlFor="lastname" className="form-label">Apellido</label>
+          <input
+            id="lastname"
+            name="lastname"
+            type="lastname"
+            value={values.lastname}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="ab-3">
+          <label htmlFor="age">Edad</label>
+          <input
+            id="age"
+            name="age"
+            type="age"
+            value={values.age}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="ab-3">
+          <label htmlFor="date" className="form-label">Fecha de Nacimiento:</label>
+          <input
+            id="date"
+            name="date"
+            type="date"
+            value={values.fnac}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="ab-3">
+          <label htmlFor="ci" className="form-label">Cedula:</label>
+          <input
+            id="ci"
+            name="ci"
+            type="ci"
+            value={values.ci}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <br/>
+        <button type="submit" className="btn btn-primary">Enviar</button>
+        <br />
+        {person}
+      </form>
+    </div>
+
+
   );
 }
 
