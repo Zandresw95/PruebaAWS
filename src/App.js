@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import $ from "jquery";
 import './App.css';
 
 let initialUsuario = {
