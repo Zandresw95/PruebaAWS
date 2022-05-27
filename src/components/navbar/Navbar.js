@@ -33,7 +33,7 @@ function Navbar() {
             navegar("/personas");
           }}
         >
-          <div className="ico-balanza format-ico-navbar"></div>
+          <div className="ico-usuario format-ico-navbar"></div>
           <p>Personas</p>
         </li>
       </ul>
