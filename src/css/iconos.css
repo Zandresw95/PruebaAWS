@@ -62,6 +62,11 @@
 /* Fin iconos de estado */
 
 /* iconos de acción */
+
+.ico-editar {
+  content: url(../media/ico/lapiz.svg);
+}
+
 .ico-lapiz {
   content: url(../media/ico/lapiz.svg);
 }
@@ -208,6 +213,10 @@
 
 .ico-cambiar {
   content: url(../media/ico/repeat.svg);
+}
+
+.ico-edit {
+  content: url(../media/ico/edit.svg);
 }
 
 .ico-copiar {

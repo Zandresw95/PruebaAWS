@@ -17,6 +17,7 @@ import "./css/normalize.css";
 import { PantallaActivaProvider } from "./context/PantallaActivaContext";
 import Error404 from "./pages/Error404";
 import Personas from "./pages/Personas";
+import Opcione from "./pages/Opcione";
 
 const NavLayout = () => (
   <>
@@ -37,6 +38,7 @@ function App() {
               <Route element={<NavLayout />}>
                 <Route index element={<Inicio />} />
                 <Route path="/personas" element={<Personas />} />
+                <Route path="/opciones" element={<Opcione />} />
               </Route>
             </Routes>
           </div>

@@ -36,6 +36,16 @@ function Navbar() {
           <div className="ico-usuario format-ico-navbar"></div>
           <p>Personas</p>
         </li>
+        <li
+          className={pantallaActiva === 1 ? "active" : ""}
+          onClick={() => {
+            setPantallaActiva(1);
+            navegar("/opciones");
+          }}
+        >
+          <div className="ico-configuracion format-ico-navbar"></div>
+          <p>Opciones</p>
+        </li>
       </ul>
     </div>
   );

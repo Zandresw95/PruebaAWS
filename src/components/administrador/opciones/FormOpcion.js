@@ -2,54 +2,49 @@ import Button from "../../generic/Button";
 import ContInput from "../../generic/ContInput";
 import $ from "jquery";
 import { useContext, useEffect, useState } from "react";
-import { host, port, dominio } from "../../../helpers/Dbdata";
+import { dominio } from "../../../helpers/Dbdata";
 import { Validar } from "../../../helpers/Validar";
 
-import "./FormUsuario.css";
+import "./FormOpcion.css";
 import PopupContext from "../../../context/PopupContext";
 
-let initialUsuario = {
-  nombre_persona: "",
-  apellido_persona: "",
-  direccion_persona: "",
-  fechanac_persona: "",
-  cedula_persona: "",
+let initialOpcion = {
+  descripcion_opcion: "",
+  observacion_opcion: "",
+  estado_opcion: true,
 };
 
 let initialFormValidado = {
-  nombre_persona: [true, ""],
-  apellido_persona: [true, ""],
-  direccion_persona: [true, ""],
-  fechanac_persona: [true, ""],
-  cedula_persona: [true, ""],
+  descripcion_opcion: [false, ""],
 };
 
-function FormUsuario({ idUsuario, cerrar }) {
+function FormOpcion({ idOpcion, cerrar }) {
   const [mostrarCargando, setMostrarCargando] = useState(false);
-  const [usuario, setUsuario] = useState(initialUsuario);
-  const [tempUsuario, setTempUsuario] = useState(initialUsuario);
+  const [opcion, setOpcion] = useState(initialOpcion);
+  const [tempOpcion, setTempOpcion] = useState(initialOpcion);
   const [formValidado, setFormValidado] = useState(initialFormValidado);
   const [editando, setEditando] = useState(false);
+  
 
   const { mostrarPopup } = useContext(PopupContext);
 
   useEffect(() => {
-    obtenerUsuario();
-    if (idUsuario === 0) setEditando(true);
+    obtenerOpcion();
+    if (idOpcion === 0) setEditando(true);
     else setEditando(false);
     setFormValidado(initialFormValidado);
-    setTempUsuario(initialUsuario);
-  }, [idUsuario]);
+    setTempOpcion(initialOpcion);
+  }, [idOpcion]);
 
   useEffect(() => {
-    if (idUsuario !== 0) validarTodo();
+    if (idOpcion !== 0) validarTodo();
     else setFormValidado(initialFormValidado);
-  }, [usuario]);
+  }, [opcion]);
 
   const handleChange = (e) => {
-    if (e.target.name === "estado")
-      setUsuario({ ...usuario, [e.target.name]: e.target.checked ? 1 : 0 });
-    else setUsuario({ ...usuario, [e.target.name]: e.target.value });
+    if (e.target.name === "estado_opcion")
+      setOpcion({ ...opcion, [e.target.name]: e.target.checked ? true : false });
+    else setOpcion({ ...opcion, [e.target.name]: e.target.value });
     actualizarValidacion(e);
   };
 
@@ -60,19 +55,9 @@ function FormUsuario({ idUsuario, cerrar }) {
   const actualizarValidacion = (e) => {
     let tempCampo = {};
     switch (e.target.name) {
-      case "nombre":
+      case "descripcion_opcion":
         tempCampo = {
           [e.target.name]: Validar.general(e.target.value),
-        };
-        break;
-      case "cedula":
-        tempCampo = {
-          [e.target.name]: Validar.cedula(e.target.value),
-        };
-        break;
-      case "idperfil":
-        tempCampo = {
-          [e.target.name]: Validar.noCero(e.target.value),
         };
         break;
       default:
@@ -95,51 +80,47 @@ function FormUsuario({ idUsuario, cerrar }) {
   };
 
   const validarTodo = () => {
-    // console.log("validar");
     let tempFormValidado;
-    for (const key in usuario) {
-      if (Object.hasOwnProperty.call(usuario, key)) {
-        const el = usuario[key];
-        if (key === "estado") continue;
-        console.log(Validar.general(el));
+    for (const key in opcion) {
+      if (Object.hasOwnProperty.call(opcion, key)) {
+        const el = opcion[key];
+        if (key === "estado_opcion" || key === "observacion_opcion") continue;
         tempFormValidado = { ...tempFormValidado, [key]: Validar.general(el) };
       }
     }
     setFormValidado(tempFormValidado);
-    // console.log(tempFormValidado);
-    // console.log(usuario);
   };
 
   useEffect(() => {
     console.log(formValidado);
   }, [formValidado]);
 
-  const guardarUsuario = () => {
+  const guardarOpcion = () => {
     if (validarForm()) {
-      if (editando && idUsuario !== 0) {
-        actualizarUsuario();
+      if (editando && idOpcion !== 0) {
+        actualizarOpcion();
       } else {
-        crearUsuario();
+        crearOpcion();
       }
     } else {
       mostrarPopup(2, "Llena todos los datos");
     }
   };
 
-  const editarUsuario = () => {
-    setTempUsuario(usuario);
+  const editarOpcion = () => {
+    setTempOpcion(opcion);
     setEditando(true);
   };
 
   const cancelarEdicion = () => {
-    setUsuario(tempUsuario);
+    setOpcion(tempOpcion);
     setEditando(false);
   };
 
-  const obtenerUsuario = () => {
-    if (idUsuario && idUsuario > 0) {
+  const obtenerOpcion = () => {
+    if (idOpcion && idOpcion > 0) {
       $.ajax({
-        url: `http://${dominio}/api/tabla_personas/${idUsuario}`,
+        url: `http://${dominio}/api/tabla_opciones/${idOpcion}`,
         type: "get",
         dataType: "json",
         contentType: "application/json",
@@ -149,12 +130,10 @@ function FormUsuario({ idUsuario, cerrar }) {
         success: function (data) {
           setMostrarCargando(false);
           console.log(data);
-          setUsuario({
-            nombre_persona: data.data.nombre_persona,
-            apellido_persona: data.data.apellido_persona,
-            direccion_persona: data.data.direccion_persona,
-            fechanac_persona: data.data.fechanac_persona,
-            cedula_persona: data.data.cedula_persona,
+          setOpcion({
+            descripcion_opcion: data.data.descripcion_opcion,
+            observacion_opcion: data.data.observacion_opcion,
+            estado_opcion: data.data.estado_opcion,
           });
           // if ("cedula" in data) {
           //   setUserData(data);
@@ -172,18 +151,17 @@ function FormUsuario({ idUsuario, cerrar }) {
         },
       });
     } else {
-      setUsuario(initialUsuario);
+      setOpcion(initialOpcion);
     }
   };
 
-  const crearUsuario = () => {
-    console.log("creando");
+  const crearOpcion = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_personas/agregar`,
+      url: `http://${dominio}/api/tabla_opciones/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
-      data: JSON.stringify({ ...usuario }),
+      data: JSON.stringify({ ...opcion }),
       beforeSend: function () {
         setMostrarCargando(true);
       },
@@ -204,13 +182,13 @@ function FormUsuario({ idUsuario, cerrar }) {
     });
   };
 
-  const actualizarUsuario = () => {
+  const actualizarOpcion = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_personas/edit/${idUsuario}`,
+      url: `http://${dominio}/api/tabla_opciones/edit/${idOpcion}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
-      data: JSON.stringify({ ...usuario }),
+      data: JSON.stringify({ ...opcion }),
       beforeSend: function () {
         setMostrarCargando(true);
       },
@@ -230,14 +208,14 @@ function FormUsuario({ idUsuario, cerrar }) {
     });
   };
 
-  const eliminarUsuario = () => {
-    if (window.confirm("¿Seguro que desea eliminar el usuario?"))
+  const eliminarOpcion = () => {
+    if (window.confirm("¿Seguro que desea eliminar la opcion?"))
       $.ajax({
-        url: `http://${dominio}/api/tabla_personas/delete/${idUsuario}`,
+        url: `http://${dominio}/api/tabla_opciones/delete/${idOpcion}`,
         type: "delete",
         dataType: "json",
         contentType: "application/json",
-        data: JSON.stringify({ estado: 100 }),
+        data: JSON.stringify({ estado: false }),
         beforeSend: function () {
           setMostrarCargando(true);
         },
@@ -258,106 +236,83 @@ function FormUsuario({ idUsuario, cerrar }) {
   };
 
   return (
-    <div className="cont-form-usuario">
+    <div className="cont-form-opcion">
       {mostrarCargando ? (
         <div className="cont-loader-full-container">
           <div className="loader format-ico-loader"></div>
         </div>
       ) : (
         <>
-          <h3>{idUsuario === 0 ? "Nuevo usuario" : usuario.nombre_persona}</h3>
-          <div className="form-usuario-acciones">
-            {idUsuario && idUsuario !== 0 && !editando ? (
+          <h3 className="titulo-opcion">{idOpcion === 0 ? "NUEVA OPCIÓN" : !editando ? "VER OPCIÓN": "EDITAR OPCIÓN" }</h3>
+          <div className="form-opcion-acciones">
+            {idOpcion && idOpcion !== 0 && !editando ? (
               <>
                 <Button
                   label={"Editar"}
-                  icono={"ico-editar"}
-                  onClick={editarUsuario}
+                  icono={"ico-edit"}
+                  onClick={editarOpcion}
+                  editar={true}
                 />
                 <Button
                   label={"Eliminar"}
                   icono={"ico-eliminar"}
-                  onClick={eliminarUsuario}
+                  onClick={eliminarOpcion}
+                  borrar={true}
                 />
               </>
             ) : (
               ""
             )}
-            {idUsuario && idUsuario !== 0 && editando ? (
+            {idOpcion && idOpcion !== 0 && editando ? (
               <Button label={"Cancelar"} onClick={cancelarEdicion} />
             ) : (
               ""
             )}
           </div>
           <form>
-            <ContInput label="Nombres" icono={"ico-usuario"}>
+            <ContInput label="Descripción" icono={"ico-opcion"}>
               <input
-                value={usuario.nombre_persona}
+                value={opcion.descripcion_opcion}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="nombre_persona"
+                name="descripcion_opcion"
                 disabled={!editando}
               />
-              {!formValidado.nombre_persona[0] && (
+              {!formValidado.descripcion_opcion[0] && (
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            {!formValidado.nombre_persona[0] && (
-              <p className="texto-validacion">{formValidado.nombre_persona[1]}</p>
+            {!formValidado.descripcion_opcion[0] && (
+              <p className="texto-validacion">{formValidado.descripcion_opcion[1]}</p>
             )}
-            <ContInput label="Apellidos" icono={"ico-usuario"}>
+            <ContInput label="Observación" icono={"ico-opcion"}>
               <input
-                value={usuario.apellido_persona}
+                value={opcion.observacion_opcion}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="apellido_persona"
+                name="observacion_opcion"
                 disabled={!editando}
               />
-              {!formValidado.apellido_persona[0] && (
-                <div className="ico-advertencia  format-ico-form-validacion"></div>
-              )}
             </ContInput>
-            <ContInput label="Dirección" icono={"ico-usuario"}>
+            <p className="form-opcion-toggle">
+              <label htmlFor="toggleEstado">Activo </label>
               <input
-                value={usuario.direccion_persona}
+                id="toggleEstado"
+                type="checkbox"
+                style={{ width: "20px", height: "30px" }}
+                name="estado_opcion"
+                checked={opcion.estado_opcion}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="direccion_persona"
                 disabled={!editando}
               />
-              {!formValidado.direccion_persona[0] && (
-                <div className="ico-advertencia  format-ico-form-validacion"></div>
-              )}
-            </ContInput>
-            <ContInput label="Fecha nacimiento" icono={"ico-usuario"}>
-              <input
-                value={usuario.fechanac_persona}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="fechanac_persona"
-                disabled={!editando}
-                type="date"
-              />
-              {!formValidado.fechanac_persona[0] && (
-                <div className="ico-advertencia  format-ico-form-validacion"></div>
-              )}
-            </ContInput>
-            <ContInput label="Cédula" icono={"ico-ruc"}>
-              <input
-                value={usuario.cedula_persona}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="cedula_persona"
-                disabled={!editando}
-              />
-              {!formValidado.cedula_persona[0] && (
-                <div className="ico-advertencia  format-ico-form-validacion"></div>
-              )}
-            </ContInput>
-            {!formValidado.cedula_persona[0] && (
-              <p className="texto-validacion">{formValidado.cedula_persona[1]}</p>
-            )}
-            {editando && <Button label={"Guardar"} onClick={guardarUsuario} />}
+            </p>
+            <div className="form-opcion-acciones">
+              <Button label={"Aceptar"} onClick={guardarOpcion} aceptar={true}/> 
+              {editando && <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>}
+              {!editando && <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>}
+            </div>
+
           </form>
         </>
       )}
@@ -365,4 +320,4 @@ function FormUsuario({ idUsuario, cerrar }) {
   );
 }
 
-export default FormUsuario;
+export default FormOpcion;

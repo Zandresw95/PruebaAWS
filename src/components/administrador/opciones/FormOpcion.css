@@ -1,0 +1,39 @@
+.cont-form-opcion {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .cont-form-opcion > form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .form-opcion-acciones {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .form-opcion-toggle {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    align-items: center;
+    width: 100px;
+    align-self: center;
+  }
+
+  .titulo-opcion{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+
+    align-items: center;
+    text-align: center;
+    color: #000000;
+  }
+  

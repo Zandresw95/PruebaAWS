@@ -24,7 +24,7 @@
 .btn:hover .format-ico-btn {
   -webkit-filter: invert(20%) sepia(95%) saturate(7091%) hue-rotate(347deg)
     brightness(92%) contrast(101%);
-  filter: invert(20%) sepia(95%) saturate(7091%) hue-rotate(347deg)
+  filter: invert(1) sepia(95%) saturate(7091%) hue-rotate(347deg)
     brightness(92%) contrast(101%);
 }
 
@@ -39,6 +39,32 @@
   filter: unset;
   cursor: default;
   /* box-shadow: none; */
+}
+
+.editar{
+  background-color: var(--color-fondo-editar);
+  color: white;
+  border-radius: 15px;
+}
+
+.editar:hover{
+  /*background-color: var(--color-fondo-borrar);*/
+}
+
+.borrar{
+  background-color: var(--color-fondo-borrar);
+  color: white;
+  border-radius: 15px;
+}
+
+.aceptar{
+  background-color: var(--color-fondo-aceptar);
+  border-radius: 15px;
+}
+
+.cancelar{
+  background-color: var(--color-fondo-cancelar);
+  border-radius: 15px;
 }
 
 .btn:hover .btn-label-rojo {

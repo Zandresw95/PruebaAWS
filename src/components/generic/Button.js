@@ -6,6 +6,10 @@ function Button({
   onClick,
   disabled = false,
   rojo = false,
+  editar = false,
+  borrar = false,
+  aceptar = false,
+  cancelar = false,
   type = "button",
 }) {
   const handleClick = (e) => {
@@ -17,7 +21,9 @@ function Button({
 
   return (
     <button
-      className={"btn " + (disabled ? " disabled " : "")}
+      className={"btn " + (disabled ? "disabled " : "")
+      +(editar? "editar":"") +(borrar? "borrar":"")
+      +(aceptar? "aceptar":"")+(cancelar? "cancelar":"")}
       onClick={handleClick}
       type={type}
     >

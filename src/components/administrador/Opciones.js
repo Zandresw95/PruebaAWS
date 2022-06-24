@@ -2,13 +2,12 @@ import { useEffect, useReducer, useState } from "react";
 import Button from "../generic/Button";
 import ContInput from "../generic/ContInput";
 import Modal from "../generic/Modal";
-import SearchBar from "../generic/SearchBar";
 import $ from "jquery";
-import { host, port, dominio } from "../../helpers/Dbdata";
+import {dominio } from "../../helpers/Dbdata";
 
-import "./Usuarios.css";
-import FormUsuario from "./usuarios/FormUsuario";
-import Usuario from "./usuarios/Usuario";
+import "./Opciones.css";
+import FormOpcion from "./opciones/FormOpcion";
+import Opcion from "./opciones/Opcion";
 
 // let dataUsuario = {
 //   id: 1,
@@ -23,20 +22,20 @@ let initialStateModal = {
 
 let modalTypes = {
   OPEN_FORM: "OPEN_FORM",
-  CLOSE_USUARIOS: "CLOSE_FORM",
+  CLOSE_FORM: "CLOSE_FORM",
 };
 
-function Usuarios({ irAtras }) {
+function Opciones({ irAtras }) {
   const [stateModal, dispatchModal] = useReducer(
     reducerModal,
     initialStateModal
   );
-  const [idUsuario, setIdUsuario] = useState(0);
-  const [usuarios, setUsuarios] = useState([]);
+  const [idOpcion, setIdOpcion] = useState(0);
+  const [opciones, setOpciones] = useState([]);
   const [mostrarCargando, setMostrarCargando] = useState(false);
 
   useEffect(() => {
-    obtenerUsuarios();
+    obteneropciones();
   }, []);
 
   function reducerModal(state, action) {
@@ -52,17 +51,17 @@ function Usuarios({ irAtras }) {
 
   const abrirForm = (id) => {
     dispatchModal({ type: modalTypes.OPEN_FORM });
-    setIdUsuario(id);
+    setIdOpcion(id);
   };
 
   const cerrarForm = () => {
     dispatchModal({ type: modalTypes.CLOSE_FORM });
-    setIdUsuario(0);
+    setIdOpcion(0);
   };
 
-  const obtenerUsuarios = () => {
+  const obteneropciones = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_personas`,
+      url: `http://${dominio}/api/tabla_opciones`,
       type: "get",
       dataType: "json",
       contentType: "application/json",
@@ -72,7 +71,7 @@ function Usuarios({ irAtras }) {
       },
       success: function (data) {
         console.log(data.data);
-        setUsuarios(data.data);
+        setOpciones(data.data);
         setMostrarCargando(false);
         // if ("cedula" in data) {
         //   setUserData(data);
@@ -99,7 +98,7 @@ function Usuarios({ irAtras }) {
         </div>
       ) : (
         <>
-          <div className="cont-usuarios animar-zoom-min-to-max">
+          <div className="cont-opciones animar-zoom-min-to-max">
             <div className="barra-acciones-top">
               <Button icono="ico-atras" label={"Atrás"} onClick={irAtras} />
               <div style={{ width: "200px" }}>
@@ -111,7 +110,7 @@ function Usuarios({ irAtras }) {
             </div>
 
             <div className="barra-acciones-top">
-              <h3>Usuarios</h3>
+              <h3>Opciones</h3>
               <div style={{ width: "max-content" }}>
                 <Button
                   label={"Nuevo"}
@@ -120,26 +119,26 @@ function Usuarios({ irAtras }) {
                 />
               </div>
             </div>
-            <div className="cont-contenido-usuarios">
-              {usuarios.length > 0
-                ? usuarios.map((el, i) => {
+            <div className="cont-contenido-opciones">
+              {opciones.length > 0
+                ? opciones.map((el, i) => {
                     return (
-                      <Usuario
+                      <Opcion
                         key={"usuario" + i}
                         datos={el}
-                        abrirForm={() => abrirForm(el.codai_persona)}
+                        abrirForm={() => abrirForm(el.codai_opcion)}
                       />
                     );
                   })
-                : "No existen usuarios"}
+                : "No existen opciones"}
             </div>
           </div>
           <Modal activo={stateModal.form} cerrar={cerrarForm}>
-            <FormUsuario
-              idUsuario={idUsuario}
+            <FormOpcion
+              idOpcion={idOpcion}
               cerrar={() => {
                 cerrarForm();
-                obtenerUsuarios();
+                obteneropciones();
               }}
             />
           </Modal>
@@ -149,4 +148,4 @@ function Usuarios({ irAtras }) {
   );
 }
 
-export default Usuarios;
+export default Opciones;
