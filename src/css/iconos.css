@@ -235,6 +235,50 @@
   content: url(../media/ico/martillo.svg);
 }
 
+/* iconos figma*/
+.ico-persona-circulo-figma {
+  content: url(../media/ico/bi_person-circle.svg);
+}
+
+.ico-user-figma{
+  content: url(../media/ico/bx_user.svg);
+}
+
+.ico-user-badge-figma{
+  content: url(../media/ico/bxs_user-badge.svg);
+}
+
+.ico-user-detail-figma{
+  content: url(../media/ico/bxs_user-detail.svg);
+}
+
+.ico-user-certification-figma{
+  content: url(../media/ico/carbon_user-certification.svg);
+}
+
+.ico-ci-file-figma{
+  content: url(../media/ico/ci_file-pdf.svg);
+}
+
+.ico-option-figma{
+  content: url(../media/ico/option.svg);
+}
+
+.ico-user-check-figma{
+  content: url(../media//ico/user-check.svg);
+}
+
+.ico-user-cog-figma{
+  content: url(../media/ico/user-cog.svg);
+}
+
+.ico-user-friends-figma{
+  content: url(../media/ico/user-friends.svg);
+}
+
+.ico-user-list{
+  content: url(../media/ico/user-list.svg);
+}
 /* formatos */
 
 .format-ico-form {
