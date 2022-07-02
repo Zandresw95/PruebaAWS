@@ -37,14 +37,24 @@ function Navbar() {
           <p>Personas</p>
         </li>
         <li
-          className={pantallaActiva === 1 ? "active" : ""}
+          className={pantallaActiva === 2 ? "active" : ""}
           onClick={() => {
-            setPantallaActiva(1);
+            setPantallaActiva(2);
             navegar("/opciones");
           }}
         >
           <div className="ico-configuracion format-ico-navbar"></div>
           <p>Opciones</p>
+        </li>
+        <li
+          className={pantallaActiva === 3 ? "active" : ""}
+          onClick={() => {
+            setPantallaActiva(3);
+            navegar("/asigOpcPerfil");
+          }}
+        >
+          <div className="ico-lapiz format-ico-navbar"></div>
+          <p>Asignar Opciones</p>
         </li>
       </ul>
     </div>

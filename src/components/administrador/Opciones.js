@@ -25,7 +25,7 @@ let modalTypes = {
   CLOSE_FORM: "CLOSE_FORM",
 };
 
-function Opciones({ irAtras }) {
+function Opciones() {
   const [stateModal, dispatchModal] = useReducer(
     reducerModal,
     initialStateModal
@@ -99,25 +99,23 @@ function Opciones({ irAtras }) {
       ) : (
         <>
           <div className="cont-opciones animar-zoom-min-to-max">
-            <div className="barra-acciones-top">
-              <Button icono="ico-atras" label={"Atrás"} onClick={irAtras} />
-              <div style={{ width: "200px" }}>
+            <div className="barra-acciones-title">
+              <h3 className="title">OPCIONES</h3>
+            </div>
+            <div className="barra-acciones-botones">
+              <div className="barra-acciones-lupa" style={{width:"200px"}}>
                 {/* <SearchBar /> */}
                 <ContInput icono={"ico-lupa"}>
                   <input placeholder="Buscar" />
                 </ContInput>
               </div>
-            </div>
-
-            <div className="barra-acciones-top">
-              <h3>Opciones</h3>
-              <div style={{ width: "max-content" }}>
-                <Button
-                  label={"Nuevo"}
-                  icono="ico-anadir"
-                  onClick={() => abrirForm(0)}
-                />
-              </div>
+              <div className="barra-acciones-lupa barra-acciones-nuevo"  style={{width:"max-content"}}>
+                  <Button
+                    label={"Nuevo"}
+                    icono="ico-anadir"
+                    onClick={() => abrirForm(0)}
+                  />
+                </div>
             </div>
             <div className="cont-contenido-opciones">
               {opciones.length > 0
@@ -136,7 +134,8 @@ function Opciones({ irAtras }) {
           <Modal activo={stateModal.form} cerrar={cerrarForm}>
             <FormOpcion
               idOpcion={idOpcion}
-              cerrar={() => {
+              cerrar={cerrarForm}
+              recargar={() =>{
                 cerrarForm();
                 obteneropciones();
               }}

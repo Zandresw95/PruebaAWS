@@ -1,15 +1,58 @@
 .cont-opciones {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    /* height: 100%; */
     background-color: #F9F5F5;
+    overflow-y: auto;
   }
   
   .cont-contenido-opciones {
+    margin-top: 47px;
+    margin-left: 107px;
+    margin-right: 107px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
     /* height: 100%; */
   }
-  
+
+  .title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 44px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+
+.barra-acciones-title{
+    margin-top: 73px;
+    display: flex;
+    justify-content: center;
+}
+
+.barra-acciones-botones{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+  margin-top: -0.5rem;
+  margin-top: 44px;
+  margin-left: 107px;
+  margin-right: 107px;
+}
+
+.barra-acciones-lupa{
+  flex: 0 0 auto;
+  width: 33.3333%;
+  padding: 0.5rem;
+}
+
+.barra-acciones-nuevo{
+  margin-left: 66.6666%;
+}
