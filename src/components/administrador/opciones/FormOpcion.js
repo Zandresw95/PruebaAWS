@@ -18,7 +18,7 @@ let initialFormValidado = {
   descripcion_opcion: [false, ""],
 };
 
-function FormOpcion({ idOpcion, cerrar }) {
+function FormOpcion({ idOpcion, cerrar, recargar }) {
   const [mostrarCargando, setMostrarCargando] = useState(false);
   const [opcion, setOpcion] = useState(initialOpcion);
   const [tempOpcion, setTempOpcion] = useState(initialOpcion);
@@ -169,7 +169,7 @@ function FormOpcion({ idOpcion, cerrar }) {
         console.log(data);
         setMostrarCargando(false);
         mostrarPopup(1, data.mensaje);
-        cerrar();
+        recargar();
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -195,7 +195,7 @@ function FormOpcion({ idOpcion, cerrar }) {
       success: function (data) {
         setMostrarCargando(false);
         mostrarPopup(1, data.mensaje);
-        cerrar();
+        recargar();
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -222,7 +222,7 @@ function FormOpcion({ idOpcion, cerrar }) {
         success: function (data) {
           setMostrarCargando(false);
           mostrarPopup(1, data.mensaje);
-          cerrar();
+          recargar();
         },
         error: function (data) {
           setMostrarCargando(false);
@@ -260,11 +260,6 @@ function FormOpcion({ idOpcion, cerrar }) {
                   borrar={true}
                 />
               </>
-            ) : (
-              ""
-            )}
-            {idOpcion && idOpcion !== 0 && editando ? (
-              <Button label={"Cancelar"} onClick={cancelarEdicion} />
             ) : (
               ""
             )}
@@ -308,11 +303,26 @@ function FormOpcion({ idOpcion, cerrar }) {
               />
             </p>
             <div className="form-opcion-acciones">
-              <Button label={"Aceptar"} onClick={guardarOpcion} aceptar={true}/> 
-              {editando && <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>}
-              {!editando && <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>}
+               
+              {idOpcion && idOpcion !== 0 && editando ? (
+                <>
+                 {/*Editando la opcion*/}
+                 <Button label={"Aceptar"} onClick={guardarOpcion} aceptar={true}/>
+                 <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
+                </>
+              ) : idOpcion && idOpcion !== 0 && !editando ? (
+                /*Ver la opcion*/
+                ""
+              ):(
+                <>
+                {/*Nueva opcion*/}
+                <Button label={"Aceptar"} onClick={guardarOpcion} aceptar={true}/>
+                <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>
+                </>
+              )}
+              
             </div>
-
+            
           </form>
         </>
       )}

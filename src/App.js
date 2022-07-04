@@ -14,11 +14,17 @@ import "./css/contenedores.css";
 import "./css/iconos.css";
 import "./css/input.css";
 import "./css/normalize.css";
+
+import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
+ 
 import { PantallaActivaProvider } from "./context/PantallaActivaContext";
 import Error404 from "./pages/Error404";
 import Personas from "./pages/Personas";
 import Opcione from "./pages/Opcione";
 import Perfile from "./pages/Perfile";
+import AsigOpcPerfil from "./pages/AsigOpcPerfil";
 
 const NavLayout = () => (
   <>
@@ -41,6 +47,7 @@ function App() {
                 <Route path="/personas" element={<Personas />} />
                 <Route path="/opciones" element={<Opcione />} />
                 <Route path="/perfiles" element={<Perfile />} />
+                <Route path="/asigOpcPerfil" element={<AsigOpcPerfil />} />
               </Route>
             </Routes>
           </div>
