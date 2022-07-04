@@ -18,6 +18,7 @@ import { PantallaActivaProvider } from "./context/PantallaActivaContext";
 import Error404 from "./pages/Error404";
 import Personas from "./pages/Personas";
 import Opcione from "./pages/Opcione";
+import Perfile from "./pages/Perfile";
 
 const NavLayout = () => (
   <>
@@ -39,6 +40,7 @@ function App() {
                 <Route index element={<Inicio />} />
                 <Route path="/personas" element={<Personas />} />
                 <Route path="/opciones" element={<Opcione />} />
+                <Route path="/perfiles" element={<Perfile />} />
               </Route>
             </Routes>
           </div>

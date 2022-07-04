@@ -12,7 +12,10 @@ let initialUsuario = {
   nombre_persona: "",
   apellido_persona: "",
   direccion_persona: "",
+  telefono_persona: "",
+  email_persona: "",
   fechanac_persona: "",
+  instruccion_persona: "",
   cedula_persona: "",
 };
 
@@ -20,7 +23,10 @@ let initialFormValidado = {
   nombre_persona: [true, ""],
   apellido_persona: [true, ""],
   direccion_persona: [true, ""],
+  telefono_persona: [true, ""],
+  email_persona: [true, ""],
   fechanac_persona: [true, ""],
+  instruccion_persona: [true, ""],
   cedula_persona: [true, ""],
 };
 
@@ -68,6 +74,16 @@ function FormUsuario({ idUsuario, cerrar }) {
       case "cedula":
         tempCampo = {
           [e.target.name]: Validar.cedula(e.target.value),
+        };
+        break;
+      case "telefono":
+        tempCampo = {
+          [e.target.name]: Validar.telefono(e.target.value),
+        };
+        break;
+      case "direccion":
+        tempCampo = {
+          [e.target.name]: Validar.direccion(e.target.value),
         };
         break;
       case "idperfil":
@@ -153,7 +169,10 @@ function FormUsuario({ idUsuario, cerrar }) {
             nombre_persona: data.data.nombre_persona,
             apellido_persona: data.data.apellido_persona,
             direccion_persona: data.data.direccion_persona,
+            telefono_persona: data.data.telefono_persona,
+            email_persona: data.data.email_persona,
             fechanac_persona: data.data.fechanac_persona,
+            inatruccion_persona: data.data.instruccion_persona,
             cedula_persona: data.data.cedula_persona,
           });
           // if ("cedula" in data) {
@@ -329,6 +348,30 @@ function FormUsuario({ idUsuario, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
+            <ContInput label="Telefono" icono={"ico-usuario"}>
+              <input
+                value={usuario.telefono_persona}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="telefono_persona"
+                disabled={!editando}
+              />
+              {!formValidado.telefono_persona[0] && (
+                <div className="ico-advertencia  format-ico-form-validacion"></div>
+              )}
+            </ContInput>
+            <ContInput label="Email" icono={"ico-usuario"}>
+              <input
+                value={usuario.email_persona}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="email_persona"
+                disabled={!editando}
+              />
+              {!formValidado.email_persona[0] && (
+                <div className="ico-advertencia  format-ico-form-validacion"></div>
+              )}
+            </ContInput>
             <ContInput label="Fecha nacimiento" icono={"ico-usuario"}>
               <input
                 value={usuario.fechanac_persona}
@@ -339,6 +382,18 @@ function FormUsuario({ idUsuario, cerrar }) {
                 type="date"
               />
               {!formValidado.fechanac_persona[0] && (
+                <div className="ico-advertencia  format-ico-form-validacion"></div>
+              )}
+            </ContInput>
+            <ContInput label="Instruccion" icono={"ico-usuario"}>
+              <input
+                value={usuario.instruccion_persona}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="instruccion_persona"
+                disabled={!editando}
+              />
+              {!formValidado.instruccion_persona[0] && (
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>

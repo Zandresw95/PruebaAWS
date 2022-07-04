@@ -19,7 +19,7 @@ function Navbar() {
         <li
           className={pantallaActiva === 0 ? "active" : ""}
           onClick={() => {
-            setPantallaActiva(0);
+            setPantallaActiva(1);
             navegar("/");
           }}
         >
@@ -37,7 +37,7 @@ function Navbar() {
           <p>Personas</p>
         </li>
         <li
-          className={pantallaActiva === 1 ? "active" : ""}
+          className={pantallaActiva === 0 ? "active" : ""}
           onClick={() => {
             setPantallaActiva(1);
             navegar("/opciones");
@@ -45,6 +45,16 @@ function Navbar() {
         >
           <div className="ico-configuracion format-ico-navbar"></div>
           <p>Opciones</p>
+        </li>
+        <li
+          className={pantallaActiva === 0 ? "active" : ""}
+          onClick={() => {
+            setPantallaActiva(1);
+            navegar("/perfiles");
+          }}
+        >
+          <div className="ico-user-certification-figma format-ico-navbar"></div>
+          <p>Perfiles</p>
         </li>
       </ul>
     </div>
