@@ -1,13 +1,13 @@
 .loader {
   display: inline-block;
-  width: 19px;
-  height: 19px;
+  /*width: 19px;
+  height: 19px;*/
 }
 .loader:after {
   content: " ";
   display: block;
-  width: 19px;
-  height: 19px;
+  width: 25px;
+  height: 25px;
   /* margin: 8px; */
   border-radius: 50%;
   border: 4px solid #fff;
@@ -303,7 +303,8 @@
 .format-ico-btn {
   width: 20px;
   max-height: 20px;
-  margin-right: 5px;
+  filter: invert(22%) sepia(38%) saturate(6143%) hue-rotate(336deg)
+    brightness(90%) contrast(99%);
 }
 
 .format-ico-btn-rojo {
@@ -316,7 +317,7 @@
 }
 
 .format-ico-app {
-  width: 70px;
+  width: 90px;
 }
 
 .format-ico-titulo-form {
@@ -327,29 +328,75 @@
 }
 
 .format-ico-loader {
-  height: calc(var(--radio-input) * 2);
-  /* filter: invert(1); */
-  -webkit-filter: invert(80%) sepia(95%) saturate(7091%) hue-rotate(347deg)
-    brightness(92%) contrast(101%);
-  filter: invert(80%) sepia(95%) saturate(7091%) hue-rotate(347deg)
-    brightness(92%) contrast(101%);
+  height: 32px;
+  width: 32px;
+  filter: invert(1);
 }
 
-.format-ico-navbar {
+
+.format-ico-tarjeta {
+  height: 15px;
+}
+
+.format-ico-titulo {
+  height: 20px;
+  /* filter:invert(40%) sepia(25%) saturate(1294%) hue-rotate(165deg) brightness(103%) contrast(104%); */
+}
+
+.format-ico-accion,
+.format-ico-accion-nofilter {
+  height: 30px;
+}
+
+.format-ico-accion {
+  /* filter: invert(0.3); */
+  opacity: 0.1;
+}
+
+.cont-ico-usuario-card,
+.cont-ico-usuario-card-config {
+  font-size: 1.7em;
+  border-radius: 50%;
   width: 40px;
-  margin: 0 auto;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: bold;
+  overflow: hidden;
+  align-self: center;
+  box-shadow: var(--borde-input);
 }
 
-.format-ico-sesion {
-  height: 50px;
-  width: 50px;
-  padding: 10px;
-}
-
-.format-ico-resumen-magnitud {
-  width: 20px;
+.cont-ico-usuario-card-config {
+  box-shadow: none;
 }
 
 .format-ico-usuario-card {
-  height: 50px;
+  margin-top: 5px;
+  height: 40px;
+  filter: invert(0.8);
+}
+
+.format-ico-usuario-config {
+  margin-top: 5px;
+  height: 40px;
+  filter: invert(0.95);
+}
+
+.format-ico-row-table {
+  height: 25px;
+}
+
+.format-ico-estado {
+  height: 15px;
+}
+
+.format-ico-navbar {
+  height: 25px;
+  filter: invert(0.25);
+}
+
+.format-ico-seccion {
+  height: 25px;
+  filter: invert(0.4);
 }

@@ -18,11 +18,15 @@
 .cont-input-ico {
   display: grid;
   grid-template-columns: max-content 1fr;
-  height: calc(var(--radio-input) * 2);
+  height: calc(var(--radio-input) * 4);
   align-items: center;
   box-shadow: var(--borde-input);
-  border-radius: calc(var(--radio-input) / 4);
+  border-radius: var(--radio-input);
   background-color: var(--color-fondo-input);
+}
+
+.cont-input-ico-no-ico {
+  grid-template-columns: 1fr;
 }
 
 .cont-input-ico:focus-within {

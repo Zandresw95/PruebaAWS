@@ -6,9 +6,9 @@ import SearchBar from "../generic/SearchBar";
 import $ from "jquery";
 import { host, port, dominio } from "../../helpers/Dbdata";
 
-import "./Usuarios.css";
-import FormUsuario from "./usuarios/FormUsuario";
-import Usuario from "./usuarios/Usuario";
+import "./Personas.css";
+import FormPersona from "./personas/FormPersona";
+import Persona from "./personas/Persona";
 
 // let dataUsuario = {
 //   id: 1,
@@ -26,14 +26,17 @@ let modalTypes = {
   CLOSE_USUARIOS: "CLOSE_FORM",
 };
 
-function Usuarios({ irAtras }) {
+function Personas({ irAtras }) {
   const [stateModal, dispatchModal] = useReducer(
     reducerModal,
     initialStateModal
   );
   const [idUsuario, setIdUsuario] = useState(0);
   const [usuarios, setUsuarios] = useState([]);
+  const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [mostrarCargando, setMostrarCargando] = useState(false);
+
+  const estadorresumenUsuarios = true;
 
   useEffect(() => {
     obtenerUsuarios();
@@ -99,43 +102,56 @@ function Usuarios({ irAtras }) {
         </div>
       ) : (
         <>
-          <div className="cont-usuarios animar-zoom-min-to-max">
-            <div className="barra-acciones-top">
-              <Button icono="ico-atras" label={"Atrás"} onClick={irAtras} />
-              <div style={{ width: "200px" }}>
-                {/* <SearchBar /> */}
+          <div className="encabezado-nombre-barra-buscar">
+            <div className="cont-flex-gap">
+              <h3 className="titulo-pagina">Personas</h3>
+            </div>
+              
+            <div className="cont-flex-gap">
+              <div style={{ width: "200px", justifySelf: "left" }}>
                 <ContInput icono={"ico-lupa"}>
-                  <input placeholder="Buscar" />
+                  <input
+                    name="buscar"
+                    onChange={(e) => setTerminoBusqueda(e.target.value)}
+                    value={terminoBusqueda}
+                    placeholder="Buscar"
+                  />
                 </ContInput>
               </div>
-            </div>
-
-            <div className="barra-acciones-top">
-              <h3>Usuarios</h3>
               <div style={{ width: "max-content" }}>
-                <Button
-                  label={"Nuevo"}
-                  icono="ico-anadir"
-                  onClick={() => abrirForm(0)}
-                />
+                  <Button
+                    label={"Nuevo"}
+                    icono="ico-anadir"
+                    onClick={() => abrirForm(0)}
+                  />
               </div>
             </div>
-            <div className="cont-contenido-usuarios">
-              {usuarios.length > 0
-                ? usuarios.map((el, i) => {
-                    return (
-                      <Usuario
-                        key={"usuario" + i}
-                        datos={el}
-                        abrirForm={() => abrirForm(el.codai_persona)}
-                      />
-                    );
-                  })
-                : "No existen usuarios"}
+          </div>
+
+            
+          <div className="contenedorPrincipal animar-zoom-min-to-max">
+            <div className="contenedorContenido">
+              {!estadorresumenUsuarios ? (
+                <div className="loader format-ico-loader" />
+              ) : (
+                <div className="contenedorPagina">
+                  <div className="cont-personas">
+                    {usuarios.map((el, i) => {
+                      return (
+                        <Persona
+                          key={"persona" + i}
+                          datos={el}
+                          abrirForm={() => abrirForm(el.codai_persona)}
+                        />
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <Modal activo={stateModal.form} cerrar={cerrarForm}>
-            <FormUsuario
+            <FormPersona
               idUsuario={idUsuario}
               cerrar={() => {
                 cerrarForm();
@@ -149,4 +165,4 @@ function Usuarios({ irAtras }) {
   );
 }
 
-export default Usuarios;
+export default Personas;

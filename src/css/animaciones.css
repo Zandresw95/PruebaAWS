@@ -1,0 +1,152 @@
+.animar-hover {
+    cursor: pointer;
+    transition: transform var(--transicion-extra-rapida);
+  }
+  
+  .animar-hover:hover {
+    transform: scale(1.03);
+  }
+  
+  .animar-hover:active {
+    transform: scale(0.98);
+  }
+  
+  .sombra-hover {
+    cursor: pointer;
+    transition: background-color var(--transicion-extra-rapida);
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 10px;
+  }
+  
+  .sombra-hover:hover {
+    /* transform: scale(1.03); */
+    background-color: rgb(250, 250, 250);
+  }
+  
+  .sombra-hover:active {
+    /* transform: scale(0.98); */
+    background-color: rgb(245, 245, 245);
+  }
+  
+  .temblar {
+    animation: shake 0.62s;
+    /* backface-visibility: hidden; */
+    /* perspective: 1000px; */
+    transform-origin: 0 0;
+  }
+  
+  @keyframes shake {
+    0% {
+      transform: scaleX(0) scaleY(0) translateX(-50%) translateY(-200px);
+    }
+    15%,
+    75% {
+      transform: scaleX(1) scaleY(1) translateX(-51%) translateY(20px);
+    }
+  
+    30%,
+    90% {
+      transform: scaleX(1) scaleY(1) translateX(-49%) translateY(20px);
+    }
+  
+    45% {
+      transform: scaleX(1) scaleY(1) translateX(-51%) translateY(20px);
+    }
+  
+    60% {
+      transform: scaleX(1) scaleY(1) translateX(-49%) translateY(20px);
+    }
+    100% {
+      transform: scaleX(1) scaleY(1) translateX(-50%) translateY(20px);
+    }
+  }
+  
+  .animar-entrada-right-to-left {
+    animation-name: animacion-right-to-left;
+    animation-duration: var(--animacion-media);
+  }
+  
+  @keyframes animacion-right-to-left {
+    from {
+      transform: translateX(300px) scale(0.7);
+      opacity: 0;
+    }
+    to {
+      transform: translate(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .animar-fade {
+    animation-name: animacion-fade;
+    animation-duration: var(--animacion-media);
+  }
+  
+  @keyframes animacion-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .animar-entrada {
+    animation-name: animacion-bottom-to-top;
+    animation-duration: var(--animacion-media);
+  }
+  
+  @keyframes animacion-bottom-to-top {
+    from {
+      transform: translateY(15px);
+      opacity: 0;
+    }
+    to {
+      transform: translate(0);
+      opacity: 1;
+    }
+  }
+  
+  .animar-zoom-max-to-min {
+    animation-name: animacion-zoom-max-to-min;
+    animation-duration: var(--animacion-media);
+  }
+  
+  @keyframes animacion-zoom-max-to-min {
+    from {
+      transform: scale(1.15);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .animar-zoom-min-to-max {
+    animation-name: animacion-zoom-min-to-max;
+    animation-duration: var(--animacion-media);
+  }
+  
+  @keyframes animacion-zoom-min-to-max {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .rotar {
+    transform: rotate(-180deg);
+    transition: transform var(--transicion-rapida);
+  }
+  
+  .rotar-volver {
+    transform: rotate(0deg);
+    transition: transform var(--transicion-rapida);
+  }
+  

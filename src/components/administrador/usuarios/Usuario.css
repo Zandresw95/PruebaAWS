@@ -1,12 +1,12 @@
-.cont-opcion {
+.cont-usuario {
     display: grid;
-    grid-template-columns: 40px 1fr;
-    gap: 15px;
-    width: 500px;
-    padding: 10px;
+    grid-template-columns: 50px 1fr;
+    gap: 10px;
+    max-width: 258px;
+    margin-left: 5px;
   }
   
-  .cont-ico-opcion {
+  .cont-ico-usuario {
     overflow: hidden;
     padding: 0px;
     padding-top: 7px;
@@ -16,8 +16,8 @@
     height: 50px;
   }
   
-  .opcion-inicial,
-  .format-ico-opcion-card {
+  .usuario-inicial,
+  .format-ico-usuario-card {
     filter: invert(0.75);
     /* font-size: 2rem; */
     /* border-radius: 50%;
@@ -29,36 +29,36 @@
     /* text-align: center; */
   }
   
-  .opcion-textos {
+  .usuario-textos {
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
   
-  .opcion-textos > p {
+  .usuario-textos > p {
     white-space: nowrap;
     overflow: hidden;
   }
   
-  .opcion-textos > p:first-child {
+  .usuario-textos > p:first-child {
     font-size: 1.1rem;
     margin-bottom: 0em;
   }
   
-  .opcion-textos > p:nth-child(2) {
+  .usuario-textos > p:nth-child(2) {
     font-size: 0.9rem;
     margin-bottom: 0em;
     color: var(--color-texto-low);
   }
   
-  .opcion-estado {
+  .usuario-estado {
     display: grid;
     grid-template-columns: 1fr 10px;
     align-items: center;
     gap: 5px;
   }
   
-  .opcion-estado > p {
+  .usuario-estado > p {
     font-size: 1.1rem;
     margin-bottom: 0em;
     /* color: var(--color-texto-low); */

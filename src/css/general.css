@@ -1,0 +1,141 @@
+:root {
+    /* colores */
+    --color-fondo-app: rgb(240, 240, 240);
+    --color-fondo-seccion: rgb(245, 245, 245);
+    --color-foco-links: rgb(245, 245, 245);
+    --color-fondo-modal: rgba(0, 0, 0, 0.25);
+    --color-fondo-card: rgb(255, 255, 255);
+    --color-principal: #e41d42;
+    --color-secundario: rgb(47, 135, 251);
+    --color-texto-low: #585858;
+    --color-texto-lowest: rgb(128, 128, 128);
+    --color-texto-active: white;
+    --color-eliminar: rgb(206, 65, 65);
+    --color-eliminar-hover: rgb(218, 71, 71);
+    --color-fondo-focus: rgb(220, 220, 220);
+    --color-fondo-button: rgb(255, 255, 255);
+    /* --color-fondo-button: rgb(250, 250, 250);*/
+    --color-fondo-input: rgb(245, 245, 245);
+    /* --color-fondo-button: rgb(250, 250, 250); */
+    /* --color-fondo-input: rgb(250,250,250); */
+    --color-sombras: rgb(220, 220, 220);
+    --color-error: rgb(180, 38, 38);
+    --color-contenido-modal: rgba(255, 255, 255, 0.6);
+    /* --color-contenido-modal: rgb(240, 240, 240); */
+    --color-fondo-tab: rgb(255, 255, 255);
+    --color-placeholder: rgb(200, 200, 200);
+    --color-fondo-popup: rgb(240, 240, 240);
+  
+    /* transiciones */
+    --transicion-extra-rapida: 0.075s ease-in-out;
+    --transicion-rapida: 0.15s ease-in-out;
+    --transicion-moderada: 0.3s ease-in-out;
+    --transicion-popup: 0.35s ease-in-out;
+  
+    /* Desenfoques */
+    --desenfoque-principal: blur(20px);
+  
+    --padding-card: 15px;
+    --padding-input: 5px;
+    --padding-btn: 8px;
+    --padding-contenido-modal: 25px;
+    --padding-tabs: 5px;
+    --padding-seccion: 10px;
+  
+    --sombra-card: 4px 4px 8px 2px hsla(0, 0%, 59%, 0.1);
+    --sombra-contenedor-principal: 0px 10px 12px 5px rgba(0, 0, 0, 0.1);
+    /* --sombra-elemento-primario:10px 10px 20px 4px rgba(0, 0, 0, 0.15); */
+    --sombra-elemento-primario: 0px 10px 10px 1px rgba(0, 0, 0, 0.05);
+    --sombra-menu-sesion: 0px 0px 20px 10px rgba(0, 0, 0, 0.1);
+    --sombra-navbar: 0px 0px 12px 0 var(--fondo);
+    --sombra-popup: 0px 0px 50px 40px rgba(0, 0, 0, 0.15);
+    --sombra-contenedor-sobrepuesto: 0px 0px 200px 40px rgba(0, 0, 0, 0.2);
+    --sombra-seccion: 0px 30px 30px -30px rgba(0, 0, 0, 0.1);
+  
+    /* radios */
+    --radio-seccion: 25px;
+    --radio-card: 20px;
+    --radio-tab: 15px;
+    --radio-input: 8px;
+    --radio-switch: 12px;
+    --radio-modal: 20px;
+    --radio-popup: 30px;
+  
+    /* bordes */
+    --borde-input: 0 0 0 2px var(--color-sombras);
+    --borde-input-focus: 0 0 0 2px var(--color-secundario);
+  
+    /* tiempos animaciones */
+    --animacion-rapida: 0.15s;
+    --animacion-media: 0.3s;
+    --animacion-normal: 0.5s;
+    --animacion-lenta: 1s;
+  }
+  
+  @font-face {
+    font-family: "Quicksand-Regular";
+    src: url(../fuentes/Quicksand-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: "Quicksand-Medium";
+    src: url(../fuentes/Quicksand-Medium.ttf);
+  }
+  
+  * {
+    font-family: "Quicksand-Medium", sans-serif;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+    background-color: var(--color-fondo-app);
+  }
+  
+  a,
+  a:visited {
+    text-decoration: none;
+    color: black;
+  }
+  
+  span > b {
+    font-weight: bold;
+  }
+  
+  input,
+  select {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: var(--padding-input);
+    border-radius: var(--radio-input);
+  }
+  
+  h4 {
+    /* color: rgb(80, 80, 80);
+    font-weight: bold; */
+  }
+  
+  input::placeholder {
+    color: var(--color-placeholder);
+  }
+  
+  .texto-validacion {
+    width: 100%;
+    grid-column: 1/-1;
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--color-error);
+  }
+  

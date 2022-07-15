@@ -1,74 +1,80 @@
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import PantallaActivaContext from "../../context/PantallaActivaContext";
-
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
+import { NavLink } from "react-router-dom";
+import logoConfiteca from "../../media/img/logoPinprexatColor.svg";
+import MenuSesion from "./MenuSesion";
 
-function Navbar() {
-  const navigate = useNavigate();
-  const { pantallaActiva, setPantallaActiva } = useContext(
-    PantallaActivaContext
-  );
+const Navbar = () => {
+  const [userNavigates, setUserNavigates] = useState(false);
 
-  const navegar = (pagina) => {
-    navigate(pagina);
+  const alertarNavegacion = () => {
+    setUserNavigates(true);
   };
+
+  useEffect(() => {
+    if (userNavigates) setUserNavigates(false);
+  }, [userNavigates]);
+
   return (
     <div className="cont-navbar">
-      <ul className="navbar-list">
-        <li
-          className={pantallaActiva === 0 ? "active" : ""}
-          onClick={() => {
-            setPantallaActiva(1);
-            navegar("/");
-          }}
+      <div className="cont-buttons">
+        <NavLink
+          className="button-menu animar-hover"
+          to="/"
+          onClick={alertarNavegacion}
         >
           <div className="ico-casa format-ico-navbar"></div>
           <p>Inicio</p>
-        </li>
-        <li
-          className={pantallaActiva === 1 ? "active" : ""}
-          onClick={() => {
-            setPantallaActiva(1);
-            navegar("/personas");
-          }}
+        </NavLink>
+        <NavLink
+          className="button-menu animar-hover"
+          to="/personas"
+          onClick={alertarNavegacion}
         >
           <div className="ico-usuario format-ico-navbar"></div>
           <p>Personas</p>
-        </li>
-        <li
-          className={pantallaActiva === 2 ? "active" : ""}
-          onClick={() => {
-            setPantallaActiva(2);
-            navegar("/opciones");
-          }}
+        </NavLink>
+        <NavLink
+          className="button-menu animar-hover"
+          to="/opciones"
+          onClick={alertarNavegacion}
         >
           <div className="ico-configuracion format-ico-navbar"></div>
           <p>Opciones</p>
-        </li>
-        <li
-          className={pantallaActiva === 4 ? "active" : ""}
-          onClick={() => {
-            setPantallaActiva(4);
-            navegar("/perfiles");
-          }}
-        >
-          <div className="ico-user-certification-figma format-ico-navbar"></div>
-          <p>Perfiles</p>
-        </li>
-        <li
-          className={pantallaActiva === 3 ? "active" : ""}
-          onClick={() => {
-            setPantallaActiva(3);
-            navegar("/asigOpcPerfil");
-          }}
+        </NavLink>
+
+        <NavLink
+          className="button-menu animar-hover"
+          to="/asignarOpc"
+          onClick={alertarNavegacion}
         >
           <div className="ico-lapiz format-ico-navbar"></div>
           <p>Asignar Opciones</p>
-        </li>
-      </ul>
+        </NavLink>
+
+        <NavLink
+          className="button-menu animar-hover"
+          to="/usuarios"
+          onClick={alertarNavegacion}
+        >
+          <div className="ico-usuario format-ico-navbar"></div>
+          <p>Usuarios</p>
+        </NavLink>
+
+        <NavLink
+          className="button-menu animar-hover"
+          to="/perfiles"
+          onClick={alertarNavegacion}
+        >
+          <div className="ico-chart format-ico-navbar"></div>
+          <p>Perfiles</p>
+        </NavLink>
+      </div>
+      <div>
+        <MenuSesion />
+      </div>
     </div>
   );
-}
+};
 
 export default Navbar;

@@ -7,6 +7,7 @@
   transform-origin: 0% 0;
   transition: transform var(--transicion-moderada);
   background-color: var(--color-contenido-modal);
+  backdrop-filter: blur(8px);
   padding: var(--padding-contenido-modal);
   border-radius: var(--radio-modal);
   display: block;
@@ -19,12 +20,13 @@
 
 .modal-fondo {
   background-color: var(--color-fondo-modal);
-  position: absolute;
+  position: fixed;
   display: none;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  height: 100%;
   z-index: 100;
 }
 

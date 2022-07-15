@@ -5,10 +5,10 @@ import { useContext, useEffect, useState } from "react";
 import { host, port, dominio } from "../../../helpers/Dbdata";
 import { Validar } from "../../../helpers/Validar";
 
-import "./FormUsuario.css";
+import "./FormPersona.css";
 import PopupContext from "../../../context/PopupContext";
 
-let initialUsuario = {
+let initialPersona = {
   nombre_persona: "",
   apellido_persona: "",
   direccion_persona: "",
@@ -30,32 +30,32 @@ let initialFormValidado = {
   cedula_persona: [true, ""],
 };
 
-function FormUsuario({ idUsuario, cerrar }) {
+function FormPersona({ idPersona, cerrar }) {
   const [mostrarCargando, setMostrarCargando] = useState(false);
-  const [usuario, setUsuario] = useState(initialUsuario);
-  const [tempUsuario, setTempUsuario] = useState(initialUsuario);
+  const [persona, setPersona] = useState(initialPersona);
+  const [tempPersona, setTempPersona] = useState(initialPersona);
   const [formValidado, setFormValidado] = useState(initialFormValidado);
   const [editando, setEditando] = useState(false);
 
   const { mostrarPopup } = useContext(PopupContext);
 
   useEffect(() => {
-    obtenerUsuario();
-    if (idUsuario === 0) setEditando(true);
+    obtenerpersona();
+    if (idPersona === 0) setEditando(true);
     else setEditando(false);
     setFormValidado(initialFormValidado);
-    setTempUsuario(initialUsuario);
-  }, [idUsuario]);
+    setTempPersona(initialPersona);
+  }, [idPersona]);
 
   useEffect(() => {
-    if (idUsuario !== 0) validarTodo();
+    if (idPersona !== 0) validarTodo();
     else setFormValidado(initialFormValidado);
-  }, [usuario]);
+  }, [persona]);
 
   const handleChange = (e) => {
     if (e.target.name === "estado")
-      setUsuario({ ...usuario, [e.target.name]: e.target.checked ? 1 : 0 });
-    else setUsuario({ ...usuario, [e.target.name]: e.target.value });
+      setPersona({ ...persona, [e.target.name]: e.target.checked ? 1 : 0 });
+    else setPersona({ ...persona, [e.target.name]: e.target.value });
     actualizarValidacion(e);
   };
 
@@ -113,9 +113,9 @@ function FormUsuario({ idUsuario, cerrar }) {
   const validarTodo = () => {
     // console.log("validar");
     let tempFormValidado;
-    for (const key in usuario) {
-      if (Object.hasOwnProperty.call(usuario, key)) {
-        const el = usuario[key];
+    for (const key in persona) {
+      if (Object.hasOwnProperty.call(persona, key)) {
+        const el = persona[key];
         if (key === "estado") continue;
         console.log(Validar.general(el));
         tempFormValidado = { ...tempFormValidado, [key]: Validar.general(el) };
@@ -123,39 +123,40 @@ function FormUsuario({ idUsuario, cerrar }) {
     }
     setFormValidado(tempFormValidado);
     // console.log(tempFormValidado);
-    // console.log(usuario);
+    // console.log(persona);
   };
 
   useEffect(() => {
     console.log(formValidado);
   }, [formValidado]);
 
-  const guardarUsuario = () => {
+  const guardarpersona = () => {
     if (validarForm()) {
-      if (editando && idUsuario !== 0) {
-        actualizarUsuario();
+      if (editando && idPersona !== 0) {
+        actualizarpersona();
       } else {
-        crearUsuario();
+        crearpersona();
       }
     } else {
       mostrarPopup(2, "Llena todos los datos");
     }
   };
 
-  const editarUsuario = () => {
-    setTempUsuario(usuario);
+  const editarpersona = () => {
+    setTempPersona(persona);
     setEditando(true);
   };
 
   const cancelarEdicion = () => {
-    setUsuario(tempUsuario);
+    setPersona(tempPersona);
     setEditando(false);
   };
 
-  const obtenerUsuario = () => {
-    if (idUsuario && idUsuario > 0) {
+  const obtenerpersona = () => {
+    if (idPersona && idPersona > 0) {
+      console.log("dentrooo");
       $.ajax({
-        url: `http://${dominio}/api/tabla_personas/${idUsuario}`,
+        url: `http://${dominio}/api/tabla_personas/${idPersona}`,
         type: "get",
         dataType: "json",
         contentType: "application/json",
@@ -165,7 +166,7 @@ function FormUsuario({ idUsuario, cerrar }) {
         success: function (data) {
           setMostrarCargando(false);
           console.log(data);
-          setUsuario({
+          setPersona({
             nombre_persona: data.data.nombre_persona,
             apellido_persona: data.data.apellido_persona,
             direccion_persona: data.data.direccion_persona,
@@ -191,18 +192,18 @@ function FormUsuario({ idUsuario, cerrar }) {
         },
       });
     } else {
-      setUsuario(initialUsuario);
+      setPersona(initialPersona);
     }
   };
 
-  const crearUsuario = () => {
+  const crearpersona = () => {
     console.log("creando");
     $.ajax({
       url: `http://${dominio}/api/tabla_personas/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
-      data: JSON.stringify({ ...usuario }),
+      data: JSON.stringify({ ...persona }),
       beforeSend: function () {
         setMostrarCargando(true);
       },
@@ -223,13 +224,13 @@ function FormUsuario({ idUsuario, cerrar }) {
     });
   };
 
-  const actualizarUsuario = () => {
+  const actualizarpersona = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_personas/edit/${idUsuario}`,
+      url: `http://${dominio}/api/tabla_personas/edit/${idPersona}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
-      data: JSON.stringify({ ...usuario }),
+      data: JSON.stringify({ ...persona }),
       beforeSend: function () {
         setMostrarCargando(true);
       },
@@ -249,10 +250,10 @@ function FormUsuario({ idUsuario, cerrar }) {
     });
   };
 
-  const eliminarUsuario = () => {
-    if (window.confirm("¿Seguro que desea eliminar el usuario?"))
+  const eliminarpersona = () => {
+    if (window.confirm("¿Seguro que desea eliminar el persona?"))
       $.ajax({
-        url: `http://${dominio}/api/tabla_personas/delete/${idUsuario}`,
+        url: `http://${dominio}/api/tabla_personas/delete/${idPersona}`,
         type: "delete",
         dataType: "json",
         contentType: "application/json",
@@ -277,41 +278,41 @@ function FormUsuario({ idUsuario, cerrar }) {
   };
 
   return (
-    <div className="cont-form-usuario">
+    <div className="cont-form-persona">
       {mostrarCargando ? (
         <div className="cont-loader-full-container">
           <div className="loader format-ico-loader"></div>
         </div>
       ) : (
         <>
-          <h3>{idUsuario === 0 ? "Nuevo usuario" : usuario.nombre_persona}</h3>
-          <div className="form-usuario-acciones">
-            {idUsuario && idUsuario !== 0 && !editando ? (
+          <h3>{idPersona === 0 ? "Nuevo persona" : persona.nombre_persona}</h3>
+          <div className="form-persona-acciones">
+            {idPersona && idPersona !== 0 && !editando ? (
               <>
                 <Button
                   label={"Editar"}
                   icono={"ico-editar"}
-                  onClick={editarUsuario}
+                  onClick={editarpersona}
                 />
                 <Button
                   label={"Eliminar"}
                   icono={"ico-eliminar"}
-                  onClick={eliminarUsuario}
+                  onClick={eliminarpersona}
                 />
               </>
             ) : (
               ""
             )}
-            {idUsuario && idUsuario !== 0 && editando ? (
+            {idPersona && idPersona !== 0 && editando ? (
               <Button label={"Cancelar"} onClick={cancelarEdicion} />
             ) : (
               ""
             )}
           </div>
           <form>
-            <ContInput label="Nombres" icono={"ico-usuario"}>
+            <ContInput label="Nombres" icono={"ico-persona"}>
               <input
-                value={usuario.nombre_persona}
+                value={persona.nombre_persona}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="nombre_persona"
@@ -324,9 +325,9 @@ function FormUsuario({ idUsuario, cerrar }) {
             {!formValidado.nombre_persona[0] && (
               <p className="texto-validacion">{formValidado.nombre_persona[1]}</p>
             )}
-            <ContInput label="Apellidos" icono={"ico-usuario"}>
+            <ContInput label="Apellidos" icono={"ico-persona"}>
               <input
-                value={usuario.apellido_persona}
+                value={persona.apellido_persona}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="apellido_persona"
@@ -336,9 +337,9 @@ function FormUsuario({ idUsuario, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Dirección" icono={"ico-usuario"}>
+            <ContInput label="Dirección" icono={"ico-persona"}>
               <input
-                value={usuario.direccion_persona}
+                value={persona.direccion_persona}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="direccion_persona"
@@ -348,9 +349,9 @@ function FormUsuario({ idUsuario, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Telefono" icono={"ico-usuario"}>
+            <ContInput label="Telefono" icono={"ico-persona"}>
               <input
-                value={usuario.telefono_persona}
+                value={persona.telefono_persona}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="telefono_persona"
@@ -360,9 +361,9 @@ function FormUsuario({ idUsuario, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Email" icono={"ico-usuario"}>
+            <ContInput label="Email" icono={"ico-persona"}>
               <input
-                value={usuario.email_persona}
+                value={persona.email_persona}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="email_persona"
@@ -372,9 +373,9 @@ function FormUsuario({ idUsuario, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Fecha nacimiento" icono={"ico-usuario"}>
+            <ContInput label="Fecha nacimiento" icono={"ico-persona"}>
               <input
-                value={usuario.fechanac_persona}
+                value={persona.fechanac_persona}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="fechanac_persona"
@@ -385,9 +386,9 @@ function FormUsuario({ idUsuario, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Instruccion" icono={"ico-usuario"}>
+            <ContInput label="Instruccion" icono={"ico-persona"}>
               <input
-                value={usuario.instruccion_persona}
+                value={persona.instruccion_persona}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="instruccion_persona"
@@ -399,7 +400,7 @@ function FormUsuario({ idUsuario, cerrar }) {
             </ContInput>
             <ContInput label="Cédula" icono={"ico-ruc"}>
               <input
-                value={usuario.cedula_persona}
+                value={persona.cedula_persona}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="cedula_persona"
@@ -412,7 +413,7 @@ function FormUsuario({ idUsuario, cerrar }) {
             {!formValidado.cedula_persona[0] && (
               <p className="texto-validacion">{formValidado.cedula_persona[1]}</p>
             )}
-            {editando && <Button label={"Guardar"} onClick={guardarUsuario} />}
+            {editando && <Button label={"Guardar"} onClick={guardarpersona} />}
           </form>
         </>
       )}
@@ -420,4 +421,4 @@ function FormUsuario({ idUsuario, cerrar }) {
   );
 }
 
-export default FormUsuario;
+export default FormPersona;
