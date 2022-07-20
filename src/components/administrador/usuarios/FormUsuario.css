@@ -14,7 +14,7 @@
   .form-usuario-acciones {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 60px;
   }
   
   .form-usuario-toggle {

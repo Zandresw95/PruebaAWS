@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import Button from "../generic/Button";
 import ContInput from "../generic/ContInput";
 import Modal from "../generic/Modal";
@@ -10,13 +10,6 @@ import "./Personas.css";
 import FormPersona from "./personas/FormPersona";
 import Persona from "./personas/Persona";
 
-// let dataUsuario = {
-//   id: 1,
-//   nombre: "Nicolás Carvajal",
-//   cargo: "ADMINISTRADOR",
-//   estado: 1,
-// };
-
 let initialStateModal = {
   form: false,
 };
@@ -26,7 +19,7 @@ let modalTypes = {
   CLOSE_USUARIOS: "CLOSE_FORM",
 };
 
-function Personas({ irAtras }) {
+const Personas = () => {
   const [stateModal, dispatchModal] = useReducer(
     reducerModal,
     initialStateModal
@@ -36,10 +29,10 @@ function Personas({ irAtras }) {
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [mostrarCargando, setMostrarCargando] = useState(false);
 
-  const estadorresumenUsuarios = true;
+  const estadoResumenUsuarios = true;
 
   useEffect(() => {
-    obtenerUsuarios();
+    obtenerPersonas();
   }, []);
 
   function reducerModal(state, action) {
@@ -63,7 +56,7 @@ function Personas({ irAtras }) {
     setIdUsuario(0);
   };
 
-  const obtenerUsuarios = () => {
+  const obtenerPersonas = () => {
     $.ajax({
       url: `http://${dominio}/api/tabla_personas`,
       type: "get",
@@ -94,6 +87,15 @@ function Personas({ irAtras }) {
     });
   };
 
+   const personas = useMemo(
+    () =>
+      usuarios.filter(
+        (el) =>
+          el.nombre_persona.toLowerCase().includes(terminoBusqueda.toLowerCase())
+      ),
+    [terminoBusqueda, usuarios]
+  );
+
   return (
     <>
       {mostrarCargando ? (
@@ -107,44 +109,47 @@ function Personas({ irAtras }) {
               <h3 className="titulo-pagina">Personas</h3>
             </div>
               
-            <div className="cont-flex-gap">
-              <div style={{ width: "200px", justifySelf: "left" }}>
-                <ContInput icono={"ico-lupa"}>
-                  <input
-                    name="buscar"
-                    onChange={(e) => setTerminoBusqueda(e.target.value)}
-                    value={terminoBusqueda}
-                    placeholder="Buscar"
-                  />
-                </ContInput>
-              </div>
-              <div style={{ width: "max-content" }}>
-                  <Button
-                    label={"Nuevo"}
-                    icono="ico-anadir"
-                    onClick={() => abrirForm(0)}
-                  />
-              </div>
+           
+            <div style={{ width: "200px", justifySelf: "left" }}>
+              <ContInput icono={"ico-lupa"}>
+                <input
+                  name="buscar"
+                  onChange={(e) => setTerminoBusqueda(e.target.value)}
+                  value={terminoBusqueda}
+                  placeholder="Buscar"
+                />
+              </ContInput>
             </div>
+            <div style={{ width: "max-content" }}>
+                <Button
+                  label={"Nuevo"}
+                  icono="ico-anadir"
+                  onClick={() => abrirForm(0)}
+                />
+            </div>
+
           </div>
 
             
           <div className="contenedorPrincipal animar-zoom-min-to-max">
             <div className="contenedorContenido">
-              {!estadorresumenUsuarios ? (
+              {!estadoResumenUsuarios ? (
                 <div className="loader format-ico-loader" />
               ) : (
                 <div className="contenedorPagina">
                   <div className="cont-personas">
-                    {usuarios.map((el, i) => {
-                      return (
-                        <Persona
-                          key={"persona" + i}
-                          datos={el}
-                          abrirForm={() => abrirForm(el.codai_persona)}
-                        />
-                      )
-                    })}
+                    { personas.length > 0
+                      ? personas.map((el, i) => {
+                        return (
+                          <Persona
+                            key={"persona" + i}
+                            datos={el}
+                            abrirForm={() => abrirForm(el.codai_persona)}
+                          />
+                        )
+                      })
+                      : "No existen personas"
+                  }
                   </div>
                 </div>
               )}
@@ -152,10 +157,13 @@ function Personas({ irAtras }) {
           </div>
           <Modal activo={stateModal.form} cerrar={cerrarForm}>
             <FormPersona
-              idUsuario={idUsuario}
+              idPersona={idUsuario}
               cerrar={() => {
                 cerrarForm();
-                obtenerUsuarios();
+              }}
+              recargar={() => {
+                cerrarForm();
+                obtenerPersonas();
               }}
             />
           </Modal>

@@ -1,17 +1,17 @@
 import { types } from "../types/types";
 import $ from "jquery";
-import { host, port } from "../../helpers/Dbdata";
+import { host, port, dominio } from "../../helpers/Dbdata";
 import { setError, startLoading, stopLoading } from "./ui";
 
 export const startLogin = (usuario, password) => {
   const credenciales = {
-    cedula: usuario,
+    user: usuario,
     clave: password,
   };
 
   return (dispatch) => {
     $.ajax({
-      url: `${host}:${port}/api/tabla_usuarioslogin`,
+      url: `http://${dominio}/api/tabla_usuarios/login`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
@@ -63,7 +63,7 @@ export const startcambiarPassword = (id, password) => {
   };
   return (dispatch) => {
     $.ajax({
-      url: `${host}:${port}/api/tabla_usuarios/edit/${credenciales.id}`,
+      url: `htttp://${dominio}/api/tabla_usuarios/edit/${credenciales.id}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
@@ -111,26 +111,19 @@ export const chekLogin = (uid, displayName) => {
   };
 };
 export const stargetUsuarios = (usuario, password) => {
-  // const credenciales = {
-  //     cedula: usuario,
-  //     clave: password,
-  // };
-
   return (dispatch) => {
     $.ajax({
-      url: `${host}:${port}/api/tabla_usuarios`,
+      url: `http://${dominio}/api/tabla_usuarios`,
       type: "get",
       dataType: "json",
       contentType: "application/json",
-      // data: JSON.stringify(credenciales),
+
       beforeSend: function () {
         dispatch(startLoading());
       },
       success: function (data) {
         dispatch(stopLoading());
-        // console.log(data)
-        dispatch(getUsuarios(data));
-        // localStorage.setItem("token", data.nombre);
+        dispatch(getUsuarios(data.data));
       },
       error: function (data) {
         // setMostrarCargando(false);
@@ -139,6 +132,7 @@ export const stargetUsuarios = (usuario, password) => {
     });
   };
 };
+
 export const getUsuarios = (e) => {
   return {
     type: types.getUsuarios,

@@ -1,27 +1,26 @@
 import "./Usuario.css";
+import Estado from "../../generic/Estado";
 
 function Usuario({ datos, abrirForm }) {
   return (
     <div
-      className="cont-card cont-usuario animar-hover"
+      className="cont-usuario animar-hover animar-entrada"
       onClick={() => abrirForm(datos.codai_usuario)}
     >
       {/* <p className="usuario-inicial">{datos.nombre[0].toUpperCase()}</p> */}
-      <div className="cont-ico-usuario">
-        <div className="ico-usuario format-ico-usuario-card"></div>
+      <div
+        className={
+          "cont-ico-usuario-card-config " + ("borde-usuario-" + 2)
+        }
+      >
+        <div className="ico-usuario format-ico-usuario-config"></div>
       </div>
       <div className="usuario-textos">
-        <div className="usuario-estado">
-            <p>{"hola"}</p>
-            <div
-                className={
-                    "cont-circulo-estado " +
-                    (datos.estado_usuario === true ? "color-estado-verde" : "color-estado-rojo")
-                }
-                >
-            </div>
+        <p>{datos.login_usuario}</p>
+        <p>{datos.id_usuario}</p>
+        <div className="usuario-cont-estado">
+          <Estado estado={datos.estado_usuario} />
         </div>
-        <p>{"hola2"}</p>
       </div>
     </div>
   );

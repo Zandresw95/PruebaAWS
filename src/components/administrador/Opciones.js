@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import Button from "../generic/Button";
 import ContInput from "../generic/ContInput";
 import Modal from "../generic/Modal";
@@ -18,7 +18,7 @@ let modalTypes = {
   CLOSE_FORM: "CLOSE_FORM",
 };
 
-function Opciones() {
+const Opciones = () => {
   const [stateModal, dispatchModal] = useReducer(
     reducerModal,
     initialStateModal
@@ -28,7 +28,7 @@ function Opciones() {
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [mostrarCargando, setMostrarCargando] = useState(false);
 
-  const estadorresumenUsuarios = true;
+
 
   useEffect(() => {
     obteneropciones();
@@ -86,6 +86,15 @@ function Opciones() {
     });
   };
 
+  const opc = useMemo(
+    () =>
+      opciones.filter(
+        (el) =>
+          el.descripcion_opcion.toLowerCase().includes(terminoBusqueda.toLowerCase())
+      ),
+    [terminoBusqueda, opciones]
+  );
+
   return (
     <>
       {mostrarCargando ? (
@@ -98,24 +107,22 @@ function Opciones() {
             <div className="cont-flex-gap">
               <h3 className="titulo-pagina">Opciones</h3>
             </div>
-            <div className="cont-flex-gap">
-              <div style={{ width: "200px", justifySelf: "left" }}>
-                <ContInput icono={"ico-lupa"}>
-                  <input
-                    name="buscar"
-                    onChange={(e) => setTerminoBusqueda(e.target.value)}
-                    value={terminoBusqueda}
-                    placeholder="Buscar"
-                  />
-                </ContInput>
-              </div>
-              <div style={{ width: "max-content" }}>
-                  <Button
-                    label={"Nuevo"}
-                    icono="ico-anadir"
-                    onClick={() => abrirForm(0)}
-                  />
-              </div>
+            <div style={{ width: "200px", justifySelf: "left" }}>
+              <ContInput icono={"ico-lupa"}>
+                <input
+                  name="buscar"
+                  onChange={(e) => setTerminoBusqueda(e.target.value)}
+                  value={terminoBusqueda}
+                  placeholder="Buscar"
+                />
+              </ContInput>
+            </div>
+            <div style={{ width: "max-content" }}>
+                <Button
+                  label={"Nuevo"}
+                  icono="ico-anadir"
+                  onClick={() => abrirForm(0)}
+                />
             </div>
           </div>
 
@@ -123,11 +130,11 @@ function Opciones() {
             <div className="contenedorContenido">
               <div className="contenedorPagina">
                 <div className="cont-opciones">
-                  {opciones.length > 0
-                    ? opciones.map((el, i) => {
+                  {opc.length > 0
+                    ? opc.map((el, i) => {
                         return (
                           <Opcion
-                            key={"usuario" + i}
+                            key={"opcion" + i}
                             datos={el}
                             abrirForm={() => abrirForm(el.codai_opcion)}
                           />

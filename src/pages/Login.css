@@ -38,7 +38,7 @@
 
 .login-logo {
   height: 30px;
-  content: url(../media/img/logoPinprexatColor.svg);
+  /*content: url(../media/img/logoPinprexatColor.svg);*/
   margin: 0 auto;
   margin-bottom: 10px;
 }

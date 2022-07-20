@@ -4,15 +4,15 @@ import $ from "jquery";
 import { useContext, useEffect, useState } from "react";
 import { dominio } from "../../../helpers/Dbdata";
 import { Validar } from "../../../helpers/Validar";
-import { Dropdown } from 'primereact/dropdown';
+
 import "./FormUsuario.css";
 import PopupContext from "../../../context/PopupContext";
+import ConfirmContext from "../../../context/ConfirmContext";
 
 let initialUsuario = {
   id_persona: "",
   login_usuario: "",
   clave_usuario: "",
-  id_perfil: "",
   estado_usuario: true,
 };
 
@@ -22,7 +22,7 @@ let initialFormValidado = {
   clave_usuario: [false, ""],
 };
 
-function FormUsuario({ idUsuario, cerrar, recargar}) {
+function FormUsuario({ idUsuario, cerrar}) {
   const [mounted, setMounted] = useState(true);
   const [mostrarCargando, setMostrarCargando] = useState(false);
   const [usuario, setUsuario] = useState(initialUsuario);
@@ -33,6 +33,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
   
 
   const { mostrarPopup } = useContext(PopupContext);
+  const { mostrarConfirm } = useContext(ConfirmContext);
 
   useEffect(() => {
     obtenerPersonas();
@@ -51,7 +52,10 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
   }, [idUsuario]);
 
   const handleChange = (e) => {
-    setUsuario({ ...usuario, [e.target.name]: e.target.value });
+    if(e.target.name === "estado_usuario"){
+      setUsuario({ ...usuario, [e.target.name]: e.target.checked ? true : false });
+    }    
+    else setUsuario({ ...usuario, [e.target.name]: e.target.value });      
     actualizarValidacion(e);
   };
 
@@ -107,13 +111,13 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
     setFormValidado(tempFormValidado);
   };
 
-  useEffect(() => {
-   console.log(formValidado);
-  }, [formValidado]);
-
   const guardarUsuario = () => {
     if (validarForm()) {
+      if (editando && idUsuario !== 0) {
+        actualizarUsuario();
+      } else {
         crearUsuario();
+      }
     } else {
       mostrarPopup(2, "Llena todos los datos");
     }
@@ -131,7 +135,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
   
   const obtenerPersonas = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_personas/obtener/activos`,
+      url: `http://${dominio}/api/tabla_personas`,
       type: "get",
       dataType: "json",
       contentType: "application/json",
@@ -139,9 +143,13 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
         setMostrarCargando(true);
       },
       success: function (data) {
-        if(mounted){
+        if (mounted) {
           setMostrarCargando(false);
-          setPersonas(data.data);
+          setPersonas(
+            data.data.map((el) => {
+              return { label: el['nombre_persona'].split(" ",1)+" "+el['apellido_persona'].split(" ",1)+"-"+el['cedula_persona'], value: el['id_persona'] };
+            })
+          );
         }
       },
       error: function (data) {
@@ -157,7 +165,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
   const obtenerUsuario = () => {
     if (idUsuario && idUsuario > 0) {
       $.ajax({
-        url: `http://${dominio}/api/tabla_usuario/${idUsuario}`,
+        url: `http://${dominio}/api/tabla_usuarios/${idUsuario}`,
         type: "get",
         dataType: "json",
         contentType: "application/json",
@@ -166,13 +174,12 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
         },
         success: function (data) {
           setMostrarCargando(false);
-          console.log(data);
           let formatedData = {
             id_persona: data.data.id_persona,
             login_usuario: data.data.login_usuario,
             clave_usuario: data.data.clave_usuario,
           };
-          setUsuario({ ...formatedData,  estado: data.data.estado_usuario});
+          setUsuario({ ...formatedData,  estado_usuario: data.data.estado_usuario});
           validarTodo(formatedData);
         },
         error: function (data) {
@@ -191,7 +198,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
 
   const crearUsuario = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_usuario/agregar`,
+      url: `http://${dominio}/api/tabla_usuarios/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
@@ -203,7 +210,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
         console.log(data);
         setMostrarCargando(false);
         mostrarPopup(1, data.mensaje);
-        recargar();
+        cerrar();
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -217,8 +224,9 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
   };
 
   const actualizarUsuario = () => {
+    console.log(usuario)
     $.ajax({
-      url: `http://${dominio}/api/tabla_usuario/edit/${idUsuario}`,
+      url: `http://${dominio}/api/tabla_usuarios/edit/${idUsuario}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
@@ -229,7 +237,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
       success: function (data) {
         setMostrarCargando(false);
         mostrarPopup(1, data.mensaje);
-        recargar();
+        cerrar();
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -242,11 +250,11 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
     });
   };
 
-  const eliminarUsuario = () => {
-    if (window.confirm("¿Seguro que desea eliminar usuario?"))
+  const eliminarUsuario = async () => {
+    if (await mostrarConfirm("¿Seguro que deseas deshabilitar el usuario?"))
       $.ajax({
-        url: `http://${dominio}/api/tabla_usuario/delete/${idUsuario}`,
-        type: "delete",
+        url: `http://${dominio}/api/tabla_usuarios/disable/${idUsuario}`,
+        type: "put",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify({ estado: false }),
@@ -256,7 +264,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
         success: function (data) {
           setMostrarCargando(false);
           mostrarPopup(1, data.mensaje);
-          recargar();
+          cerrar();
         },
         error: function (data) {
           setMostrarCargando(false);
@@ -280,12 +288,12 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
       ) : (
         <>
           <h3 className="titulo-usuario">{idUsuario === 0 ? "NUEVO USUARIO" : !editando ? "VER USUARIO": "EDITAR USUARIO" }</h3>
-          <div className="form-usuario-acciones">
+          <div className="form-usuario-acciones" style={{ width: "max-content", alignSelf: "center" }}>
             {idUsuario && idUsuario !== 0 && !editando ? (
               <>
                 <Button
                   label={"Editar"}
-                  icono={"ico-edit"}
+                  icono={"ico-lapiz"}
                   onClick={editarUsuario}
                   editar={true}
                 />
@@ -294,6 +302,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
                   icono={"ico-eliminar"}
                   onClick={eliminarUsuario}
                   borrar={true}
+                  rojo={true}
                 />
               </>
             ) : (
@@ -302,13 +311,23 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
           </div>
           <form>
             <ContInput label="Persona" icono={"ico-usuario"}>
-              <Dropdown disabled={!editando}
-                        name="id_persona"
-                        value={usuario.id_persona}
-                        options={personas}
-                        onChange={handleChange}
-                        placeholder="Selecciona una persona"
-              />
+              <select
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="id_persona"
+                disabled={!editando}
+                value={usuario.id_persona}
+              >
+                {usuario.id_persona === "" && <option disabled value={""} />}
+                {personas &&
+                  personas.map((el, i) => {
+                    return (
+                      <option key={"id_persona" + i} value={el.value}>
+                        {el.label}
+                      </option>
+                    );
+                  })}
+              </select>
               {!formValidado.id_persona[0] && (
                 <div className="ico-advertencia format-ico-form-validacion"></div>
               )}
@@ -321,6 +340,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
               <input
                 value={usuario.login_usuario}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="login_usuario"
                 disabled={!editando}
               />
@@ -336,6 +356,7 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
               <input
                 value={usuario.clave_usuario}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="clave_usuario"
                 disabled={!editando}
                 type={"password"}
@@ -347,8 +368,20 @@ function FormUsuario({ idUsuario, cerrar, recargar}) {
             {!formValidado.clave_usuario[0] && (
               <p className="texto-validacion">{formValidado.clave_usuario[1]}</p>
             )}
+            <p className="form-opcion-toggle">
+              <label htmlFor="toggleEstado">Activo </label>
+              <input
+                id="toggleEstado"
+                type="checkbox"
+                style={{ width: "20px", height: "30px" }}
+                name="estado_usuario"
+                checked={usuario.estado_usuario}
+                onChange={handleChange}
+                disabled={!editando}
+              />
+            </p>
            
-            <div className="form-usuario-acciones">
+            <div className="form-usuario-acciones" style={{ width: "max-content", alignSelf: "center" }}>
                
               {idUsuario && idUsuario !== 0 && editando ? (
                 <>

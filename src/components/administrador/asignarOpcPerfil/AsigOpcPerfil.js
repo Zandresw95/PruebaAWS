@@ -167,7 +167,7 @@ const AsigOpcPerfiles = () => {
         </div>
       ) : (
         
-        <div className="cont-asignar animar-zoom-min-to-max">
+        <div className="cont-asignaraa animar-zoom-min-to-max">
             <div className="barra-acciones-title">
                 <h3 className="title">ASIGNAR OPCIONES</h3>
             </div>

@@ -82,10 +82,6 @@
   color: var(--color-texto-active);
 }
 
-.btn-label-rojo {
-  color: var(--color-eliminar);
-}
-
 input.disabled,
 button.disabled {
   box-shadow: var(--borde-input);

@@ -57,7 +57,7 @@ const Navbar = () => {
           to="/usuarios"
           onClick={alertarNavegacion}
         >
-          <div className="ico-usuario format-ico-navbar"></div>
+          <div className="ico-usuarios format-ico-navbar"></div>
           <p>Usuarios</p>
         </NavLink>
 

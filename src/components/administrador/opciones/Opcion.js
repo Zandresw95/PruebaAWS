@@ -10,10 +10,10 @@ function Opcion({ datos, abrirForm }) {
       {/* <p className="usuario-inicial">{datos.nombre[0].toUpperCase()}</p> */}
       <div
         className={
-          "cont-ico-opcion-card-config "
+          "cont-ico-usuario-card-config "+ ("borde-opcion-" + 3)
         }
       >
-        <div className="ico-opcion format-ico-opcion-config"></div>
+        <div className="ico-configuracion format-ico-opcion-config"></div>
       </div>
       <div className="opcion-textos">
         <p>{datos.descripcion_opcion}</p>

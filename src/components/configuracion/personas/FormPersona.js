@@ -2,11 +2,12 @@ import Button from "../../generic/Button";
 import ContInput from "../../generic/ContInput";
 import $ from "jquery";
 import { useContext, useEffect, useState } from "react";
-import { host, port, dominio } from "../../../helpers/Dbdata";
+import { dominio } from "../../../helpers/Dbdata";
 import { Validar } from "../../../helpers/Validar";
 
 import "./FormPersona.css";
 import PopupContext from "../../../context/PopupContext";
+import ConfirmContext from "../../../context/ConfirmContext";
 
 let initialPersona = {
   nombre_persona: "",
@@ -20,17 +21,17 @@ let initialPersona = {
 };
 
 let initialFormValidado = {
-  nombre_persona: [true, ""],
-  apellido_persona: [true, ""],
-  direccion_persona: [true, ""],
-  telefono_persona: [true, ""],
-  email_persona: [true, ""],
-  fechanac_persona: [true, ""],
-  instruccion_persona: [true, ""],
-  cedula_persona: [true, ""],
+  nombre_persona: [false, ""],
+  apellido_persona: [false, ""],
+  direccion_persona: [false, ""],
+  telefono_persona: [false, ""],
+  email_persona: [false, ""],
+  fechanac_persona: [false, ""],
+  instruccion_persona: [false, ""],
+  cedula_persona: [false, ""],
 };
 
-function FormPersona({ idPersona, cerrar }) {
+function FormPersona({ idPersona, cerrar, recargar }) {
   const [mostrarCargando, setMostrarCargando] = useState(false);
   const [persona, setPersona] = useState(initialPersona);
   const [tempPersona, setTempPersona] = useState(initialPersona);
@@ -38,59 +39,72 @@ function FormPersona({ idPersona, cerrar }) {
   const [editando, setEditando] = useState(false);
 
   const { mostrarPopup } = useContext(PopupContext);
+  const { mostrarConfirm } = useContext(ConfirmContext);
 
   useEffect(() => {
-    obtenerpersona();
-    if (idPersona === 0) setEditando(true);
-    else setEditando(false);
-    setFormValidado(initialFormValidado);
-    setTempPersona(initialPersona);
+    if (idPersona === 0){
+      setEditando(true);
+      setFormValidado(initialFormValidado);
+      setPersona(initialPersona);
+    } else {
+      setEditando(false);
+      obtenerPersona();
+    }
   }, [idPersona]);
 
-  useEffect(() => {
-    if (idPersona !== 0) validarTodo();
-    else setFormValidado(initialFormValidado);
-  }, [persona]);
-
+  
   const handleChange = (e) => {
-    if (e.target.name === "estado")
-      setPersona({ ...persona, [e.target.name]: e.target.checked ? 1 : 0 });
-    else setPersona({ ...persona, [e.target.name]: e.target.value });
+    setPersona({ ...persona, [e.target.name]: e.target.value });
     actualizarValidacion(e);
   };
 
   const handleBlur = (e) => {
-    actualizarValidacion(e);
+    setPersona({ ...persona, [e.target.name]: e.target.value.trim() });
   };
 
   const actualizarValidacion = (e) => {
     let tempCampo = {};
     switch (e.target.name) {
-      case "nombre":
+      case "nombre_persona":
         tempCampo = {
-          [e.target.name]: Validar.general(e.target.value),
+          [e.target.name]: Validar.texto(e.target.value),
         };
         break;
-      case "cedula":
+      case "apellido_persona":
+        tempCampo = {
+          [e.target.name]: Validar.texto(e.target.value),
+        };
+        break;    
+      case "cedula_persona":
         tempCampo = {
           [e.target.name]: Validar.cedula(e.target.value),
         };
         break;
-      case "telefono":
+      case "telefono_persona":
         tempCampo = {
           [e.target.name]: Validar.telefono(e.target.value),
         };
         break;
-      case "direccion":
+      case "direccion_persona":
         tempCampo = {
           [e.target.name]: Validar.direccion(e.target.value),
         };
         break;
-      case "idperfil":
+      case "email_persona":
         tempCampo = {
-          [e.target.name]: Validar.noCero(e.target.value),
+          [e.target.name]: Validar.email(e.target.value),
         };
         break;
+      case "fechanac_persona":
+        tempCampo = {
+          [e.target.name]: Validar.general(e.target.value),
+        };
+        break;  
+      case "instruccion_persona":
+        tempCampo = {
+          [e.target.name]: Validar.general(e.target.value),
+        };
+        break; 
       default:
         break;
     }
@@ -110,39 +124,30 @@ function FormPersona({ idPersona, cerrar }) {
     return true;
   };
 
-  const validarTodo = () => {
-    // console.log("validar");
-    let tempFormValidado;
-    for (const key in persona) {
-      if (Object.hasOwnProperty.call(persona, key)) {
-        const el = persona[key];
-        if (key === "estado") continue;
-        console.log(Validar.general(el));
+  const validarTodo = (data) => {
+    let tempFormValidado = formValidado;
+    for (const key in data) {
+      if (Object.hasOwnProperty.call(initialPersona, key)) {
+        const el = data[key];
         tempFormValidado = { ...tempFormValidado, [key]: Validar.general(el) };
       }
     }
     setFormValidado(tempFormValidado);
-    // console.log(tempFormValidado);
-    // console.log(persona);
   };
 
-  useEffect(() => {
-    console.log(formValidado);
-  }, [formValidado]);
-
-  const guardarpersona = () => {
+  const guardarPersona = () => {
     if (validarForm()) {
       if (editando && idPersona !== 0) {
-        actualizarpersona();
+        actualizarPersona();
       } else {
-        crearpersona();
+        crearPersona();
       }
     } else {
       mostrarPopup(2, "Llena todos los datos");
     }
   };
 
-  const editarpersona = () => {
+  const editarPersona = () => {
     setTempPersona(persona);
     setEditando(true);
   };
@@ -152,9 +157,8 @@ function FormPersona({ idPersona, cerrar }) {
     setEditando(false);
   };
 
-  const obtenerpersona = () => {
+  const obtenerPersona = () => {
     if (idPersona && idPersona > 0) {
-      console.log("dentrooo");
       $.ajax({
         url: `http://${dominio}/api/tabla_personas/${idPersona}`,
         type: "get",
@@ -165,22 +169,19 @@ function FormPersona({ idPersona, cerrar }) {
         },
         success: function (data) {
           setMostrarCargando(false);
-          console.log(data);
-          setPersona({
+          let formatedData = {
             nombre_persona: data.data.nombre_persona,
             apellido_persona: data.data.apellido_persona,
             direccion_persona: data.data.direccion_persona,
             telefono_persona: data.data.telefono_persona,
             email_persona: data.data.email_persona,
             fechanac_persona: data.data.fechanac_persona,
-            inatruccion_persona: data.data.instruccion_persona,
+            instruccion_persona: data.data.instruccion_persona,
             cedula_persona: data.data.cedula_persona,
-          });
-          // if ("cedula" in data) {
-          //   setUserData(data);
-          // } else {
-          //   mostrarPopup(2, data);
-          // }
+          };
+          setPersona(formatedData);
+          validarTodo(formatedData);
+
         },
         error: function (data) {
           setMostrarCargando(false);
@@ -196,8 +197,7 @@ function FormPersona({ idPersona, cerrar }) {
     }
   };
 
-  const crearpersona = () => {
-    console.log("creando");
+  const crearPersona = () => {
     $.ajax({
       url: `http://${dominio}/api/tabla_personas/agregar`,
       type: "post",
@@ -208,10 +208,9 @@ function FormPersona({ idPersona, cerrar }) {
         setMostrarCargando(true);
       },
       success: function (data) {
-        console.log(data);
         setMostrarCargando(false);
         mostrarPopup(1, data.mensaje);
-        cerrar();
+        recargar();
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -224,7 +223,7 @@ function FormPersona({ idPersona, cerrar }) {
     });
   };
 
-  const actualizarpersona = () => {
+  const actualizarPersona = () => {
     $.ajax({
       url: `http://${dominio}/api/tabla_personas/edit/${idPersona}`,
       type: "put",
@@ -237,7 +236,7 @@ function FormPersona({ idPersona, cerrar }) {
       success: function (data) {
         setMostrarCargando(false);
         mostrarPopup(1, data.mensaje);
-        cerrar();
+        recargar();
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -250,8 +249,8 @@ function FormPersona({ idPersona, cerrar }) {
     });
   };
 
-  const eliminarpersona = () => {
-    if (window.confirm("¿Seguro que desea eliminar el persona?"))
+  const eliminarPersona = async () => {
+    if (await mostrarConfirm("¿Seguro que deseas eliminar la persona?"))
       $.ajax({
         url: `http://${dominio}/api/tabla_personas/delete/${idPersona}`,
         type: "delete",
@@ -264,7 +263,7 @@ function FormPersona({ idPersona, cerrar }) {
         success: function (data) {
           setMostrarCargando(false);
           mostrarPopup(1, data.mensaje);
-          cerrar();
+          recargar();
         },
         error: function (data) {
           setMostrarCargando(false);
@@ -285,26 +284,24 @@ function FormPersona({ idPersona, cerrar }) {
         </div>
       ) : (
         <>
-          <h3>{idPersona === 0 ? "Nuevo persona" : persona.nombre_persona}</h3>
-          <div className="form-persona-acciones">
+          <h3 className="titulo-persona">{idPersona === 0 ? "NUEVA PERSONA" : !editando ? "VER PERSONA": "EDITAR PERSONA" }</h3>
+          <div className="form-persona-acciones" style={{ width: "max-content", alignSelf: "center" }}>
             {idPersona && idPersona !== 0 && !editando ? (
               <>
                 <Button
                   label={"Editar"}
-                  icono={"ico-editar"}
-                  onClick={editarpersona}
+                  icono={"ico-lapiz"}
+                  onClick={editarPersona}
+                  editar={true}
                 />
                 <Button
                   label={"Eliminar"}
                   icono={"ico-eliminar"}
-                  onClick={eliminarpersona}
+                  onClick={eliminarPersona}
+                  borrar={true}
+                  rojo={true}
                 />
               </>
-            ) : (
-              ""
-            )}
-            {idPersona && idPersona !== 0 && editando ? (
-              <Button label={"Cancelar"} onClick={cancelarEdicion} />
             ) : (
               ""
             )}
@@ -337,6 +334,9 @@ function FormPersona({ idPersona, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
+            {!formValidado.apellido_persona[0] && (
+              <p className="texto-validacion">{formValidado.apellido_persona[1]}</p>
+            )}
             <ContInput label="Dirección" icono={"ico-persona"}>
               <input
                 value={persona.direccion_persona}
@@ -349,7 +349,10 @@ function FormPersona({ idPersona, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Telefono" icono={"ico-persona"}>
+            {!formValidado.direccion_persona[0] && (
+              <p className="texto-validacion">{formValidado.direccion_persona[1]}</p>
+            )}
+            <ContInput label="Teléfono" icono={"ico-persona"}>
               <input
                 value={persona.telefono_persona}
                 onChange={handleChange}
@@ -361,7 +364,10 @@ function FormPersona({ idPersona, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Email" icono={"ico-persona"}>
+            {!formValidado.telefono_persona[0] && (
+              <p className="texto-validacion">{formValidado.telefono_persona[1]}</p>
+            )}
+            <ContInput label="Correo" icono={"ico-persona"}>
               <input
                 value={persona.email_persona}
                 onChange={handleChange}
@@ -373,7 +379,10 @@ function FormPersona({ idPersona, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Fecha nacimiento" icono={"ico-persona"}>
+            {!formValidado.email_persona[0] && (
+              <p className="texto-validacion">{formValidado.email_persona[1]}</p>
+            )}
+            <ContInput label="Fecha Nacimiento" icono={"ico-persona"}>
               <input
                 value={persona.fechanac_persona}
                 onChange={handleChange}
@@ -386,18 +395,33 @@ function FormPersona({ idPersona, cerrar }) {
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
-            <ContInput label="Instruccion" icono={"ico-persona"}>
-              <input
-                value={persona.instruccion_persona}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="instruccion_persona"
-                disabled={!editando}
-              />
+            {!formValidado.fechanac_persona[0] && (
+              <p className="texto-validacion">{formValidado.fechanac_persona[1]}</p>
+            )}
+            <ContInput label="Instrucción" icono={"ico-persona"}>
+              <select
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="instruccion_persona"
+                  disabled={!editando}
+                  value={persona.instruccion_persona}
+              >
+                {persona.instruccion_persona === "" && <option disabled value={""} />}
+                  <option value="Ninguna">Ninguna</option>
+                  <option value="Primaria">Primaria</option>
+                  <option value="Secundaria">Secundaria</option>
+                  <option value="Tercer Nivel">Tercer Nivel</option>
+                  <option value="Cuarto Nivel">Cuarto Nivel</option>
+                  <option value="Doctorado">Doctorado</option>
+                  <option value="Otra">Otra</option>
+                </select>
               {!formValidado.instruccion_persona[0] && (
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
               )}
             </ContInput>
+            {!formValidado.instruccion_persona[0] && (
+              <p className="texto-validacion">{formValidado.instruccion_persona[1]}</p>
+            )}
             <ContInput label="Cédula" icono={"ico-ruc"}>
               <input
                 value={persona.cedula_persona}
@@ -413,7 +437,27 @@ function FormPersona({ idPersona, cerrar }) {
             {!formValidado.cedula_persona[0] && (
               <p className="texto-validacion">{formValidado.cedula_persona[1]}</p>
             )}
-            {editando && <Button label={"Guardar"} onClick={guardarpersona} />}
+
+            <div className="form-usuario-acciones" style={{ width: "max-content", alignSelf: "center" }}>
+               
+              {idPersona && idPersona !== 0 && editando ? (
+                <>
+                 {/*Editando usuario*/}
+                 <Button label={"Aceptar"} onClick={guardarPersona} aceptar={true}/>
+                 <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
+                </>
+              ) : idPersona && idPersona !== 0 && !editando ? (
+                /*Ver usuario*/
+                ""
+              ):(
+                <>
+                {/*Nuevo usuario*/}
+                <Button label={"Aceptar"} onClick={guardarPersona} aceptar={true}/>
+                <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>
+                </>
+              )}
+              
+            </div>
           </form>
         </>
       )}

@@ -201,6 +201,22 @@
   content: url(../media/ico/usuario.svg);
 }
 
+.ico-persona {
+  content: url(../media/ico/usuario.svg);
+}
+
+.ico-confirmar {
+  content: url(../media/ico/confirmar.svg);
+}
+
+.ico-rechazar {
+  content: url(../media/ico/rechazar.svg);
+}
+
+.ico-perfil {
+  content: url(../media/ico/perfil.svg);
+}
+
 .ico-estado-activo {
   border-radius: 50%;
   background-color: rgb(31, 206, 54);
@@ -378,6 +394,36 @@
 }
 
 .format-ico-usuario-config {
+  margin-top: 5px;
+  height: 40px;
+  filter: invert(0.95);
+}
+
+.cont-ico-persona-card,
+.cont-ico-persona-card-config {
+  font-size: 1.7em;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: bold;
+  overflow: hidden;
+  align-self: center;
+  box-shadow: var(--borde-input);
+}
+
+.cont-ico-persona-card-config {
+  box-shadow: none;
+}
+
+.format-ico-persona-card {
+  margin-top: 5px;
+  height: 40px;
+  filter: invert(0.8);
+}
+
+.format-ico-persona-config {
   margin-top: 5px;
   height: 40px;
   filter: invert(0.95);

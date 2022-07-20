@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import Button from "../generic/Button";
 import ContInput from "../generic/ContInput";
 import Modal from "../generic/Modal";
@@ -9,13 +9,6 @@ import "./Perfiles.css";
 import FormPerfil from "./perfiles/FormPerfil";
 import Perfil from "./perfiles/Perfil";
 
-// let dataUsuario = {
-//   id: 1,
-//   nombre: "Nicolás Carvajal",
-//   cargo: "ADMINISTRADOR",
-//   estado: 1,
-// };
-
 let initialStateModal = {
   form: false,
 };
@@ -25,13 +18,14 @@ let modalTypes = {
   CLOSE_FORM: "CLOSE_FORM",
 };
 
-function Perfiles({ irAtras }) {
+const Perfiles = () => {
   const [stateModal, dispatchModal] = useReducer(
     reducerModal,
     initialStateModal
   );
   const [idPerfil, setIdPerfil] = useState(0);
   const [perfiles, setPerfiles] = useState([]);
+  const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [mostrarCargando, setMostrarCargando] = useState(false);
 
   useEffect(() => {
@@ -90,6 +84,15 @@ function Perfiles({ irAtras }) {
     });
   };
 
+  const perfils = useMemo(
+    () =>
+      perfiles.filter(
+        (el) =>
+          el.descripcion_perfil.toLowerCase().includes(terminoBusqueda.toLowerCase())
+      ),
+    [terminoBusqueda, perfiles]
+  );
+
   return (
     <>
       {mostrarCargando ? (
@@ -98,39 +101,46 @@ function Perfiles({ irAtras }) {
         </div>
       ) : (
         <>
-          <div className="cont-perfiles animar-zoom-min-to-max">
-            <div className="barra-acciones-top">
-              <Button icono="ico-atras" label={"Atrás"} onClick={irAtras} />
-              <div style={{ width: "200px" }}>
-                {/* <SearchBar /> */}
-                <ContInput icono={"ico-lupa"}>
-                  <input placeholder="Buscar" />
-                </ContInput>
-              </div>
+          <div className="encabezado-nombre-barra-buscar">
+            <div className="cont-flex-gap">
+              <h3 className="titulo-pagina">Perfiles</h3>
             </div>
-
-            <div className="barra-acciones-top">
-              <h3>Perfiles</h3>
-              <div style={{ width: "max-content" }}>
+            <div style={{ width: "200px", justifySelf: "left" }}>
+              <ContInput icono={"ico-lupa"}>
+                <input
+                  name="buscar"
+                  onChange={(e) => setTerminoBusqueda(e.target.value)}
+                  value={terminoBusqueda}
+                  placeholder="Buscar"
+                />
+              </ContInput>
+            </div>
+            <div style={{ width: "max-content" }}>
                 <Button
                   label={"Nuevo"}
                   icono="ico-anadir"
                   onClick={() => abrirForm(0)}
                 />
-              </div>
             </div>
-            <div className="cont-contenido-perfiles">
-              {perfiles.length > 0
-                ? perfiles.map((el, i) => {
-                    return (
-                      <Perfil
-                        key={"usuario" + i}
-                        datos={el}
-                        abrirForm={() => abrirForm(el.codai_perfil)}
-                      />
-                    );
-                  })
-                : "No existen perfiles"}
+          </div>
+          <div className="contenedorPrincipal animar-zoom-min-to-max">
+            <div className="contenedorContenido">
+              <div className="contenedorPagina">
+                <div className="cont-perfiles">
+                  {perfils.length > 0
+                    ? perfils.map((el, i) => {
+                        return (
+                          <Perfil
+                            key={"usuario" + i}
+                            datos={el}
+                            abrirForm={() => abrirForm(el.codai_perfil)}
+                          />
+                        );
+                      })
+                    : "No existen perfiles"
+                  }
+                </div>
+              </div>
             </div>
           </div>
           <Modal activo={stateModal.form} cerrar={cerrarForm}>

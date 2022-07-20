@@ -1,14 +1,8 @@
 .cont-perfiles {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* height: 100%; */
-    background-color: #F9F5F5;
-}
-
-.cont-contenido-perfiles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
-    /* height: 100%; */
+    margin-bottom: 20px;
+    margin-top: 10px;
 }

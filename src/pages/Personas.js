@@ -1,4 +1,3 @@
-import "./Personas.css";
 import Persona from "../components/configuracion/Personas";
 
 function Personas() {

@@ -25,6 +25,11 @@
     --color-fondo-tab: rgb(255, 255, 255);
     --color-placeholder: rgb(200, 200, 200);
     --color-fondo-popup: rgb(240, 240, 240);
+
+    --color-fondo-editar: rgb(44, 174, 215, 1);
+    --color-fondo-borrar: rgb(248, 87, 87, 1);
+    --color-fondo-aceptar: rgb(163, 220, 122, 1);
+    --color-fondo-cancelar: rgb(244, 218, 34, 1);
   
     /* transiciones */
     --transicion-extra-rapida: 0.075s ease-in-out;

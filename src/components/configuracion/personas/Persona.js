@@ -3,21 +3,20 @@ import "./Persona.css";
 function Persona({ datos, abrirForm }) {
   return (
     <div
-      className="cont-usuario animar-hover animar-entrada"
+      className="cont-persona animar-hover animar-entrada"
       onClick={() => abrirForm(datos.codai_persona)}
     >
-      {/* <p className="usuario-inicial">{datos.nombre[0].toUpperCase()}</p> */}
+      {/* <p className="persona-inicial">{datos.nombre[0].toUpperCase()}</p> */}
       <div
         className={
-          "cont-ico-usuario-card-config " + ("borde-usuario-" + 1)
+          "cont-ico-persona-card-config " + ("borde-persona-" + 1)
         }
       >
-        <div className="ico-usuario format-ico-usuario-config"></div>
+        <div className="ico-persona format-ico-persona-config"></div>
       </div>
-      <div className="usuario-textos">
+      <div className="persona-textos">
         <p>{datos.nombre_persona.split(" ",1)} {datos.apellido_persona.split(" ",1)}</p>
         <p>{datos.cedula_persona}</p>
-        <p>{datos.codai_persona}</p>
       </div>
     </div>
   );
