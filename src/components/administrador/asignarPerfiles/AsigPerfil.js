@@ -10,11 +10,11 @@ const AsigPerfiles = () => {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
     const [mostrarCargando, setMostrarCargando] = useState(false);
-    const [usuario, setUsuario] = useState("");
-    const [usuarios, setUsuarios] = useState([]);
+    const [perfil, setPerfil] = useState("");
+    const [perfiles, setPerfiles] = useState([]);
 
     useEffect(() => {
-        obtenerUsuarios();
+        obtenerPerfiles();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {
@@ -27,7 +27,7 @@ const AsigPerfiles = () => {
 
     const onChangeSelect = (e) => {
         
-        setUsuario(e.value);
+        setPerfil(e.value);
         obtenerAsignados(e.value);
         obtenerNoAsignados(e.value); 
    
@@ -36,7 +36,7 @@ const AsigPerfiles = () => {
     const agregarPerfiles = (asignadas, noAsignadas) => {
         for(const el of asignadas) {
             $.ajax({
-                url: `http://${dominio}/api/tabla_usu_perfiles/agregar/${usuario}`,
+                url: `http://${dominio}/api/tabla_usu_perfil/agregar/${perfil}`,
                 type: "post",
                 async: false,
                 dataType: "json",
@@ -59,11 +59,11 @@ const AsigPerfiles = () => {
         }
         noAsignadas.map((el) => {
             $.ajax({
-                url: `http://${dominio}/api/tabla_usu_perfiles/delete/${usuario}`,
+                url: `http://${dominio}/api/tabla_usu_perfil/delete/${perfil}`,
                 type: "delete",
                 dataType: "json",
                 contentType: "application/json",
-                data: JSON.stringify({id_perfil: el['ID_PERFIL']}),
+                data: JSON.stringify({id_usuario: el['ID_USUARIO']}),
                 success: function (data) {
                     console.log(data.data);
                     //let mensaje = data.data;
@@ -81,31 +81,31 @@ const AsigPerfiles = () => {
         })
     }
 
-    const obtenerUsuarios = () => {
+    const obtenerPerfiles = () => {
         $.ajax({
-            url: `http://${dominio}/api/tabla_usuarios`,
+            url: `http://${dominio}/api/tabla_perfiles/obtener/activos`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
             data: JSON.stringify({}),
             success: function (data) {
-              setUsuarios(data.data);
-              setMostrarCargando(false);
+                setPerfiles(data.data);
+                setMostrarCargando(false);
             },
             error: function (data) {
-              setMostrarCargando(false);
-              console.log(data.responseJSON.data);
-              //let mensaje = data.responseJSON.data;
-              // if (data.status === 0)
-              // mostrarPopup(0, "No es posible conectarse al servidor Node JS");
-              // else mostrarPopup(2, mensaje);
+                setMostrarCargando(false);
+                console.log(data.responseJSON.data);
+                let mensaje = data.responseJSON.data;
+                // if (data.status === 0)
+                // mostrarPopup(0, "No es posible conectarse al servidor Node JS");
+                // else mostrarPopup(2, mensaje);
             },
         });
     }
 
-    const obtenerAsignados = (usuario) => {
+    const obtenerAsignados = (perfil) => {
         $.ajax({
-            url: `http://${dominio}/api/tabla_usu_perfiles/obtener/perfAsig/${usuario}`,
+            url: `http://${dominio}/api/tabla_usu_perfil/obtener/perfAsig/${perfil}`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
@@ -126,9 +126,9 @@ const AsigPerfiles = () => {
         });
     }
 
-    const obtenerNoAsignados = (usuario) => {
+    const obtenerNoAsignados = (perfil) => {
         $.ajax({
-            url: `http://${dominio}/api/tabla_usu_perfiles/obtener/perfNotAsig/${usuario}`,
+            url: `http://${dominio}/api/tabla_usu_perfil/obtener/perfNotAsig/${perfil}`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
@@ -149,11 +149,11 @@ const AsigPerfiles = () => {
         });
     }
 
-    const opcionTemplate = (opcion) => {
+    const opcionTemplate = (usuario) => {
         return (
             <div className="product-item">
                 <div className="product-list-detail">
-                    <h6 className="mb-2">{opcion['DESCRIPCION_OPCION']}</h6>
+                    <h6 className="mb-2">{usuario['LOGIN_USUARIO']}</h6>
                 </div>
             </div>
         );
@@ -167,21 +167,21 @@ const AsigPerfiles = () => {
         </div>
       ) : (
         
-        <div className="cont-asignar animar-zoom-min-to-max">
+        <div className="cont-kkasignar animar-zoom-min-to-max">
             <div className="barra-acciones-title">
                 <h3 className="title">ASIGNAR PERFILES</h3>
             </div>
             <div className="barra-acciones-perfil">
                 <div className="dropdown-demo">
                     <h5>Usuarios</h5>
-                    <Dropdown style={{width: '14rem'}} id='select-perfil' value={usuario} options={usuarios} onChange={onChangeSelect} placeholder="Selecciona un usuario"/>
+                    <Dropdown style={{width: '14rem'}} id='select-perfil' value={perfil} options={perfiles} onChange={onChangeSelect} placeholder="Selecciona un usuario"/>
                 </div>
             </div>
             <div className="cont-contenido-opciones">
                 <div className="picklist-demo">
                     <div className="card-1">
                         <PickList style={{marginTop: "80px", marginLeft: "78px", marginRight: "57px"}} source={source} target={target} itemTemplate={opcionTemplate}
-                            sourceHeader="Perfiles asignados" targetHeader="Perfiles no asignadas"
+                            sourceHeader="Usuarios asignados" targetHeader="Usuarios no asignadas"
                             showSourceControls={false} showTargetControls={false} 
                             sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
                             onChange={onChange}>
