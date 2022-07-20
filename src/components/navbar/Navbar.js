@@ -66,6 +66,16 @@ function Navbar() {
           <div className="ico-lapiz format-ico-navbar"></div>
           <p>Asignar Opciones</p>
         </li>
+        <li
+          className={pantallaActiva === 5 ? "active" : ""}
+          onClick={() => {
+            setPantallaActiva(5);
+            navegar("/asigPerfiles");
+          }}
+        >
+          <div className="ico-user-check-figma format-ico-navbar"></div>
+          <p>Asignar Perfiles</p>
+        </li>
       </ul>
     </div>
   );

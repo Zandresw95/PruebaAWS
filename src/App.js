@@ -25,6 +25,7 @@ import Personas from "./pages/Personas";
 import Opcione from "./pages/Opcione";
 import Perfile from "./pages/Perfile";
 import AsigOpcPerfil from "./pages/AsigOpcPerfil";
+import AsigPerfil from "./pages/AsigPerfUsuario";
 
 const NavLayout = () => (
   <>
@@ -48,6 +49,7 @@ function App() {
                 <Route path="/opciones" element={<Opcione />} />
                 <Route path="/perfiles" element={<Perfile />} />
                 <Route path="/asigOpcPerfil" element={<AsigOpcPerfil />} />
+                <Route path="/asigPerfiles" element={<AsigPerfil />} />
               </Route>
             </Routes>
           </div>
