@@ -1,0 +1,30 @@
+.num-card {
+    font-weight: bold;
+    font-family: "Quicksand-Regular";
+    box-shadow: 0px 0px 0px 2px var(--color-principal);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: var(--color-principal);
+  }
+  
+  .texto-valor-numerico {
+    color: #206ba8;
+    font-size: 1rem;
+  }
+  
+  .texto-unidad-magnitud {
+    color: #698ba7;
+    font-size: 0.9rem;
+  }
+  
+  .texto-subtitulo {
+    color: gray;
+  }
+  
+  .texto-descripcion {
+    color: var(--color-texto-lowest);
+  }
+  

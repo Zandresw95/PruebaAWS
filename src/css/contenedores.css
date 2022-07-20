@@ -1,21 +1,29 @@
 .cont-app {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 100px 1fr;
+  overflow: hidden;
+}
+
+.cont-contenido-app {
+  padding: 15px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: grid;
+  grid-template-rows: 35px 1fr;
+  height: 100%;
+  gap: 5px;
 }
 
 .cont-seccion {
-  width: calc(100% - 10px);
-  height: calc(100vh - 10px);
+  width: 100%;
   display: block;
-  margin: 5px;
+  margin: 0 auto;
   background-color: var(--color-fondo-seccion);
   padding: var(--padding-seccion);
   border-radius: var(--radio-seccion);
-  position: relative;
-  overflow-y: auto;
+  box-shadow: var(--sombra-seccion);
 }
 
 .cont-card {
@@ -45,54 +53,154 @@
   gap: 10px;
 }
 
-.barra-acciones-top {
+.cont-acciones {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  left: auto;
+  bottom: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.cont-acciones .acciones-accion {
   display: grid;
-  grid-template-columns: max-content 1fr;
-  justify-items: flex-end;
-}
-
-.animar-hover {
+  grid-template-rows: 30px max-content;
+  justify-items: center;
   cursor: pointer;
-  transition: transform var(--transicion-rapida);
 }
 
-.animar-hover:hover {
-  transform: scale(1.03);
+.cont-acciones .acciones-accion > p {
+  font-size: 0.8rem;
+  color: var(--color-texto-lowest);
+  opacity: 0;
+  transition: opacity var(--transicion-rapida);
+}
+.cont-card:hover .cont-acciones .acciones-accion > p {
+  opacity: 1;
+}
+.cont-card:hover .cont-acciones .acciones-accion > div {
+  opacity: 0.5;
 }
 
-.animar-hover:active {
-  background-color: var(--color-fondo-focus);
+/* .titulo-pagina{
+  padding-left: 5px;
+  border-left: 3px solid var(--color-principal);
+} */
+
+.encabezado-nombre-barra-buscar {
+  display: grid;
+  grid-template-columns: 1fr 400px 1fr;
+  align-items: flex-start;
 }
 
-.cont-circulo-estado {
-  width: 10px;
-  height: 10px;
-  background-color: var(--color-fondo-input);
-  border-radius: 50%;
+.encabezado-nombre-barra-buscar > :first-child {
+  justify-self: flex-start;
+}
+.encabezado-nombre-barra-buscar > :nth-child(2) {
+  justify-self: center;
+}
+.encabezado-nombre-barra-buscar > :nth-child(3) {
+  justify-self: flex-end;
 }
 
-/* colores estados */
-.color-estado-inactivo {
-  background-color: var(--color-fondo-input);
+.input-border {
+  border: 1px solid lightgray;
+  border-radius: 4px;
 }
-.color-estado-rojo {
-  background-color: rgb(226, 0, 0);
-}
-.color-estado-verde {
-  background-color: rgb(5, 158, 0);
-}
-/* colores estados */
 
 .cont-loader-full-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   margin: auto;
   align-content: center;
   justify-content: center;
-  grid-column: 1/-1;
-  grid-row: 1/-1;
   display: grid;
+  width: 100%;
+  height: 100%;
+}
+
+.max-content {
+  width: max-content;
+}
+
+.btn-atras-seccion::after {
+  width: 140px;
+  height: 40px;
+  background-color: var(--color-fondo-app);
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  z-index: 0;
+}
+
+.btn-atras-seccion {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-atras-seccion .btn {
+  position: absolute;
+  top: 4px;
+  /* left: 140px; */
+  left: 10px;
+  z-index: 10;
+}
+
+.cont-btns-derecha {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+  margin: 0 10px;
+}
+
+.cont-mensaje-centro-pantalla {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.cont-label-state > p:first-child {
+  color: var(--color-texto-low);
+  font-size: 0.85rem;
+}
+
+.cont-label-state {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.cont-flex-vertical-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cont-grid-equal-gap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+  gap: 10px;
+}
+.cont-flex-gap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.cont-flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.oculto {
+  opacity: 0;
+}
+
+.cont-btnAtras-titulo {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
 }

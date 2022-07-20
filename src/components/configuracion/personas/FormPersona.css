@@ -1,0 +1,38 @@
+.cont-form-persona {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cont-form-persona > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-persona-acciones {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.form-persona-toggle {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  align-items: center;
+  width: 100px;
+  align-self: center;
+}
+
+.titulo-persona{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}

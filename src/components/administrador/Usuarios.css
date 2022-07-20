@@ -1,0 +1,8 @@
+.cont-usuarios {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}

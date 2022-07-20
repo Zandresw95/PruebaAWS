@@ -1,0 +1,38 @@
+.justify-self-end {
+    justify-self: end;
+  }
+  .justify-self-center {
+    justify-self: center;
+  }
+  .justify-items-end {
+    justify-items: end;
+  }
+  .align-items-center {
+    align-items: center;
+  }
+  .align-items-end {
+    align-items: end;
+  }
+  .align-self-center {
+    align-self: center;
+  }
+  
+  .justify-content-center {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+  }
+  
+  .text-align-center {
+    text-align: center;
+  }
+  
+  .mh10 {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .ph10 {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  

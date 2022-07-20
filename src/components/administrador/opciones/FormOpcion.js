@@ -7,6 +7,7 @@ import { Validar } from "../../../helpers/Validar";
 
 import "./FormOpcion.css";
 import PopupContext from "../../../context/PopupContext";
+import ConfirmContext from "../../../context/ConfirmContext";
 
 let initialOpcion = {
   descripcion_opcion: "",
@@ -25,21 +26,20 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
   const [formValidado, setFormValidado] = useState(initialFormValidado);
   const [editando, setEditando] = useState(false);
   
-
+  const { mostrarConfirm } = useContext(ConfirmContext);
   const { mostrarPopup } = useContext(PopupContext);
 
   useEffect(() => {
-    obtenerOpcion();
-    if (idOpcion === 0) setEditando(true);
-    else setEditando(false);
-    setFormValidado(initialFormValidado);
-    setTempOpcion(initialOpcion);
+    if (idOpcion === 0){
+      setEditando(true);
+      setFormValidado(initialFormValidado);
+      setTempOpcion(initialOpcion);
+    }else{
+      setEditando(false);
+      obtenerOpcion();
+    }
+    
   }, [idOpcion]);
-
-  useEffect(() => {
-    if (idOpcion !== 0) validarTodo();
-    else setFormValidado(initialFormValidado);
-  }, [opcion]);
 
   const handleChange = (e) => {
     if (e.target.name === "estado_opcion")
@@ -49,7 +49,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
   };
 
   const handleBlur = (e) => {
-    actualizarValidacion(e);
+    setOpcion({ ...opcion, [e.target.name]: e.target.value.trim() });
   };
 
   const actualizarValidacion = (e) => {
@@ -79,21 +79,16 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
     return true;
   };
 
-  const validarTodo = () => {
-    let tempFormValidado;
-    for (const key in opcion) {
-      if (Object.hasOwnProperty.call(opcion, key)) {
-        const el = opcion[key];
-        if (key === "estado_opcion" || key === "observacion_opcion") continue;
+  const validarTodo = (data) => {
+    let tempFormValidado = formValidado;
+    for (const key in data) {
+      if (Object.hasOwnProperty.call(initialOpcion, key)) {
+        const el = data[key];
         tempFormValidado = { ...tempFormValidado, [key]: Validar.general(el) };
       }
     }
     setFormValidado(tempFormValidado);
   };
-
-  useEffect(() => {
-    console.log(formValidado);
-  }, [formValidado]);
 
   const guardarOpcion = () => {
     if (validarForm()) {
@@ -129,12 +124,13 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
         },
         success: function (data) {
           setMostrarCargando(false);
-          console.log(data);
-          setOpcion({
+          let formatedData = {
             descripcion_opcion: data.data.descripcion_opcion,
             observacion_opcion: data.data.observacion_opcion,
             estado_opcion: data.data.estado_opcion,
-          });
+          };
+          setOpcion(formatedData);
+          validarTodo(formatedData);
           // if ("cedula" in data) {
           //   setUserData(data);
           // } else {
@@ -208,11 +204,11 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
     });
   };
 
-  const eliminarOpcion = () => {
-    if (window.confirm("¿Seguro que desea eliminar la opcion?"))
+  const eliminarOpcion = async () => {
+    if (await mostrarConfirm("¿Seguro que deseas deshabilitar la opción?"))
       $.ajax({
-        url: `http://${dominio}/api/tabla_opciones/delete/${idOpcion}`,
-        type: "delete",
+        url: `http://${dominio}/api/tabla_opciones/disable/${idOpcion}`,
+        type: "put",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify({ estado: false }),
@@ -244,12 +240,12 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
       ) : (
         <>
           <h3 className="titulo-opcion">{idOpcion === 0 ? "NUEVA OPCIÓN" : !editando ? "VER OPCIÓN": "EDITAR OPCIÓN" }</h3>
-          <div className="form-opcion-acciones">
+          <div className="form-opcion-acciones" style={{ width: "max-content", alignSelf: "center" }}>
             {idOpcion && idOpcion !== 0 && !editando ? (
               <>
                 <Button
                   label={"Editar"}
-                  icono={"ico-edit"}
+                  icono={"ico-lapiz"}
                   onClick={editarOpcion}
                   editar={true}
                 />
@@ -258,6 +254,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
                   icono={"ico-eliminar"}
                   onClick={eliminarOpcion}
                   borrar={true}
+                  rojo = {true}
                 />
               </>
             ) : (
@@ -298,11 +295,10 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
                 name="estado_opcion"
                 checked={opcion.estado_opcion}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 disabled={!editando}
               />
             </p>
-            <div className="form-opcion-acciones">
+            <div className="form-opcion-acciones" style={{ width: "max-content", alignSelf: "center" }}>
                
               {idOpcion && idOpcion !== 0 && editando ? (
                 <>

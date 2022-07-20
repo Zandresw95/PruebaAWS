@@ -1,10 +1,9 @@
-import "./Personas.css";
-import Usuarios from "../components/configuracion/Usuarios";
+import Persona from "../components/configuracion/Personas";
 
 function Personas() {
  
   return (
-    <Usuarios/>
+    <Persona/>
   );
 }
 

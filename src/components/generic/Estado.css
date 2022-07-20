@@ -1,0 +1,33 @@
+.cont-status{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.cont-circulo-status{
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+}
+
+.status-label{
+    font-size: 0.75rem;
+    line-height: 12px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.color-estado-inactivo {
+    background-color: var(--color-fondo-input);
+    color: var(--color-fondo-input);
+}
+
+.color-estado-rojo {
+    background-color: rgb(226, 43, 43);
+    color: rgb(226, 43, 43);
+}
+
+.color-estado-verde {
+    background-color: rgb(60, 180, 88);
+    color: rgb(60, 180, 88);
+}

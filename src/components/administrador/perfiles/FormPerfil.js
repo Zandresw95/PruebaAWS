@@ -7,6 +7,7 @@ import { Validar } from "../../../helpers/Validar";
 
 import "./FormPerfil.css";
 import PopupContext from "../../../context/PopupContext";
+import ConfirmContext from "../../../context/ConfirmContext";
 
 let initialPerfil = {
   descripcion_perfil: "",
@@ -26,19 +27,20 @@ function FormPerfil({ idPerfil, cerrar }) {
   const [editando, setEditando] = useState(false);
 
   const { mostrarPopup } = useContext(PopupContext);
+  const { mostrarConfirm } = useContext(ConfirmContext);
 
   useEffect(() => {
-    obtenerPerfil();
-    if (idPerfil === 0) setEditando(true);
-    else setEditando(false);
-    setFormValidado(initialFormValidado);
-    setTempPerfil(initialPerfil);
+
+    if (idPerfil === 0){
+      setEditando(true);
+      setFormValidado(initialFormValidado);
+      setTempPerfil(initialPerfil);
+    } else{
+      setEditando(false);
+      obtenerPerfil();
+    } 
+ 
   }, [idPerfil]);
-
-  useEffect(() => {
-    if (idPerfil !== 0) validarTodo();
-    else setFormValidado(initialFormValidado);
-  }, [perfil]);
 
   const handleChange = (e) => {
     if (e.target.name === "estado_perfil")
@@ -51,7 +53,7 @@ function FormPerfil({ idPerfil, cerrar }) {
   };
 
   const handleBlur = (e) => {
-    actualizarValidacion(e);
+    setPerfil({ ...perfil, [e.target.name]: e.target.value.trim() });
   };
 
   const actualizarValidacion = (e) => {
@@ -81,21 +83,16 @@ function FormPerfil({ idPerfil, cerrar }) {
     return true;
   };
 
-  const validarTodo = () => {
-    let tempFormValidado;
-    for (const key in perfil) {
-      if (Object.hasOwnProperty.call(perfil, key)) {
-        const el = perfil[key];
-        if (key === "estado_perfil" || key === "observacion_perfil") continue;
+  const validarTodo = (data) => {
+    let tempFormValidado = formValidado;
+    for (const key in data) {
+      if (Object.hasOwnProperty.call(initialPerfil, key)) {
+        const el = data[key];
         tempFormValidado = { ...tempFormValidado, [key]: Validar.general(el) };
       }
     }
     setFormValidado(tempFormValidado);
   };
-
-  useEffect(() => {
-    console.log(formValidado);
-  }, [formValidado]);
 
   const guardarPerfil = () => {
     if (validarForm()) {
@@ -210,11 +207,11 @@ function FormPerfil({ idPerfil, cerrar }) {
     });
   };
 
-  const eliminarPerfil = () => {
-    if (window.confirm("¿Seguro que desea eliminar el perfil?"))
+  const eliminarPerfil = async () => {
+    if (await mostrarConfirm("¿Seguro que deseas deshabilitar el perfil?"))
       $.ajax({
-        url: `http://${dominio}/api/tabla_perfiles/delete/${idPerfil}`,
-        type: "delete",
+        url: `http://${dominio}/api/tabla_perfiles/disable/${idPerfil}`,
+        type: "put",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify({ estado: false }),
@@ -252,12 +249,12 @@ function FormPerfil({ idPerfil, cerrar }) {
               ? "VER PERFIL"
               : "EDITAR PERFIL"}
           </h3>
-          <div className="form-perfil-acciones">
+          <div className="form-perfil-acciones" style={{ width: "max-content", alignSelf: "center" }}>
             {idPerfil && idPerfil !== 0 && !editando ? (
               <>
                 <Button
                   label={"Editar"}
-                  icono={"ico-edit"}
+                  icono={"ico-lapiz"}
                   onClick={editarPerfil}
                   editar={true}
                 />
@@ -266,6 +263,7 @@ function FormPerfil({ idPerfil, cerrar }) {
                   icono={"ico-eliminar"}
                   onClick={eliminarPerfil}
                   borrar={true}
+                  rojo= {true}
                 />
               </>
             ) : (
@@ -317,7 +315,7 @@ function FormPerfil({ idPerfil, cerrar }) {
                 disabled={!editando}
               />
             </p>
-            <div className="form-perfil-acciones">
+            <div className="form-perfil-acciones" style={{ width: "max-content", alignSelf: "center" }}>
               <Button
                 label={"Aceptar"}
                 onClick={guardarPerfil}

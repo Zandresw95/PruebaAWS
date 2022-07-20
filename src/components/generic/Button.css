@@ -1,40 +1,51 @@
 .btn {
-  border-radius: calc(var(--radio-input) / 4);
+  border-radius: var(--radio-input);
   outline: none;
   border: none;
+  /* box-shadow: var(--borde-input); */
   background-color: var(--color-fondo-button);
-  color: black;
+  color: var(--color-principal);
   cursor: pointer;
-  display: grid;
-  grid-template-columns: max-content max-content;
-  height: calc(var(--radio-input) * 2);
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: calc(var(--radio-input) * 4);
   align-items: center;
   padding: 0 var(--padding-btn);
   padding-right: calc(var(--padding-btn) * 1.5);
-  width: 100%;
   justify-content: center;
 }
 
 .btn:hover {
-  /* background-color: var(--color-principal); */
-  box-shadow: var(--borde-input);
+  background-color: var(--color-principal);
+  /*box-shadow: var(--borde-input);*/
   color: var(--color-texto-active);
 }
 
-.btn:hover .format-ico-btn {
-  -webkit-filter: invert(20%) sepia(95%) saturate(7091%) hue-rotate(347deg)
-    brightness(92%) contrast(101%);
-  filter: invert(1) sepia(95%) saturate(7091%) hue-rotate(347deg)
-    brightness(92%) contrast(101%);
+.btn:hover.disabled {
+  background-color: var(--fondo);
+  color: var(--color-texto-lowest);
+  cursor: default;
 }
 
-/* .btn span {
-  padding-top: 2px;
-} */
+.btn:hover .format-ico-btn {
+  filter: invert(1);
+}
+.btn:hover.disabled .format-ico-btn {
+  filter: invert(0.5);
+}
+.btn.disabled .format-ico-btn {
+  filter: invert(0.5);
+}
+
+.btn span {
+  padding-top: 1px;
+  font-size: 0.9rem;
+}
 
 .disabled {
   background-color: var(--fondo);
-  color: var(--suave2);
+  color: var(--color-texto-lowest);
   /* border-radius: 15px; */
   filter: unset;
   cursor: default;
@@ -71,21 +82,24 @@
   color: var(--color-texto-active);
 }
 
-.btn-label-rojo {
-  color: var(--color-eliminar);
-}
-
 input.disabled,
 button.disabled {
-  box-shadow: none;
+  box-shadow: var(--borde-input);
 }
 
-input.disabled:hover,
-button.disabled:hover,
-button.disabled:focus {
-  box-shadow: none;
+.btn-only-ico,.btn-only-text{
+  gap: 0;
+  padding: 0 var(--padding-btn);
 }
 
-.disabled:focus-within {
-  box-shadow: none;
+.btn-open-on-hover{
+  white-space: nowrap;
+  max-width: 35px;
+  overflow: hidden;
+  transition: max-width var(--transicion-rapida);
+  justify-content: flex-start;
+}
+.btn-open-on-hover:hover{
+  width: max-content;
+  max-width: 200px;
 }

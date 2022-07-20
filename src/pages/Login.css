@@ -1,33 +1,49 @@
-.cont-login0 {
+.cont-page-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  width: 260px;
-  height: max-content;
-  margin: auto;
-  padding: var(--padding-seccion);
-  background-color: var(--color-fondo-seccion);
-  border-radius: var(--radio-seccion);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
 }
 
 .cont-login {
   display: flex;
   flex-direction: column;
-
+  /* position: absolute; */
+  /* top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
   align-items: center;
   justify-items: center;
-
+  max-width: 300px;
+  height: max-content;
+  margin: auto;
   /* transform: translate(-50%,-60%); */
-  gap: 20px;
+  box-shadow: 0px -30px 30px -35px lightgray;
+}
+
+.cont-login > form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
 }
 
 .login-logo {
-  height: 40px;
-  content: url(../media/img/logoPinprexatColor.svg);
+  height: 30px;
+  /*content: url(../media/img/logoPinprexatColor.svg);*/
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
+
+/* .cont-login input::-webkit-outer-spin-button,.cont-login input::-webkit-inner-spin-button{
+-webkit-appearance:none;
+margin:0
+} */

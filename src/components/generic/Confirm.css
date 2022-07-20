@@ -1,0 +1,17 @@
+.cont-confirm{
+    width: 300px;
+    height: 100px;
+    display: grid;
+    grid-template-rows: 1fr max-content;
+}
+
+.cont-confirm>p{
+    line-height: 24px;
+}
+
+.cont-confirm .confirm-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}

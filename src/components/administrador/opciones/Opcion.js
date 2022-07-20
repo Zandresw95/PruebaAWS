@@ -1,29 +1,27 @@
 import "./Opcion.css";
+import Estado from "../../generic/Estado";
 
 function Opcion({ datos, abrirForm }) {
   return (
     <div
-      className="cont-card cont-opcion animar-hover"
+      className="cont-opcion animar-hover animar-entrada"
       onClick={() => abrirForm(datos.codai_opcion)}
     >
       {/* <p className="usuario-inicial">{datos.nombre[0].toUpperCase()}</p> */}
-      <div className="cont-ico-opcion">
-        <div className="ico-opcion format-ico-opcion-card"></div>
+      <div
+        className={
+          "cont-ico-usuario-card-config "+ ("borde-opcion-" + 3)
+        }
+      >
+        <div className="ico-configuracion format-ico-opcion-config"></div>
       </div>
       <div className="opcion-textos">
-        <div className="opcion-estado">
-            <p>{datos.descripcion_opcion}</p>
-            <div
-                className={
-                    "cont-circulo-estado " +
-                    (datos.estado_opcion === true ? "color-estado-verde" : "color-estado-rojo")
-                }
-                >
-            </div>
-        </div>
+        <p>{datos.descripcion_opcion}</p>
         <p>{datos.id_opcion}</p>
+        <div className="opcion-cont-estado">
+          <Estado estado={datos.estado_opcion} />
+        </div>
       </div>
-      
     </div>
   );
 }
