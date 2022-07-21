@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { startLogout } from "../../reduxStore/actions/auth";
-import FormContrasena from "../configuracion/personas/FormContrasena";
+import FormContrasena from "../administrador/usuarios/FormContrasena";
 import Modal from "../generic/Modal";
 import "./MenuSesion.css";
 import { useDispatch } from "react-redux";

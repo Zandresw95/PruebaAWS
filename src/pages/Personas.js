@@ -1,4 +1,4 @@
-import Persona from "../components/configuracion/Personas";
+import Persona from "../components/administrador/Personas";
 
 function Personas() {
  
