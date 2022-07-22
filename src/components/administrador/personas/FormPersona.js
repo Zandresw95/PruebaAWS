@@ -160,7 +160,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
   const obtenerPersona = () => {
     if (idPersona && idPersona > 0) {
       $.ajax({
-        url: `https://${dominio}/api/tabla_personas/${idPersona}`,
+        url: `${dominio}/api/tabla_personas/${idPersona}`,
         type: "get",
         dataType: "json",
         contentType: "application/json",
@@ -199,7 +199,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
 
   const crearPersona = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_personas/agregar`,
+      url: `${dominio}/api/tabla_personas/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
@@ -225,7 +225,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
 
   const actualizarPersona = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_personas/edit/${idPersona}`,
+      url: `${dominio}/api/tabla_personas/edit/${idPersona}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
@@ -252,7 +252,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
   const eliminarPersona = async () => {
     if (await mostrarConfirm("¿Seguro que deseas eliminar la persona?"))
       $.ajax({
-        url: `https://${dominio}/api/tabla_personas/delete/${idPersona}`,
+        url: `${dominio}/api/tabla_personas/delete/${idPersona}`,
         type: "delete",
         dataType: "json",
         contentType: "application/json",

@@ -42,6 +42,7 @@
     flex-direction: column;
     align-items: center;
     font-size: calc(1.8em + 1vw);
+    line-height: 1em
 }
 
 p {

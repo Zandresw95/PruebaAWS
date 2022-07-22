@@ -55,7 +55,7 @@ const Perfiles = () => {
 
   const obtenerperfiles = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_perfiles`,
+      url: `${dominio}/api/tabla_perfiles`,
       type: "get",
       dataType: "json",
       contentType: "application/json",
