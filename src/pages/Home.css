@@ -1,0 +1,24 @@
+.home-div {
+    display: flex;
+    overflow: auto;
+    justify-content: center;
+}
+
+.home-container {
+    background-color: #F9F5F5;
+}
+
+img {
+    align-items: center;
+}
+
+.btn-svg {
+    background-color: #F9F5F5;
+}
+
+html,
+body {
+    display: block;
+    overflow: auto;
+    background-color: #F9F5F5;
+}
