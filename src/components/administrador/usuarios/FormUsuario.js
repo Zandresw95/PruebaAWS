@@ -135,7 +135,7 @@ function FormUsuario({ idUsuario, cerrar}) {
   
   const obtenerPersonas = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_personas`,
+      url: `https://${dominio}/api/tabla_personas`,
       type: "get",
       dataType: "json",
       contentType: "application/json",
@@ -165,7 +165,7 @@ function FormUsuario({ idUsuario, cerrar}) {
   const obtenerUsuario = () => {
     if (idUsuario && idUsuario > 0) {
       $.ajax({
-        url: `http://${dominio}/api/tabla_usuarios/${idUsuario}`,
+        url: `https://${dominio}/api/tabla_usuarios/${idUsuario}`,
         type: "get",
         dataType: "json",
         contentType: "application/json",
@@ -198,7 +198,7 @@ function FormUsuario({ idUsuario, cerrar}) {
 
   const crearUsuario = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_usuarios/agregar`,
+      url: `https://${dominio}/api/tabla_usuarios/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
@@ -226,7 +226,7 @@ function FormUsuario({ idUsuario, cerrar}) {
   const actualizarUsuario = () => {
     console.log(usuario)
     $.ajax({
-      url: `http://${dominio}/api/tabla_usuarios/edit/${idUsuario}`,
+      url: `https://${dominio}/api/tabla_usuarios/edit/${idUsuario}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
@@ -253,7 +253,7 @@ function FormUsuario({ idUsuario, cerrar}) {
   const eliminarUsuario = async () => {
     if (await mostrarConfirm("¿Seguro que deseas deshabilitar el usuario?"))
       $.ajax({
-        url: `http://${dominio}/api/tabla_usuarios/disable/${idUsuario}`,
+        url: `https://${dominio}/api/tabla_usuarios/disable/${idUsuario}`,
         type: "put",
         dataType: "json",
         contentType: "application/json",

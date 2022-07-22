@@ -119,7 +119,7 @@ function FormPerfil({ idPerfil, cerrar }) {
   const obtenerPerfil = () => {
     if (idPerfil && idPerfil > 0) {
       $.ajax({
-        url: `http://${dominio}/api/tabla_perfiles/${idPerfil}`,
+        url: `https://${dominio}/api/tabla_perfiles/${idPerfil}`,
         type: "get",
         dataType: "json",
         contentType: "application/json",
@@ -156,7 +156,7 @@ function FormPerfil({ idPerfil, cerrar }) {
 
   const crearPerfil = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_perfiles/agregar`,
+      url: `https://${dominio}/api/tabla_perfiles/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
@@ -183,7 +183,7 @@ function FormPerfil({ idPerfil, cerrar }) {
 
   const actualizarPerfil = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_perfiles/edit/${idPerfil}`,
+      url: `https://${dominio}/api/tabla_perfiles/edit/${idPerfil}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
@@ -210,7 +210,7 @@ function FormPerfil({ idPerfil, cerrar }) {
   const eliminarPerfil = async () => {
     if (await mostrarConfirm("¿Seguro que deseas deshabilitar el perfil?"))
       $.ajax({
-        url: `http://${dominio}/api/tabla_perfiles/disable/${idPerfil}`,
+        url: `https://${dominio}/api/tabla_perfiles/disable/${idPerfil}`,
         type: "put",
         dataType: "json",
         contentType: "application/json",

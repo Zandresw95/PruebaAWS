@@ -36,7 +36,7 @@ const AsigPerfiles = () => {
     const agregarPerfiles = (asignadas, noAsignadas) => {
         for(const el of asignadas) {
             $.ajax({
-                url: `http://${dominio}/api/tabla_usu_perfil/agregar/${perfil}`,
+                url: `https://${dominio}/api/tabla_usu_perfil/agregar/${perfil}`,
                 type: "post",
                 async: false,
                 dataType: "json",
@@ -59,7 +59,7 @@ const AsigPerfiles = () => {
         }
         noAsignadas.map((el) => {
             $.ajax({
-                url: `http://${dominio}/api/tabla_usu_perfil/delete/${perfil}`,
+                url: `https://${dominio}/api/tabla_usu_perfil/delete/${perfil}`,
                 type: "delete",
                 dataType: "json",
                 contentType: "application/json",
@@ -83,7 +83,7 @@ const AsigPerfiles = () => {
 
     const obtenerPerfiles = () => {
         $.ajax({
-            url: `http://${dominio}/api/tabla_perfiles/obtener/activos`,
+            url: `https://${dominio}/api/tabla_perfiles/obtener/activos`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
@@ -105,7 +105,7 @@ const AsigPerfiles = () => {
 
     const obtenerAsignados = (perfil) => {
         $.ajax({
-            url: `http://${dominio}/api/tabla_usu_perfil/obtener/perfAsig/${perfil}`,
+            url: `https://${dominio}/api/tabla_usu_perfil/obtener/perfAsig/${perfil}`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
@@ -128,7 +128,7 @@ const AsigPerfiles = () => {
 
     const obtenerNoAsignados = (perfil) => {
         $.ajax({
-            url: `http://${dominio}/api/tabla_usu_perfil/obtener/perfNotAsig/${perfil}`,
+            url: `https://${dominio}/api/tabla_usu_perfil/obtener/perfNotAsig/${perfil}`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
