@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import BannerRegistroFundacion from "../components/navbar/BannerRegistroFundacion";
 import FormRegistroFundacion from "../components/Fundacion/FormFundacion";
+import FormRegistroRepresentante from "../components/Representante/FormRepresentante";
 import { TabView, TabPanel } from 'primereact/tabview';
 import './RegistroFundacion.css';
 
@@ -18,7 +19,7 @@ const RegistroFundacion = () => {
                             <FormRegistroFundacion/>
                         </TabPanel>
                         <TabPanel header="Representante">
-                            
+                            <FormRegistroRepresentante/>
                         </TabPanel>
                         <TabPanel header="Usuario">
                             

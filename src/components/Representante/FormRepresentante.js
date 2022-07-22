@@ -1,13 +1,13 @@
-import Button from "../../generic/Button";
-import ContInput from "../../generic/ContInput";
+import Button from "../generic/Button";
+import ContInput from "../generic/ContInput";
 import $ from "jquery";
 import { useContext, useEffect, useState } from "react";
-import { dominio } from "../../../helpers/Dbdata";
-import { Validar } from "../../../helpers/Validar";
+import { dominio } from "../../helpers/Dbdata";
+import { Validar } from "../../helpers/Validar";
 
-import "./Formrepresentante.css";
-import PopupContext from "../../../context/PopupContext";
-import ConfirmContext from "../../../context/ConfirmContext";
+import "./FormRepresentante.css";
+import PopupContext from "../../context/PopupContext";
+import ConfirmContext from "../../context/ConfirmContext";
 
 let initialrepresentante = {
   nombre_representante: "",
