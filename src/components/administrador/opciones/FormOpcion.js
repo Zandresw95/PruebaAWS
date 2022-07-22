@@ -115,7 +115,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
   const obtenerOpcion = () => {
     if (idOpcion && idOpcion > 0) {
       $.ajax({
-        url: `http://${dominio}/api/tabla_opciones/${idOpcion}`,
+        url: `https://${dominio}/api/tabla_opciones/${idOpcion}`,
         type: "get",
         dataType: "json",
         contentType: "application/json",
@@ -153,7 +153,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
 
   const crearOpcion = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_opciones/agregar`,
+      url: `https://${dominio}/api/tabla_opciones/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
@@ -180,7 +180,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
 
   const actualizarOpcion = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_opciones/edit/${idOpcion}`,
+      url: `https://${dominio}/api/tabla_opciones/edit/${idOpcion}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
@@ -207,7 +207,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
   const eliminarOpcion = async () => {
     if (await mostrarConfirm("¿Seguro que deseas deshabilitar la opción?"))
       $.ajax({
-        url: `http://${dominio}/api/tabla_opciones/disable/${idOpcion}`,
+        url: `https://${dominio}/api/tabla_opciones/disable/${idOpcion}`,
         type: "put",
         dataType: "json",
         contentType: "application/json",

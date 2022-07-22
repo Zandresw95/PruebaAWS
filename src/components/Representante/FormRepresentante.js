@@ -151,7 +151,7 @@ function FormRepresentante() {
 
   const crearrepresentante = () => {
     $.ajax({
-      url: `http://${dominio}/api/tabla_representantes/agregar`,
+      url: `https://${dominio}/api/tabla_representantes/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",

@@ -68,7 +68,7 @@ function Login() {
     if (validarForm()) {
       // dispatch(startLogin(datosUsuarioTemp.usuario, datosUsuarioTemp.password));
       $.ajax({
-        url: `http://${dominio}/api/tabla_usuarios/login`,
+        url: `https://${dominio}/api/tabla_usuarios/login`,
         type: "post",
         dataType: "json",
         contentType: "application/json",
