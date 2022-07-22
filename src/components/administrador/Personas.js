@@ -58,7 +58,7 @@ const Personas = () => {
 
   const obtenerPersonas = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_personas`,
+      url: `${dominio}/api/tabla_personas`,
       type: "get",
       dataType: "json",
       contentType: "application/json",

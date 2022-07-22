@@ -57,7 +57,7 @@ const Opciones = () => {
 
   const obteneropciones = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_opciones`,
+      url: `${dominio}/api/tabla_opciones`,
       type: "get",
       dataType: "json",
       contentType: "application/json",

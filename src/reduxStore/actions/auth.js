@@ -11,7 +11,7 @@ export const startLogin = (usuario, password) => {
 
   return (dispatch) => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_usuarios/login`,
+      url: `${dominio}/api/tabla_usuarios/login`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
@@ -113,7 +113,7 @@ export const chekLogin = (uid, displayName) => {
 export const stargetUsuarios = (usuario, password) => {
   return (dispatch) => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_usuarios`,
+      url: `${dominio}/api/tabla_usuarios`,
       type: "get",
       dataType: "json",
       contentType: "application/json",

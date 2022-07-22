@@ -129,7 +129,7 @@ const FormFundacion = () => {
 
   const crearFundacion = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_fundacion/agregar`,
+      url: `${dominio}/api/tabla_fundacion/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",

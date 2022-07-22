@@ -19,7 +19,7 @@ let initialFormValidado = {
   descripcion_perfil: [false, ""],
 };
 
-function FormPerfil({ idPerfil, cerrar }) {
+function FormPerfil({ idPerfil, cerrar, recargar }) {
   const [mostrarCargando, setMostrarCargando] = useState(false);
   const [perfil, setPerfil] = useState(initialPerfil);
   const [tempPerfil, setTempPerfil] = useState(initialPerfil);
@@ -30,11 +30,10 @@ function FormPerfil({ idPerfil, cerrar }) {
   const { mostrarConfirm } = useContext(ConfirmContext);
 
   useEffect(() => {
-
     if (idPerfil === 0){
       setEditando(true);
       setFormValidado(initialFormValidado);
-      setTempPerfil(initialPerfil);
+      setPerfil(initialPerfil);
     } else{
       setEditando(false);
       obtenerPerfil();
@@ -119,7 +118,7 @@ function FormPerfil({ idPerfil, cerrar }) {
   const obtenerPerfil = () => {
     if (idPerfil && idPerfil > 0) {
       $.ajax({
-        url: `https://${dominio}/api/tabla_perfiles/${idPerfil}`,
+        url: `${dominio}/api/tabla_perfiles/${idPerfil}`,
         type: "get",
         dataType: "json",
         contentType: "application/json",
@@ -129,16 +128,13 @@ function FormPerfil({ idPerfil, cerrar }) {
         success: function (data) {
           setMostrarCargando(false);
           console.log(data);
-          setPerfil({
+          let formatedData = {
             descripcion_perfil: data.data.descripcion_perfil,
             observacion_perfil: data.data.observacion_perfil,
             estado_perfil: data.data.estado_perfil,
-          });
-          // if ("cedula" in data) {
-          //   setUserData(data);
-          // } else {
-          //   mostrarPopup(2, data);
-          // }
+          };
+          setPerfil(formatedData);
+          validarTodo(formatedData);
         },
         error: function (data) {
           setMostrarCargando(false);
@@ -156,7 +152,7 @@ function FormPerfil({ idPerfil, cerrar }) {
 
   const crearPerfil = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_perfiles/agregar`,
+      url: `${dominio}/api/tabla_perfiles/agregar`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
@@ -168,7 +164,7 @@ function FormPerfil({ idPerfil, cerrar }) {
         console.log(data);
         setMostrarCargando(false);
         mostrarPopup(1, data.mensaje);
-        cerrar();
+        recargar();
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -183,7 +179,7 @@ function FormPerfil({ idPerfil, cerrar }) {
 
   const actualizarPerfil = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_perfiles/edit/${idPerfil}`,
+      url: `${dominio}/api/tabla_perfiles/edit/${idPerfil}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
@@ -194,7 +190,7 @@ function FormPerfil({ idPerfil, cerrar }) {
       success: function (data) {
         setMostrarCargando(false);
         mostrarPopup(1, data.mensaje);
-        cerrar();
+        recargar();
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -210,7 +206,7 @@ function FormPerfil({ idPerfil, cerrar }) {
   const eliminarPerfil = async () => {
     if (await mostrarConfirm("¿Seguro que deseas deshabilitar el perfil?"))
       $.ajax({
-        url: `https://${dominio}/api/tabla_perfiles/disable/${idPerfil}`,
+        url: `${dominio}/api/tabla_perfiles/disable/${idPerfil}`,
         type: "put",
         dataType: "json",
         contentType: "application/json",
@@ -221,7 +217,7 @@ function FormPerfil({ idPerfil, cerrar }) {
         success: function (data) {
           setMostrarCargando(false);
           mostrarPopup(1, data.mensaje);
-          cerrar();
+          recargar();
         },
         error: function (data) {
           setMostrarCargando(false);
@@ -269,11 +265,6 @@ function FormPerfil({ idPerfil, cerrar }) {
             ) : (
               ""
             )}
-            {idPerfil && idPerfil !== 0 && editando ? (
-              <Button label={"Cancelar"} onClick={cancelarEdicion} />
-            ) : (
-              ""
-            )}
           </div>
           <form>
             <ContInput label="Descripción" icono={"ico-perfil"}>
@@ -316,21 +307,22 @@ function FormPerfil({ idPerfil, cerrar }) {
               />
             </p>
             <div className="form-perfil-acciones" style={{ width: "max-content", alignSelf: "center" }}>
-              <Button
-                label={"Aceptar"}
-                onClick={guardarPerfil}
-                aceptar={true}
-              />
-              {editando && (
-                <Button
-                  label={"Cancelar"}
-                  onClick={cancelarEdicion}
-                  cancelar={true}
-                />
-              )}
-              {!editando && (
-                <Button label={"Cancelar"} onClick={cerrar} cancelar={true} />
-              )}
+              {idPerfil && idPerfil !== 0 && editando ? (
+                  <>
+                  {/*Editando*/}
+                  <Button label={"Aceptar"} onClick={guardarPerfil} aceptar={true}/>
+                  <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
+                  </>
+                ) : idPerfil && idPerfil !== 0 && !editando ? (
+                  /*Ver la opcion*/
+                  ""
+                ):(
+                  <>
+                  {/*Nueva*/}
+                  <Button label={"Aceptar"} onClick={guardarPerfil} aceptar={true}/>
+                  <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>
+                  </>
+                )}
             </div>
           </form>
         </>

@@ -55,7 +55,7 @@ const Perfiles = () => {
 
   const obtenerperfiles = () => {
     $.ajax({
-      url: `https://${dominio}/api/tabla_perfiles`,
+      url: `${dominio}/api/tabla_perfiles`,
       type: "get",
       dataType: "json",
       contentType: "application/json",
@@ -146,7 +146,8 @@ const Perfiles = () => {
           <Modal activo={stateModal.form} cerrar={cerrarForm}>
             <FormPerfil
               idPerfil={idPerfil}
-              cerrar={() => {
+              cerrar={cerrarForm}
+              recargar={() => {
                 cerrarForm();
                 obtenerperfiles();
               }}
