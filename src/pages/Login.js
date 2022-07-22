@@ -13,6 +13,7 @@ import MensajesUI from "../helpers/MensajesUI";
 import { login, startLogin } from "../reduxStore/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { startLoading, stopLoading } from "../reduxStore/actions/ui";
+import { useNavigate } from "react-router-dom";
 
 const initialDatosUsuarioTemp = {
   usuario: "",
@@ -62,6 +63,7 @@ function Login() {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   async function verificarUsuario() {
     if (validarForm()) {
       // dispatch(startLogin(datosUsuarioTemp.usuario, datosUsuarioTemp.password));
@@ -115,7 +117,7 @@ function Login() {
             <input
               onKeyDown={handleKeyDown}
               onChange={handleChange}
-              placeholder="1700000001"
+              placeholder="usuario"
               name="usuario"
               autoFocus
               autoComplete="off"
@@ -133,7 +135,7 @@ function Login() {
               type="password"
               onKeyDown={handleKeyDown}
               onChange={handleChange}
-              placeholder="1234"
+              placeholder="clave"
               name="clave"
               autoComplete="off"
               value={datosUsuarioTemp.clave}
@@ -148,11 +150,19 @@ function Login() {
           {cargando ? (
             <div className="loader format-ico-loader"></div>
           ) : (
-            <Button
-              label={"Ingresar"}
-              icono={"ico-login"}
-              onClick={verificarUsuario}
-            />
+            <>
+              <Button
+                label={"Ingresar"}
+                icono={"ico-login"}
+                onClick={verificarUsuario}
+              />
+              <Button
+                label={"Registrar"}
+                icono={"ico-login"}
+                onClick={() => navigate("/registrar/fundacion")}
+              />
+            </>
+            
           )}
         </form>
       </div>

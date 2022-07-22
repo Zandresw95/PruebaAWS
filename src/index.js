@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 import { Provider } from "react-redux";
@@ -8,7 +8,9 @@ import { PopupProvider } from "./context/PopupContext";
 import { ConfirmProvider } from "./context/ConfirmContext";
 import { UserProvider } from "./context/UserContext";
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(
   <Provider store={store}>
     <PopupProvider>
       <ConfirmProvider>
@@ -17,6 +19,7 @@ ReactDOM.render(
         </UserProvider>
       </ConfirmProvider>
     </PopupProvider>
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
+
+

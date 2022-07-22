@@ -1,0 +1,45 @@
+.cont-regFund__banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0;
+    background-color: #C6E1F1;
+    width: 33.333%;
+    height: 100%;
+}
+
+.ico-atras {
+    width: 67px;
+    height: 67px;
+    filter: invert(71%) sepia(30%) saturate(423%) hue-rotate(78deg) brightness(89%) contrast(87%);
+}
+
+.regFund__banner__icon{
+    margin: 8px 8px 8px 8px;
+    width: 67px;
+    height: 67px;
+    border-radius: 60%;
+    margin-top: -77px;
+    align-self: flex-start;
+    background-color: #fff;
+}
+.regFund__banner__icon:hover{
+    background-color: #75bbe4;
+}
+.ico-atras:hover{
+    cursor: pointer;
+    filter: invert(88%) sepia(19%) saturate(320%) hue-rotate(168deg) brightness(99%) contrast(91%);
+}
+
+.regFund__banner__image{
+    align-self: center;
+    width: 447px;
+    height: 208px;
+}
+
+.regFund__banner__titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3.5em;
+}

@@ -19,6 +19,7 @@ import Perfile from "./pages/Perfile";
 import AsigOpcPerfil from "./pages/AsigOpcPerfil";
 import AsigPerfil from "./pages/AsigPerfUsuario";
 import Usuarios from "./pages/Usuario";
+import RegistroFundacion from "./pages/RegistroFundacion";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -38,7 +39,6 @@ import "/node_modules/primeflex/primeflex.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
-import AsigPerfiles from "./components/administrador/asignarPerfiles/AsigPerfil";
 
 const ProtectedRoute = ({ children }) => {
   const isLogin = useSelector((state) => state.auth.name);
@@ -160,6 +160,12 @@ const App = () => {
                 }
               >
               </Route>
+              <Route
+                path="/registrar/fundacion"
+                element={
+                  <RegistroFundacion />
+                }
+              />
             </Routes>
           </div>
         </div>
