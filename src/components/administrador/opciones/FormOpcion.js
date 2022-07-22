@@ -33,7 +33,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
     if (idOpcion === 0){
       setEditando(true);
       setFormValidado(initialFormValidado);
-      setTempOpcion(initialOpcion);
+      setOpcion(initialOpcion);
     }else{
       setEditando(false);
       obtenerOpcion();

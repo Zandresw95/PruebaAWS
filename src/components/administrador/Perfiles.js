@@ -146,7 +146,8 @@ const Perfiles = () => {
           <Modal activo={stateModal.form} cerrar={cerrarForm}>
             <FormPerfil
               idPerfil={idPerfil}
-              cerrar={() => {
+              cerrar={cerrarForm}
+              recargar={() => {
                 cerrarForm();
                 obtenerperfiles();
               }}
