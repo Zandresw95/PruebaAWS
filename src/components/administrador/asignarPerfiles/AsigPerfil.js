@@ -41,7 +41,7 @@ const AsigPerfiles = () => {
                 async: false,
                 dataType: "json",
                 contentType: "application/json",
-                data: JSON.stringify({id_perfil: el['ID_PERFIL']}),
+                data: JSON.stringify({id_usuario: el['ID_USUARIO']}),
                 success: function (data) {
                     console.log(data.data);
                     //let mensaje = data.data;
