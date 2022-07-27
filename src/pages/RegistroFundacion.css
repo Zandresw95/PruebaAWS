@@ -1,5 +1,5 @@
 .tabview-demo .tabview-header-icon i, .tabview-demo .tabview-header-icon span {
-    
+    vertical-align: middle;
 }
 
 .tabview-demo .tabview-header-icon span {
@@ -42,3 +42,21 @@
     font-size: 32px;
     line-height: 39px;
 }
+
+.cont-form-fundacion {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .cont-form-fundacion > form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-fundacion-acciones {
+    width: inherit;
+    display: flex;
+    justify-content: space-around;
+  }

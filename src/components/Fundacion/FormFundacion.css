@@ -1,5 +1,5 @@
 .cont-form-fundacion {
-    width: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -10,21 +10,7 @@
     flex-direction: column;
     gap: 10px;
   }
-  
-  .form-fundacion-acciones {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-  }
-  
-  .form-fundacion-toggle {
-    display: grid;
-    grid-template-columns: 1fr max-content;
-    align-items: center;
-    width: 100px;
-    align-self: center;
-  }
-  
+    
   .titulo-fundacion{
     font-family: 'Inter';
     font-style: normal;

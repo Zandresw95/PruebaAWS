@@ -7,10 +7,9 @@ import { Validar } from "../../helpers/Validar";
 
 import "./FormFundacion.css";
 import PopupContext from "../../context/PopupContext";
-import ConfirmContext from "../../context/ConfirmContext";
 
 let initialFundacion = {
-  nombre_fundacion: "",
+  nombre_fundacion: "holi",
   direccion_fundacion: "",
   telefono_fundacion: "",
   email_fundacion: "",
@@ -35,21 +34,16 @@ const FormFundacion = () => {
 
   const { mostrarPopup } = useContext(PopupContext);
 
-  useEffect(() => {
-    setEditando(true);
-    setFormValidado(initialFormValidado);
-    setFundacion(initialFundacion);
-
-  }, []);
-
-  
+ 
   const handleChange = (e) => {
     setFundacion({ ...fundacion, [e.target.name]: e.target.value });
+    setTempfundacion({ ...tempfundacion, [e.target.name]: e.target.value });
     actualizarValidacion(e);
   };
 
   const handleBlur = (e) => {
     setFundacion({ ...fundacion, [e.target.name]: e.target.value.trim() });
+    setTempfundacion({ ...tempfundacion, [e.target.name]: e.target.value.trim() });
   };
 
   const actualizarValidacion = (e) => {
@@ -161,8 +155,7 @@ const FormFundacion = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="nombre_fundacion"
-                disabled={!editando}
-                autoComplete="off"
+                autoComplete={"off"}
               />
               {!formValidado.nombre_fundacion[0] && (
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
@@ -178,7 +171,6 @@ const FormFundacion = () => {
                 onBlur={handleBlur}
                 name="direccion_fundacion"
                 autoComplete="off"
-                disabled={!editando}
               />
               {!formValidado.direccion_fundacion[0] && (
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
@@ -194,7 +186,6 @@ const FormFundacion = () => {
                 onBlur={handleBlur}
                 autoComplete="off"
                 name="telefono_fundacion"
-                disabled={!editando}
               />
               {!formValidado.telefono_fundacion[0] && (
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
@@ -210,7 +201,6 @@ const FormFundacion = () => {
                 onBlur={handleBlur}
                 autoComplete="off"
                 name="email_fundacion"
-                disabled={!editando}
               />
               {!formValidado.email_fundacion[0] && (
                 <div className="ico-advertencia  format-ico-form-validacion"></div>
@@ -226,7 +216,6 @@ const FormFundacion = () => {
                 onBlur={handleBlur}
                 name="fechacrea_fundacion"
                 autoComplete="off"
-                disabled={!editando}
                 type="date"
               />
               {!formValidado.fechacrea_fundacion[0] && (
@@ -243,7 +232,6 @@ const FormFundacion = () => {
                 onBlur={handleBlur}
                 name="permiso_fundacion"
                 autoComplete="off"
-                disabled={!editando}
                 type="file"
               />
               {!formValidado.permiso_fundacion[0] && (
@@ -253,11 +241,8 @@ const FormFundacion = () => {
             {!formValidado.permiso_fundacion[0] && (
               <p className="texto-validacion">{formValidado.permiso_fundacion[1]}</p>
             )}
-
-            <div className="form-usuario-acciones" style={{ width: "max-content", alignSelf: "center" }}>
-              <Button icono="pi pi-chevron-right" label={"Continuar"} onClick={cancelarEdicion} aceptar={true}/>
-            </div>
           </form>
+              
     </div>
   );
 }
