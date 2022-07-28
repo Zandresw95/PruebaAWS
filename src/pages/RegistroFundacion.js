@@ -3,8 +3,9 @@ import { dominio } from "../helpers/Dbdata";
 import { Validar } from "../helpers/Validar";
 import Button from '../components/generic/Button';
 import ContInput from "../components/generic/ContInput";
+import imgBanner from '../media/img/regFundacion.png';
 import $ from "jquery";
-import BannerRegistroFundacion from "../components/navbar/BannerRegistroFundacion";
+import BannerRegistro from "../components/navbar/BannerRegistro";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { useNavigate } from "react-router-dom";
 import './RegistroFundacion.css';
@@ -306,7 +307,7 @@ const RegistroFundacion = () => {
 
     return (
       <div className='cont-regFund animar-zoom-max-to-min'>
-        <BannerRegistroFundacion/>
+        <BannerRegistro img={imgBanner} color="#C6E1F1" nombre="Fundación"/>
         <div className="tabview-demo" style={{width: "100%"}}>
             <h5 className="tabview-title">Por favor completa todos los datos </h5>
             <div className="card">

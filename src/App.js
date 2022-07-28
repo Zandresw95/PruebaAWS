@@ -20,6 +20,7 @@ import AsigOpcPerfil from "./pages/AsigOpcPerfil";
 import AsigPerfil from "./pages/AsigPerfUsuario";
 import Usuarios from "./pages/Usuario";
 import RegistroFundacion from "./pages/RegistroFundacion";
+import RegistroUsuario from "./pages/RegistroUsuario";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -164,6 +165,12 @@ const App = () => {
                 path="/registrar/fundacion"
                 element={
                   <RegistroFundacion />
+                }
+              />
+              <Route
+                path="/registrar/usuario"
+                element={
+                  <RegistroUsuario />
                 }
               />
             </Routes>
