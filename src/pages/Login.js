@@ -35,7 +35,7 @@ function Login() {
   const { loading: cargando, msgError } = useSelector((state) => state.ui);
 
   const handleChange = (e) => {
-    e.target.value = e.target.value.toUpperCase();
+    // e.target.value = e.target.value.toUpperCase();
     setDatosUsuarioTemp({
       ...datosUsuarioTemp,
       [e.target.name]: e.target.value,
@@ -78,9 +78,10 @@ function Login() {
         },
         success: function (data) {
           dispatch(stopLoading());
-          dispatch(login(data.data.id_usuario, data.data.login_usuario));
+          dispatch(login(data.data.id_usuario, data.data.login_usuario, data.role));
           localStorage.setItem("iduser", data.data.id_usuario);
           localStorage.setItem("nombre", data.data.login_usuario);
+          localStorage.setItem("role", data.role);
         },
         error: function (data) {
           dispatch(stopLoading());
@@ -159,10 +160,10 @@ function Login() {
               <Button
                 label={"Registrar"}
                 icono={"ico-login"}
-                onClick={() => navigate("/registrar/fundacion")}
+                onClick={() => navigate("/registrar")}
               />
             </>
-            
+
           )}
         </form>
       </div>

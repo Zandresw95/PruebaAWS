@@ -7,7 +7,7 @@ import "./MenuSesion.css";
 import { useDispatch } from "react-redux";
 
 function MenuSesion() {
-  const { name } = useSelector((state) => state.auth);
+  const { name, role } = useSelector((state) => state.auth);
 
   const [menuActivo, setMenuActivo] = useState(false);
   const [formContrasenaActivo, setFormContrasenaActivo] = useState(false);

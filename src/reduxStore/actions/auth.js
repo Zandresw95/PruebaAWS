@@ -3,43 +3,13 @@ import $ from "jquery";
 import { host, port, dominio } from "../../helpers/Dbdata";
 import { setError, startLoading, stopLoading } from "./ui";
 
-export const startLogin = (usuario, password) => {
-  const credenciales = {
-    user: usuario,
-    clave: password,
-  };
-
-  return (dispatch) => {
-    $.ajax({
-      url: `${dominio}/api/tabla_usuarios/login`,
-      type: "post",
-      dataType: "json",
-      contentType: "application/json",
-      data: JSON.stringify(credenciales),
-      beforeSend: function () {
-        dispatch(startLoading());
-      },
-      success: function (data) {
-        dispatch(stopLoading());
-        dispatch(login(data.iduser, data.nombre));
-        localStorage.setItem("iduser", data.iduser);
-        localStorage.setItem("nombre", data.nombre);
-      },
-      error: function (data) {
-        dispatch(stopLoading());
-        console.log(data.responseJSON.data);
-        dispatch(setError(data.responseJSON.data));
-      },
-    });
-  };
-};
-
-export const login = (uid, displayName) => {
+export const login = (uid, displayName,role) => {
   return {
     type: types.login,
     payload: {
       uid,
       displayName,
+      role,
     },
   };
 };
@@ -52,6 +22,7 @@ export const startLogout = () => {
 export const logout = () => {
   localStorage.removeItem("iduser");
   localStorage.removeItem("nombre");
+  localStorage.removeItem("role");
   return {
     type: types.logout,
   };

@@ -1,0 +1,17 @@
+.cont-regGen {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: aqua;
+    text-align: center;
+}
+
+.cont-general{
+    background-color: blueviolet;
+    /* display: flexbox; */
+    justify-content: space-between;
+    /* align-items: center; */
+    margin: auto;
+    gap: 8rem;
+}

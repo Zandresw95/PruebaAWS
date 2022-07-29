@@ -19,7 +19,10 @@ import Perfile from "./pages/Perfile";
 import AsigOpcPerfil from "./pages/AsigOpcPerfil";
 import AsigPerfil from "./pages/AsigPerfUsuario";
 import Usuarios from "./pages/Usuario";
+import RegistroGeneral from "./pages/GeneralRegister";
+import UserTypeRegister from "./pages/UserTypeRegister";
 import RegistroFundacion from "./pages/RegistroFundacion";
+import Home from "./pages/Home";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -82,10 +85,18 @@ const App = () => {
           <div className="cont-contenido-app" id="cont-contenido-app">
             <Routes>
               <Route
-                path="/"
+                path="/inicio"
                 element={
                   <ProtectedRoute>
                     <Inicio />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Home />
                   </ProtectedRoute>
                 }
               />
@@ -164,6 +175,18 @@ const App = () => {
                 path="/registrar/fundacion"
                 element={
                   <RegistroFundacion />
+                }
+              />
+              <Route
+                path="/registrar"
+                element={
+                  <RegistroGeneral />
+                }
+              />
+              <Route
+                path="/registrar/usuario"
+                element={
+                  <UserTypeRegister />
                 }
               />
             </Routes>

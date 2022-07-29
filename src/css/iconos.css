@@ -3,6 +3,7 @@
   /*width: 19px;
   height: 19px;*/
 }
+
 .loader:after {
   content: " ";
   display: block;
@@ -14,10 +15,12 @@
   border-color: #fff transparent #fff transparent;
   animation: animacionLoader 1.2s linear infinite;
 }
+
 @keyframes animacionLoader {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -59,6 +62,7 @@
 .ico-advertencia {
   content: url(../media/ico/advertencia.svg);
 }
+
 /* Fin iconos de estado */
 
 /* iconos de acción */
@@ -78,6 +82,7 @@
 .ico-estrella {
   content: url(../media/ico/estrella.svg);
 }
+
 /* iconos de acción */
 
 .ico-casa {
@@ -131,9 +136,11 @@
 .ico-descargar2 {
   content: url(../media/ico/flechaAbajo.svg);
 }
+
 .ico-cargar {
   content: url(../media/ico/upload.svg);
 }
+
 .ico-descargar {
   content: url(../media/ico/download.svg);
 }
@@ -161,9 +168,11 @@
 .ico-machine {
   content: url(../media/ico/machine.svg);
 }
+
 .ico-product {
   content: url(../media/ico/product.svg);
 }
+
 .ico-room {
   content: url(../media/ico/room.svg);
 }
@@ -256,44 +265,81 @@
   content: url(../media/ico/bi_person-circle.svg);
 }
 
-.ico-user-figma{
+.ico-user-figma {
   content: url(../media/ico/bx_user.svg);
 }
 
-.ico-user-badge-figma{
+.ico-user-badge-figma {
   content: url(../media/ico/bxs_user-badge.svg);
 }
 
-.ico-user-detail-figma{
+.ico-user-detail-figma {
   content: url(../media/ico/bxs_user-detail.svg);
 }
 
-.ico-user-certification-figma{
+.ico-user-certification-figma {
   content: url(../media/ico/carbon_user-certification.svg);
 }
 
-.ico-ci-file-figma{
+.ico-ci-file-figma {
   content: url(../media/ico/ci_file-pdf.svg);
 }
 
-.ico-option-figma{
+.ico-option-figma {
   content: url(../media/ico/option.svg);
 }
 
-.ico-user-check-figma{
+.ico-user-check-figma {
   content: url(../media//ico/user-check.svg);
 }
 
-.ico-user-cog-figma{
+.ico-user-cog-figma {
   content: url(../media/ico/user-cog.svg);
 }
 
-.ico-user-friends-figma{
+.ico-user-friends-figma {
   content: url(../media/ico/user-friends.svg);
 }
 
-.ico-user-list{
+.ico-user-list {
   content: url(../media/ico/user-list.svg);
+}
+
+/* Iconos de Botones Navegadores*/
+.ico-administracion {
+  content: url(../media/img/AdministracionCard.svg);
+}
+
+.ico-apadrinamiento {
+  content: url(../media/img/ApadrinamientosCard.svg);
+}
+
+.ico-adopcion {
+  content: url(../media/img/AdopcionesCard.svg);
+}
+
+.ico-donacion {
+  content: url(../media/img/DonacionesCard.svg);
+}
+
+.ico-fundacion {
+  content: url(../media/img/FundacionCard.svg);
+}
+
+.ico-fundaciones {
+  content: url(../media/img/FundacionesCard.svg);
+}
+
+.ico-organizacion {
+  content: url(../media/img/OrganizacionCard.svg);
+}
+
+.ico-usurio-nav{
+  content: url(../media/img/UsuarioCard.svg);
+}
+
+.ico-usuarion-nav{
+  content: url(../media/img/UsuarioNCard.svg);
 }
 /* formatos */
 
@@ -319,15 +365,13 @@
 .format-ico-btn {
   width: 20px;
   max-height: 20px;
-  filter: invert(22%) sepia(38%) saturate(6143%) hue-rotate(336deg)
-    brightness(90%) contrast(99%);
+  filter: invert(22%) sepia(38%) saturate(6143%) hue-rotate(336deg) brightness(90%) contrast(99%);
 }
 
 .format-ico-btn-rojo {
   width: 17px;
   max-height: 17px;
-  -webkit-filter: invert(1) brightness(0.4) sepia(1) hue-rotate(320deg)
-    saturate(4);
+  -webkit-filter: invert(1) brightness(0.4) sepia(1) hue-rotate(320deg) saturate(4);
   filter: invert(1) brightness(0.4) sepia(1) hue-rotate(320deg) saturate(4);
   margin-right: 5px;
 }
