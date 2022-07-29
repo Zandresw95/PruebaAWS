@@ -23,6 +23,8 @@ import RegistroGeneral from "./pages/GeneralRegister";
 import UserTypeRegister from "./pages/UserTypeRegister";
 import RegistroFundacion from "./pages/RegistroFundacion";
 import Home from "./pages/Home";
+import RegistroUsuario from "./pages/RegistroUsuario";
+import RegistroOrganizacion from "./pages/RegistrarOrganizacion";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -184,9 +186,21 @@ const App = () => {
                 }
               />
               <Route
+                path="/registrar/usuarioSeleccion"
+                element={
+                  <UserTypeRegister />}
+              />
+
+              <Route
                 path="/registrar/usuario"
                 element={
-                  <UserTypeRegister />
+                  <RegistroUsuario />
+                }
+              />
+              <Route
+                path="/registrar/organizacion"
+                element={
+                  <RegistroOrganizacion />
                 }
               />
             </Routes>

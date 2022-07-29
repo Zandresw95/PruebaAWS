@@ -158,7 +158,7 @@ function Login() {
                 onClick={verificarUsuario}
               />
               <Button
-                label={"Registrar"}
+                label={"Registrarse"}
                 icono={"ico-login"}
                 onClick={() => navigate("/registrar")}
               />

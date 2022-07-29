@@ -1,43 +1,43 @@
-.cont-regFund__banner {
+.cont-reg__banner {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     margin: 0;
-    background-color: #C6E1F1;
     width: 33.333%;
     height: 100%;
+    gap: 8rem;
 }
 
 .ico-atras {
-    width: 67px;
-    height: 67px;
+    width: 50px;
+    height: 50px;
     filter: invert(71%) sepia(30%) saturate(423%) hue-rotate(78deg) brightness(89%) contrast(87%);
 }
 
-.regFund__banner__icon{
+.reg__banner__icon{
     margin: 8px 8px 8px 8px;
-    width: 67px;
-    height: 67px;
+    width: 50px;
+    height: 50px;
     border-radius: 60%;
     align-self: flex-start;
     background-color: #fff;
 }
-.regFund__banner__icon:hover{
-    background-color: #75bbe4;
+.reg__banner__icon:hover{
+    background-color: #62ccaa;
 }
 .ico-atras:hover{
     cursor: pointer;
     filter: invert(88%) sepia(19%) saturate(320%) hue-rotate(168deg) brightness(99%) contrast(91%);
 }
 
-.regFund__banner__image{
+.reg__banner__image{
     align-self: center;
     padding: 0px 10px 0px 10px;
     width: 447px;
     height: 208px;
 }
 
-.regFund__banner__titulo{
+.reg__banner__titulo{
     display: flex;
     flex-direction: column;
     align-items: center;

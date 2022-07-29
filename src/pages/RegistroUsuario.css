@@ -1,20 +1,17 @@
 .tabview-demo .tabview-header-icon i, .tabview-demo .tabview-header-icon span {
     vertical-align: middle;
-    border-radius: 20px;
 }
 
 .tabview-demo .tabview-header-icon span {
     margin: 0 .5rem;
-    border-radius: 20px;
 }
 
 .tabview-demo .p-tabview p {
     line-height: 1.5;
     margin: 0;
-    border-radius: 20px;
 }
 
-.cont-regFund {
+.cont-regUs {
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -42,19 +39,21 @@
     line-height: 39px;
 }
 
-.cont-form-fundacion {
+.cont-form-usuario {
     width: inherit;
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
   
-  .cont-form-fundacion > form {
+  .cont-form-usuario > form {
+    width: calc(100% / 2);
     display: flex;
     flex-direction: column;
+    gap:8px;
   }
 
-  .form-fundacion-acciones {
+  .form-usuario-acciones {
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -64,7 +63,7 @@
   }
 
   .card {
-    background-color: #C6E1F1;
+    background-color: #C7CEEA;
     width: calc(100% / 2);
     height: fit-content;
     margin: 16px;
