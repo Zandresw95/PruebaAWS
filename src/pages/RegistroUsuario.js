@@ -159,7 +159,7 @@ const RegistroUsuario = () => {
 
   const asignarPerfil = (id_usuario) => {
     $.ajax({
-      url: `${dominio}/api/tabla_usu_perfil/agregar/${"P003"}`,
+      url: `${dominio}/api/tabla_usu_perfil/agregar/${"P004"}`,
       type: "post",
       dataType: "json",
       contentType: "application/json",
