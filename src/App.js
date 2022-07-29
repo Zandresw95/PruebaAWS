@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "./pages/Login";
 import Navbar from "./components/navbar/Navbar";
 import Inicio from "./pages/Inicio";
-import { PantallaActivaProvider } from "./context/PantallaActivaContext";
 import Error404 from "./pages/Error404";
 import Personas from "./pages/Personas";
 import Opcione from "./pages/Opcione";
@@ -23,6 +22,7 @@ import RegistroGeneral from "./pages/GeneralRegister";
 import UserTypeRegister from "./pages/UserTypeRegister";
 import RegistroFundacion from "./pages/RegistroFundacion";
 import Home from "./pages/Home";
+import Fundaciones from "./pages/Fundaciones";
 import RegistroUsuario from "./pages/RegistroUsuario";
 import RegistroOrganizacion from "./pages/RegistrarOrganizacion";
 import { startchekLogin } from "./reduxStore/actions/auth";
@@ -146,7 +146,45 @@ const App = () => {
                 }
               >
               </Route>
+              <Route
+                path="/fundacionesExistentes"
+                element={
+                  <ProtectedRoute>
+                    <Fundaciones tipo={""}/>
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
 
+              <Route
+                path="/fundacionesDonar"
+                element={
+                  <ProtectedRoute>
+                    <Fundaciones tipo={"donacion"} />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+
+              <Route
+                path="/fundacionesAdoptar"
+                element={
+                  <ProtectedRoute>
+                    <Fundaciones tipo={"adoptar"} />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+
+              <Route
+                path="/fundacionesApadrinar"
+                element={
+                  <ProtectedRoute>
+                    <Fundaciones tipo={"apadrinamiento"} />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
               <Route
                 path="*"
                 element={

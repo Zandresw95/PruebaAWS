@@ -341,6 +341,10 @@
 .ico-usuarion-nav{
   content: url(../media/img/UsuarioNCard.svg);
 }
+
+.ico-fundacion-default{
+  content: url(../media/img/img-fundacion-default.jpg);
+}
 /* formatos */
 
 .format-ico-form {

@@ -4,7 +4,7 @@ import ContInput from "../generic/ContInput";
 import Modal from "../generic/Modal";
 import SearchBar from "../generic/SearchBar";
 import $ from "jquery";
-import { host, port, dominio } from "../../helpers/Dbdata";
+import { dominio } from "../../helpers/Dbdata";
 
 import "./Personas.css";
 import FormPersona from "./personas/FormPersona";
@@ -87,7 +87,7 @@ const Personas = () => {
     });
   };
 
-   const personas = useMemo(
+  const personas = useMemo(
     () =>
       usuarios.filter(
         (el) =>
@@ -108,8 +108,8 @@ const Personas = () => {
             <div className="cont-flex-gap">
               <h3 className="titulo-pagina">Personas</h3>
             </div>
-              
-           
+
+
             <div style={{ width: "200px", justifySelf: "left" }}>
               <ContInput icono={"ico-lupa"}>
                 <input
@@ -121,16 +121,16 @@ const Personas = () => {
               </ContInput>
             </div>
             <div style={{ width: "max-content" }}>
-                <Button
-                  label={"Nuevo"}
-                  icono="ico-anadir"
-                  onClick={() => abrirForm(0)}
-                />
+              <Button
+                label={"Nuevo"}
+                icono="ico-anadir"
+                onClick={() => abrirForm(0)}
+              />
             </div>
 
           </div>
 
-            
+
           <div className="contenedorPrincipal animar-zoom-min-to-max">
             <div className="contenedorContenido">
               {!estadoResumenUsuarios ? (
@@ -138,7 +138,7 @@ const Personas = () => {
               ) : (
                 <div className="contenedorPagina">
                   <div className="cont-personas">
-                    { personas.length > 0
+                    {personas.length > 0
                       ? personas.map((el, i) => {
                         return (
                           <Persona
@@ -149,7 +149,7 @@ const Personas = () => {
                         )
                       })
                       : "No existen personas"
-                  }
+                    }
                   </div>
                 </div>
               )}
