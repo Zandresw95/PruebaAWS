@@ -62,22 +62,24 @@ export const cambiarPassword = (uid, displayName) => {
     },
   };
 };
-export const startchekLogin = (uid, nombre) => {
+export const startchekLogin = (uid, nombre,role) => {
   const credenciales = {
     uid: uid,
     nombre: nombre,
+    role: role
   };
 
   return (dispatch) => {
-    dispatch(chekLogin(credenciales.uid, credenciales.nombre));
+    dispatch(chekLogin(credenciales.uid, credenciales.nombre,credenciales.role));
   };
 };
-export const chekLogin = (uid, displayName) => {
+export const chekLogin = (uid, displayName,role) => {
   return {
     type: types.login,
     payload: {
       uid,
       displayName,
+      role
     },
   };
 };

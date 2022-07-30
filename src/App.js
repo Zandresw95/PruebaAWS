@@ -25,6 +25,7 @@ import Home from "./pages/Home";
 import Fundaciones from "./pages/Fundaciones";
 import RegistroUsuario from "./pages/RegistroUsuario";
 import RegistroOrganizacion from "./pages/RegistrarOrganizacion";
+import Footer from "./components/Footer/Footer";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -47,7 +48,8 @@ import "primeicons/primeicons.css";                                //icons
 
 const ProtectedRoute = ({ children }) => {
   const isLogin = useSelector((state) => state.auth.name);
-  if (!isLogin) {
+  const isRole = useSelector((state) => state.auth.role);
+  if (!(isLogin && isRole)) {
     return <Navigate to="/login" replace />;
   }
   return children;
@@ -57,18 +59,21 @@ const ProtectedRoute = ({ children }) => {
 const App = () => {
   const estadoModal = useSelector((state) => state.modales);
   const isLogin = useSelector((state) => state.auth.name);
+  const isRole = useSelector((state) => state.auth.role);
   const [checked, setChecked] = useState(false);
 
   var uid;
   var nombre;
+  var role;
 
   const dispatch = useDispatch();
   useEffect(() => {
     // verificando si el usuario está logeado
     uid = localStorage.getItem("iduser");
     nombre = localStorage.getItem("nombre");
-    if (uid && nombre) {
-      dispatch(startchekLogin(uid, nombre));
+    role = localStorage.getItem("role");
+    if (uid && nombre && role) {
+      dispatch(startchekLogin(uid, nombre,role));
       setChecked(true);
     } else {
       setChecked(true);
@@ -83,7 +88,7 @@ const App = () => {
     <>
       <HashRouter>
         <div className="cont-app">
-          {isLogin && <Navbar />}
+          {isLogin && isRole && <Navbar />}
           <div className="cont-contenido-app" id="cont-contenido-app">
             <Routes>
               <Route
@@ -150,7 +155,7 @@ const App = () => {
                 path="/fundacionesExistentes"
                 element={
                   <ProtectedRoute>
-                    <Fundaciones tipo={""}/>
+                    <Fundaciones tipo={""} />
                   </ProtectedRoute>
                 }
               >
@@ -197,7 +202,7 @@ const App = () => {
                 path="/login"
                 element={
                   <>
-                    {isLogin && <Navigate to="/" replace />}
+                    {isLogin && isRole && <Navigate to="/" replace />}
                     <Login />
                   </>
                 }
@@ -244,6 +249,8 @@ const App = () => {
             </Routes>
           </div>
         </div>
+        {isLogin && isRole && <Footer />}
+
       </HashRouter>
       <Confirm />
       <Popup />
