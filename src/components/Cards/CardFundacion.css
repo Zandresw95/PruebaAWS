@@ -1,0 +1,7 @@
+.cardFoundacion {
+    display: flex;
+    flex-direction: column;
+    width: 28em;
+    height: 28em;
+    justify-content: space-evenly;
+}

@@ -1,0 +1,38 @@
+.cont-form-donacion {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cont-form-donacion>form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-donacion-acciones {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+.form-donacion-toggle {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    align-items: center;
+    width: 100px;
+    align-self: center;
+}
+
+.titulo-donacion {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}

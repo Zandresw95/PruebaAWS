@@ -45,7 +45,7 @@ function Fundaciones({tipo}) {
                         />
                     )
                 })
-                : "No existen personas"
+                : <></>
             }
         </div>
     );
