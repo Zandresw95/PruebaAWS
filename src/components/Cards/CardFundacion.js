@@ -88,7 +88,7 @@ const CardFundacion = ({fundacion, tipo}) => {
 
     return (
         <div className=''>
-            <Card title={fundacion.nombre_fundacion} className='cardFoundacion' footer={footer} header={header}>
+            <Card title={fundacion.nombre_fundacion} className='cardFoundacion animar-hover animar-entrada' footer={footer} header={header}>
                 <p className="m-0" style={{ lineHeight: '1.5' }}><strong>Teléfono:</strong> {fundacion.telefono_fundacion}</p>
                 <p className="m-0" style={{ lineHeight: '1.5' }}><strong>Dirección:</strong>{fundacion.direccion_fundacion}</p>
             </Card>
