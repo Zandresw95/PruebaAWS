@@ -5,7 +5,7 @@ import {
   Route,
   Navigate,
   HashRouter,
-  Outlet,
+  Outlet,useParams
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./pages/Login";
@@ -26,6 +26,7 @@ import Fundaciones from "./pages/Fundaciones";
 import RegistroUsuario from "./pages/RegistroUsuario";
 import RegistroOrganizacion from "./pages/RegistrarOrganizacion";
 import Footer from "./components/Footer/Footer";
+import FundacionInfo from "./pages/FundacionInfo";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -186,6 +187,15 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <Fundaciones tipo={"apadrinamiento"} />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+              <Route
+                path="/fundacionesApadrinar/:idFundacion"
+                element={
+                  <ProtectedRoute>
+                    <FundacionInfo />
                   </ProtectedRoute>
                 }
               >

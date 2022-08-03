@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
+import { useNavigate } from "react-router-dom";
 import Modal from '../generic/Modal';
 import FormDonacion from '../Donacion/FormDonacion';
 import './CardFundacion.css';
@@ -14,6 +15,7 @@ let modalTypes = {
 };
 
 const CardFundacion = ({fundacion,tipo}) => {
+    const navigate = useNavigate();
     const [fundacionSelected,setFundacionSelected]= useState(fundacion)
     const [stateModal, dispatchModal] = useReducer(
         reducerModal,
@@ -50,13 +52,17 @@ const CardFundacion = ({fundacion,tipo}) => {
     const footer = (
         <div className='flex flex-row flex-wrap card-container justify-content-evenly '>
             {tipo == 'apadrinamiento' ?
-                <Button label="Apadrinar" icon="pi pi-check" className='p-button-info' />
+                <Button label="Apadrinar" icon="pi pi-check" className='p-button-info' onClick={()=>{
+                    navigate(`/fundacionesApadrinar/${fundacion.id_fundacion}`);
+                }}/>
                 : tipo == 'donacion' ?
                     <Button label="Donar" icon="pi pi-check" className='p-button-help' onClick={()=>{
                         abrirForm(fundacion.id_fundacion);
                     }}/>
                     : tipo == 'adoptar' ?
-                        <Button label="Adoptar" icon="pi pi-check" className="p-button-success" />
+                        <Button label="Adoptar" icon="pi pi-check" className="p-button-success" onClick={()=>{
+                            navigate(`/fundacionesApadrinar/${fundacion.id_fundacion}`);
+                        }}/>
                         :
                         <></>
             }
