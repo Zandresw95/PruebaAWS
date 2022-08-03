@@ -80,6 +80,7 @@ function Login() {
           dispatch(stopLoading());
           dispatch(login(data.data.id_usuario, data.data.login_usuario, data.role));
           localStorage.setItem("iduser", data.data.id_usuario);
+          localStorage.setItem("idpersona", data.data.id_persona);
           localStorage.setItem("nombre", data.data.login_usuario);
           localStorage.setItem("role", data.role);
         },

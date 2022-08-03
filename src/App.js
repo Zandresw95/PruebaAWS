@@ -192,7 +192,7 @@ const App = () => {
               >
               </Route>
               <Route
-                path="/fundacionesApadrinar/:idFundacion"
+                path="/fundacionesApadrinar/:idFundacion/:estadoAnimal"
                 element={
                   <ProtectedRoute>
                     <FundacionInfo />

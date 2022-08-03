@@ -1,80 +1,59 @@
 import React, { useReducer, useState } from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
+import { Image } from 'primereact/image';
+import { Dialog } from 'primereact/dialog';
+import { useParams } from "react-router-dom";
 import Modal from '../generic/Modal';
-import FormDonacion from '../Donacion/FormDonacion';
 import './CardAnimal.css';
-// let initialStateModal = {
-//     form: false,
-// };
-
-// let modalTypes = {
-//     OPEN_FORM: "OPEN_FORM",
-//     CLOSE_USUARIOS: "CLOSE_FORM",
-// };
-
-const CardAnimal = ({ fundacion, tipo }) => {
-    // const [fundacionSelected, setFundacionSelected] = useState(fundacion)
-    // const [stateModal, dispatchModal] = useReducer(
-    //     reducerModal,
-    //     initialStateModal
-    // );
 
 
-    // function reducerModal(state, action) {
-    //     switch (action.type) {
-    //         case modalTypes.OPEN_FORM:
-    //             return { ...state, form: true };
-    //         case modalTypes.CLOSE_FORM:
-    //             return { ...state, form: false };
-    //         default:
-    //             break;
-    //     }
-    // }
+const CardAnimal = ({ animal,idFundacion }) => {
+    const [displayModal, setDisplayModal] = useState(false);
+    const onHide = () => {
+        setDisplayModal(false);
+    }
 
+    const onClick = () => {
+        setDisplayModal(true);
+    }
 
-    // const abrirForm = (id) => {
-    //     dispatchModal({ type: modalTypes.OPEN_FORM });
-    //     setFundacionSelected(id);
-    // };
+    let idPersona = localStorage.getItem("idpersona");
+    
+    const renderFooter = () => {
+        return (
+            <div>
+                <Button label="¡Quiero Apadrinarlo!" icon="pi pi-home" onClick={() => onHide()} />
+            </div>
+        );
+    }
 
-    // const cerrarForm = () => {
-    //     dispatchModal({ type: modalTypes.CLOSE_FORM });
-    //     setFundacionSelected(0);
-    // };
     const header = (
-        <div className='flex justify-content-center'>
-            <div className='ico-fundacion-default w-5 h-5'></div>
-        </div>
-    );
-    const footer = (
-        <div className='flex flex-row flex-wrap card-container justify-content-evenly '>
-            {tipo == 'apadrinamiento' ?
-                <Button label="Apadrinar" icon="pi pi-check" className='p-button-info' />
-                    : tipo == 'adoptar' ?
-                        <Button label="Adoptar" icon="pi pi-check" className="p-button-success" />
-                        :
-                        <></>
-            }
-        </div>
+        <Image src={animal.foto_animal} alt="Image" width="250" height='180' />
     );
 
     return (
-        <div className=''>
-            <Card title={fundacion.nombre_fundacion} className='cardAnimal' footer={footer} header={header}>
-                <p className="m-0" style={{ lineHeight: '1.5' }}><strong>NOmbre:</strong> {fundacion.telefono_fundacion}</p>
-                <p className="m-0" style={{ lineHeight: '1.5' }}><strong>Dirección:</strong>{fundacion.direccion_fundacion}</p>
-            </Card>
-            {/* <Modal activo={stateModal.form} cerrar={cerrarForm}>
-                <FormDonacion
-                    id_fundacion={fundacion.id_fundacion}
-                    cerrar={() => {
-                        cerrarForm();
-                    }}
-                    nombre={fundacion.nombre_fundacion}
-                />
-            </Modal> */}
-        </div>
+        <>
+            <div className='animar-hover animar-entrada' onClick={() => { onClick() }}>
+                <Card title={animal.nombre_animal} className='cardAnimal' header={header}>
+                    <p className="m-0" style={{ lineHeight: '1.5' }}><strong>Edad:</strong>{animal.edad_animal}</p>
+                </Card>
+            </div>
+            <Dialog header={animal.nombre_animal} visible={displayModal} modal={true} style={{ width: '50vw' }} footer={renderFooter()} onHide={() => onHide()}>
+                <div class="flex flex-row justify-content-around">
+                    <Image src={animal.foto_animal} alt="Image" width="250" height='180' />
+                    <div class="flex flex-column m-2">
+                        <h6><strong>Descripción</strong></h6>
+                        <p>{animal.descripcion_animal}</p>
+                        <h6><strong>Edad</strong></h6>
+                        <p>{animal.edad_animal} Meses</p>
+                        <h6><strong>Sexo</strong></h6>
+                        <p>{animal.sexo_animal}</p>
+                        <p></p>
+                    </div>
+                </div>
+            </Dialog>
+        </>
     );
 }
 

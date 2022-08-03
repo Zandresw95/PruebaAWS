@@ -4,10 +4,12 @@ const UserContext = createContext();
 
 const initialUserData = {
   idusuario: 0,
+  id_persona: "",
   cedula: "",
   nombre: "",
   idperfil: "",
   perfil: "",
+  role: "",
 };
 
 const UserProvider = ({ children }) => {
@@ -46,26 +48,6 @@ const UserProvider = ({ children }) => {
       return false;
     }
   });
-
-  // useEffect(() => {
-  //   let temp = sessionStorage.getItem("userData");
-  //   if (temp) {
-  //     for (const key in temp) {
-  //       if (Object.hasOwnProperty.call(temp, key)) {
-  //         const el = temp[key];
-  //         if (el === "") {
-  //           setUserData(initialUserData);
-  //           // setSesionActiva(false);
-  //           return;
-  //         }
-  //       }
-  //     }
-  //     setUserData(JSON.parse(temp));
-  //     // setSesionActiva(true);
-  //   } else {
-  //     setUserData(initialUserData);
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (userData && userData !== "") {

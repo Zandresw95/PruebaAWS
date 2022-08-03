@@ -3,13 +3,14 @@ import $ from "jquery";
 import { host, port, dominio } from "../../helpers/Dbdata";
 import { setError, startLoading, stopLoading } from "./ui";
 
-export const login = (uid, displayName,role) => {
+export const login = (uid, displayName,role, idpersona) => {
   return {
     type: types.login,
     payload: {
       uid,
       displayName,
       role,
+      idpersona
     },
   };
 };
@@ -22,6 +23,7 @@ export const startLogout = () => {
 export const logout = () => {
   localStorage.removeItem("iduser");
   localStorage.removeItem("nombre");
+  localStorage.removeItem("idpersona");
   localStorage.removeItem("role");
   return {
     type: types.logout,

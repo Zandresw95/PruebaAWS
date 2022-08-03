@@ -36,3 +36,9 @@
     text-align: center;
     color: #000000;
 }
+
+.etiqueta-textarea{
+    color: var(--color-texto-low);
+    font-size: 0.9em;
+    margin-left: calc(var(--radio-input) / 2);
+}

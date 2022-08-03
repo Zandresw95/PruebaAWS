@@ -1,0 +1,80 @@
+.cont-donacion {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 15px;
+    width: 300px;
+    padding: 10px;
+  }
+
+  .format-ico-donacion-config{
+    height: 38px;
+    filter: invert(0.45);
+  }
+
+  .borde-donacion-1 {
+    /* border-left: 4px solid rgb(57, 143, 255); */
+    /* background-color: rgb(57, 143, 255); */
+    background-color: rgb(166, 204, 255);
+    /* box-shadow: 0px 0 0 1px rgb(57, 143, 255); */
+  }
+  .borde-donacion-2 {
+    /* background-color: rgb(255, 112, 112); */
+    background-color: rgb(255, 207, 180);
+    /* box-shadow: 0px 0 0 1px rgb(255, 112, 112); */
+  }
+  .borde-donacion-3 {
+    /* box-shadow: 0px 0 0 1px rgb(221, 169, 0); */
+    background-color: rgb(230, 203, 117);
+  }
+  .borde-donacion-4 {
+    /* box-shadow: 0px 0 0 1px rgb(13, 151, 0); */
+    background-color: rgb(149, 231, 142);
+  }
+
+  .cont-ico-donacion {
+    overflow: hidden;
+    padding: 0px;
+    padding-top: 7px;
+    /*border-radius: 50%;*/
+    /*background-color: var(--color-fondo-input);*/
+    width: 50px;
+    height: 50px;
+  }
+   
+  .donacion-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+  }
+  
+  .donacion-textos > p {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .donacion-textos > p:first-child {
+    font-size: 1.1rem;
+    margin-bottom: 0em;
+  }
+  
+  .donacion-textos > p:nth-child(2) {
+    font-size: 0.9rem;
+    margin-bottom: 0em;
+    color: var(--color-texto-lowest);
+  }
+  
+  .donacion-estado {
+    display: grid;
+    grid-template-columns: max-content 1fr 10px;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .donacion-estado > p {
+    font-size: 0.85rem;
+    margin-bottom: 0em;
+    /* color: var(--color-texto-low); */
+    /* font-weight: bold; */
+  }
+  
