@@ -111,8 +111,8 @@ function Login() {
 
   return (
     <div className="cont-page-login">
+        <p className="milky">Juntando Patitas</p>
       <div className="cont-seccion cont-login  animar-zoom-min-to-max">
-        <div className="login-logo"></div>
         <form className="cont-card">
           <div className="justify-content-center"></div>
           <ContInput label={"Usuario"} icono={"ico-usuario"}>
