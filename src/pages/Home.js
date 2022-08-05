@@ -7,13 +7,13 @@ function Home() {
   const navigate = useNavigate();
   return (
     <div >
-      <div className="grid justify-content-around align-items-center gap-8" style={{ height: '100vh' }}>
+      <div className="grid justify-content-around align-items-center gap-8">
         <Button className="p-button-rounded p-button-text ico-apadrinamiento" onClick={() => navigate("/fundacionesApadrinar")} />
         <Button className="p-button-rounded p-button-text ico-adopcion" onClick={() => navigate("/fundacionesAdoptar")} />
         <Button className="p-button-rounded p-button-text ico-donacion" onClick={() => navigate("/fundacionesDonar")} />
         <Button className="p-button-rounded p-button-text ico-fundaciones" onClick={() => navigate("/fundacionesExistentes")} />
-        <Button className="p-button-rounded p-button-text ico-usurio-nav" onClick={() => { }} />
-        {(role == "P001") && <Button className="p-button-rounded p-button-text ico-administracion" onClick={() => { }} />}
+        <Button className="p-button-rounded p-button-text ico-usurio-nav" onClick={() => {}} />
+        {(role == "P001") && <Button className="p-button-rounded p-button-text ico-administracion" onClick={() => { navigate("/administrador") }} />}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { Dropdown } from 'primereact/dropdown';
 import $ from "jquery";
 import {dominio } from "../../../helpers/Dbdata";
 import './PickListDemo.css';
-import './AsigPerfil.css';
+import '../asignarOpcPerfil/AsigOpcPerfil.css'
 
 const AsigPerfiles = () => {
     const [source, setSource] = useState([]);
@@ -167,20 +167,20 @@ const AsigPerfiles = () => {
         </div>
       ) : (
         
-        <div className="cont-kkasignar animar-zoom-min-to-max">
+        <div className="cont-asignar animar-zoom-min-to-max">
             <div className="barra-acciones-title">
-                <h3 className="title">ASIGNAR PERFILES</h3>
+                <h3 className="title">Asignar Perfiles</h3>
             </div>
             <div className="barra-acciones-perfil">
                 <div className="dropdown-demo">
-                    <h5>Usuarios</h5>
+                    <h5>Perfiles</h5>
                     <Dropdown style={{width: '14rem'}} id='select-perfil' value={perfil} options={perfiles} onChange={onChangeSelect} placeholder="Selecciona un usuario"/>
                 </div>
             </div>
             <div className="cont-contenido-opciones">
                 <div className="picklist-demo">
                     <div className="card-1">
-                        <PickList style={{marginTop: "80px", marginLeft: "78px", marginRight: "57px"}} source={source} target={target} itemTemplate={opcionTemplate}
+                        <PickList source={source} target={target} itemTemplate={opcionTemplate}
                             sourceHeader="Usuarios asignados" targetHeader="Usuarios no asignadas"
                             showSourceControls={false} showTargetControls={false} 
                             sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}

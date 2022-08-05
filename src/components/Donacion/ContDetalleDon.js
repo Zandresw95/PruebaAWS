@@ -1,20 +1,40 @@
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { Divider } from 'primereact/divider';
+import { useSelector } from "react-redux";
 
 function ContDetalleDon({don}) {
+    const { name, role } = useSelector((state) => state.auth);
     return (
         <>
-            <Divider align="center">
-                <div className="inline-flex align-items-center">
-                    <i className="pi pi-user mr-2"></i>
-                    <b>Datos Donante</b>
-                </div>
-            </Divider>
-            <p><span className="font-bold w-10">Nombres:</span> {don["NOMBRE_PERSONA"]}</p>
-            <p><span className="font-bold w-10">Apellidos:</span> {don["APELLIDO_PERSONA"]}</p>
-            <p><span className="font-bold w-10">Correo electrónico:</span> {don["EMAIL_PERSONA"]}</p>
-            <p><span className="font-bold w-10">Teléfono:</span> {don["TELEFONO_PERSONA"]}</p>
-            <p><span className="font-bold w-10">Cédula:</span> {don["CEDULA_PERSONA"]}</p>
+            {(role !== "P002") ? (
+                <>
+                    <Divider align="center">
+                        <div className="inline-flex align-items-center">
+                            <i className="pi pi-user mr-2"></i>
+                            <b>Datos Fundación</b>
+                        </div>
+                    </Divider>
+                    <p><span className="font-bold w-10">Nombre:</span> {don["NOMBRE_FUNDACION"]}</p>
+                    <p><span className="font-bold w-10">Dirección:</span> {don["DIRECCION_FUNDACION"]}</p>
+                    <p><span className="font-bold w-10">Correo electrónico:</span> {don["EMAIL_FUNDACION"]}</p>
+                    <p><span className="font-bold w-10">Teléfono:</span> {don["TELEFONO_FUNDACION"]}</p>
+                </>
+            ) : (
+                <>
+                    <Divider align="center">
+                        <div className="inline-flex align-items-center">
+                            <i className="pi pi-user mr-2"></i>
+                            <b>Datos Donante</b>
+                        </div>
+                    </Divider>
+                    <p><span className="font-bold w-10">Nombres:</span> {don["NOMBRE_PERSONA"]}</p>
+                    <p><span className="font-bold w-10">Apellidos:</span> {don["APELLIDO_PERSONA"]}</p>
+                    <p><span className="font-bold w-10">Correo electrónico:</span> {don["EMAIL_PERSONA"]}</p>
+                    <p><span className="font-bold w-10">Teléfono:</span> {don["TELEFONO_PERSONA"]}</p>
+                    <p><span className="font-bold w-10">Cédula:</span> {don["CEDULA_PERSONA"]}</p>
+                </>
+            )}
+            
             <Divider align="center">
                 <div className="inline-flex align-items-center">
                     <i className="pi pi-home mr-2"></i>
@@ -36,7 +56,7 @@ function ContDetalleDon({don}) {
                             </span>
                         </InplaceDisplay>
                         <InplaceContent className="flex justify-content-center">
-                            <img alt="Compbrobante" src={don["OBSERVACION_DONACION"]} onError={(e) => {e.target.src='https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width=500; e.target.height=300}} />
+                            <img alt="Comprobante" src={don["OBSERVACION_DONACION"]} onError={(e) => {e.target.src='https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width=500; e.target.height=300}} />
                         </InplaceContent>
                     </Inplace>
                 </>

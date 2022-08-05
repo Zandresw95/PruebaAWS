@@ -9,15 +9,9 @@ import {
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./pages/Login";
-import Navbar from "./components/navbar/Navbar";
-import Inicio from "./pages/Inicio";
+import { MenuBar } from "./components/navbar/MenuBar";
 import Error404 from "./pages/Error404";
-import Personas from "./pages/Personas";
-import Opcione from "./pages/Opcione";
-import Perfile from "./pages/Perfile";
-import AsigOpcPerfil from "./pages/AsigOpcPerfil";
-import AsigPerfil from "./pages/AsigPerfUsuario";
-import Usuarios from "./pages/Usuario";
+import { Administrator } from "./pages/Administrator";
 import RegistroGeneral from "./pages/GeneralRegister";
 import UserTypeRegister from "./pages/UserTypeRegister";
 import RegistroFundacion from "./pages/RegistroFundacion";
@@ -27,6 +21,7 @@ import RegistroUsuario from "./pages/RegistroUsuario";
 import RegistroOrganizacion from "./pages/RegistrarOrganizacion";
 import Footer from "./components/Footer/Footer";
 import FundacionInfo from "./pages/FundacionInfo";
+import UsuarioDonaciones from "./components/Donacion/usuarioDonacion/UsuarioDonaciones";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -53,6 +48,20 @@ const ProtectedRoute = ({ children }) => {
   if (!(isLogin && isRole)) {
     return <Navigate to="/login" replace />;
   }
+  return children;
+};
+
+const ProtectedRouteAdmin = ({ children }) => {
+  const isLogin = useSelector((state) => state.auth.name);
+  const isRole = useSelector((state) => state.auth.role);
+  if (!(isLogin && isRole)) {
+    return <Navigate to="/" replace />;
+  }else{
+    if(isRole !== "P001"){
+      return <Navigate to="/" replace />;
+    }
+  }
+  
   return children;
 };
 
@@ -89,17 +98,9 @@ const App = () => {
     <>
       <HashRouter>
         <div className="cont-app">
-          {isLogin && isRole && <Navbar />}
+          {isLogin && isRole && <MenuBar />}
           <div className="cont-contenido-app" id="cont-contenido-app">
             <Routes>
-              <Route
-                path="/inicio"
-                element={
-                  <ProtectedRoute>
-                    <Inicio />
-                  </ProtectedRoute>
-                }
-              />
               <Route
                 path="/"
                 element={
@@ -109,54 +110,30 @@ const App = () => {
                 }
               />
               <Route
-                path="/personas"
+                path="/administrador/*"
                 element={
-                  <ProtectedRoute>
-                    <Personas />
-                  </ProtectedRoute>
+                  <ProtectedRouteAdmin>
+                    <Administrator />
+                  </ProtectedRouteAdmin>
                 }
               >
               </Route>
-              <Route
-                path="/opciones"
-                element={
-                  <ProtectedRoute>
-                    <Opcione />
-                  </ProtectedRoute>
-                }
-              >
-              </Route>
-              <Route
-                path="/perfiles"
-                element={
-                  <ProtectedRoute>
-                    <Perfile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/usuarios"
-                element={
-                  <ProtectedRoute>
-                    <Usuarios />
-                  </ProtectedRoute>
-                }
-              >
-              </Route>
-              <Route
-                path="/asignarOpc"
-                element={
-                  <ProtectedRoute>
-                    <AsigOpcPerfil />
-                  </ProtectedRoute>
-                }
-              >
-              </Route>
+              
               <Route
                 path="/fundacionesExistentes"
                 element={
                   <ProtectedRoute>
                     <Fundaciones tipo={""} />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+
+              <Route
+                path="/donaciones/usuario"
+                element={
+                  <ProtectedRoute>
+                    <UsuarioDonaciones />
                   </ProtectedRoute>
                 }
               >
@@ -217,15 +194,7 @@ const App = () => {
                   </>
                 }
               />
-              <Route
-                path="/asigPerf"
-                element={
-                  <ProtectedRoute>
-                    <AsigPerfil />
-                  </ProtectedRoute>
-                }
-              >
-              </Route>
+              
               <Route
                 path="/registrar/fundacion"
                 element={
@@ -258,9 +227,8 @@ const App = () => {
               />
             </Routes>
           </div>
+          {isLogin && isRole && <Footer />}
         </div>
-        {isLogin && isRole && <Footer />}
-
       </HashRouter>
       <Confirm />
       <Popup />

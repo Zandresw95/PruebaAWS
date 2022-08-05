@@ -2,19 +2,19 @@
     width: 300px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
   
   .cont-form-usuario > form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
   
   .form-usuario-acciones {
     display: flex;
     flex-direction: row;
-    gap: 60px;
+    gap: 10px;
   }
   
   .form-usuario-toggle {
@@ -26,7 +26,6 @@
   }
 
   .titulo-usuario{
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 32px;

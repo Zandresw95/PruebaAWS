@@ -47,10 +47,9 @@
   }
   
   .cont-form-usuario > form {
-    width: calc(100% / 2);
     display: flex;
     flex-direction: column;
-    gap:8px;
+    gap: 8px;
   }
 
   .form-usuario-acciones {

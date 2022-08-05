@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { NavLink } from "react-router-dom";
-import logoConfiteca from "../../media/img/logoPinprexatColor.svg";
-import MenuSesion from "./MenuSesion";
 
 const Navbar = () => {
   const [userNavigates, setUserNavigates] = useState(false);
@@ -17,10 +15,17 @@ const Navbar = () => {
 
   return (
     <div className="cont-navbar">
+      <NavLink
+          className="logo-empresa"
+          to="/"
+          onClick={alertarNavegacion}
+        >
+          <div className="pi pi-arrow-left format-ico-navbar" style={{'fontSize':"1.5em"}}></div>
+        </NavLink>
       <div className="cont-buttons">
         <NavLink
           className="button-menu animar-hover"
-          to="/"
+          to="inicio"
           onClick={alertarNavegacion}
         >
           <div className="ico-casa format-ico-navbar"></div>
@@ -28,7 +33,7 @@ const Navbar = () => {
         </NavLink>
         <NavLink
           className="button-menu animar-hover"
-          to="/personas"
+          to="personas"
           onClick={alertarNavegacion}
         >
           <div className="ico-usuario format-ico-navbar"></div>
@@ -36,7 +41,7 @@ const Navbar = () => {
         </NavLink>
         <NavLink
           className="button-menu animar-hover"
-          to="/opciones"
+          to="opciones"
           onClick={alertarNavegacion}
         >
           <div className="ico-configuracion format-ico-navbar"></div>
@@ -45,7 +50,7 @@ const Navbar = () => {
 
         <NavLink
           className="button-menu animar-hover"
-          to="/asignarOpc"
+          to="asignarOpc"
           onClick={alertarNavegacion}
         >
           <div className="ico-lapiz format-ico-navbar"></div>
@@ -54,7 +59,7 @@ const Navbar = () => {
 
         <NavLink
           className="button-menu animar-hover"
-          to="/usuarios"
+          to="usuarios"
           onClick={alertarNavegacion}
         >
           <div className="ico-usuarios format-ico-navbar"></div>
@@ -63,24 +68,21 @@ const Navbar = () => {
 
         <NavLink
           className="button-menu animar-hover"
-          to="/perfiles"
+          to="perfiles"
           onClick={alertarNavegacion}
         >
-          <div className="ico-chart format-ico-navbar"></div>
+          <div className="pi pi-user-plus format-ico-navbar" style={{'fontSize': '2em'}}></div>
           <p>Perfiles</p>
         </NavLink>
 
         <NavLink
           className="button-menu animar-hover"
-          to="/asigPerf"
+          to="asigPerf"
           onClick={alertarNavegacion}
         >
-          <div className="ico-usuarios format-ico-navbar"></div>
+          <div className="pi pi-book format-ico-navbar" style={{'fontSize': '2em'}}></div>
           <p>Asignar Perfiles</p>
         </NavLink>
-      </div>
-      <div>
-        <MenuSesion />
       </div>
     </div>
   );

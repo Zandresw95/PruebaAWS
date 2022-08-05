@@ -2,11 +2,10 @@ import {useState, useEffect} from 'react';
 import $ from 'jquery';
 import { Dialog } from 'primereact/dialog';
 import {dominio} from '../../helpers/Dbdata'
-import { Button } from 'primereact/button';
 import ContDetalleDon from '../Donacion/ContDetalleDon'
 import "./CardDonacionFund.css";
 
-function CardDonacionFund({ datos, tipo }) {
+function CardDonacionFund({datos}) {
   const [displayBasic, setDisplayBasic] = useState(false);
   const [donacion, setDonacion] = useState("");
 
@@ -43,15 +42,6 @@ function CardDonacionFund({ datos, tipo }) {
 
   const onHide = (name) => {
       setDisplayBasic(false);
-  }
-
-  const renderFooter = (name) => {
-      return (
-          <div>
-              <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
-              <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
-          </div>
-      );
   }
 
   return (

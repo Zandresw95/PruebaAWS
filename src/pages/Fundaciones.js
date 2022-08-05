@@ -139,7 +139,6 @@ function Fundaciones({tipo}) {
                                         <CardDonacionFund
                                             key={"donacion" + i}
                                             datos={el}
-                                            tipo={tipo}
                                         />
                                     )
                                 })

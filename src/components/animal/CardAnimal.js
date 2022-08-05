@@ -29,20 +29,20 @@ const CardAnimal = ({ animal,idFundacion }) => {
     }
 
     const header = (
-        <Image src={animal.foto_animal} alt="Image" width="250" height='180' />
+        <Image src={animal.foto_animal} alt="Image" width="250" height='180'/>
     );
 
     return (
         <>
             <div className='animar-hover animar-entrada' onClick={() => { onClick() }}>
                 <Card title={animal.nombre_animal} className='cardAnimal' header={header}>
-                    <p className="m-0" style={{ lineHeight: '1.5' }}><strong>Edad:</strong>{animal.edad_animal}</p>
+                    <p><span className='font-bold w-10'>Edad:</span> {animal.edad_animal} meses</p>
                 </Card>
             </div>
             <Dialog header={animal.nombre_animal} visible={displayModal} modal={true} style={{ width: '50vw' }} footer={renderFooter()} onHide={() => onHide()}>
-                <div class="flex flex-row justify-content-around">
+                <div className="flex flex-row justify-content-around">
                     <Image src={animal.foto_animal} alt="Image" width="250" height='180' />
-                    <div class="flex flex-column m-2">
+                    <div className="flex flex-column m-2">
                         <h6><strong>Descripción</strong></h6>
                         <p>{animal.descripcion_animal}</p>
                         <h6><strong>Edad</strong></h6>

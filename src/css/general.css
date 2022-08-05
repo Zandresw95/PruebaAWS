@@ -1,6 +1,7 @@
 :root {
     /* colores */
-    --color-fondo-app: rgb(240, 240, 240);
+    /*--color-fondo-app: rgb(240, 240, 240);*/
+    --color-fondo-app: #F9F5F5;
     --color-fondo-seccion: rgb(245, 245, 245);
     --color-foco-links: rgb(245, 245, 245);
     --color-fondo-modal: rgba(0, 0, 0, 0.25);

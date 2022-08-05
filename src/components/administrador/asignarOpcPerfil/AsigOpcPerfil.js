@@ -167,9 +167,9 @@ const AsigOpcPerfiles = () => {
         </div>
       ) : (
         
-        <div className="cont-asignaraa animar-zoom-min-to-max">
+        <div className="cont-asignar animar-zoom-min-to-max">
             <div className="barra-acciones-title">
-                <h3 className="title">ASIGNAR OPCIONES</h3>
+                <h3 className="title">Asignar Opciones</h3>
             </div>
             <div className="barra-acciones-perfil">
                 <div className="dropdown-demo">
@@ -180,7 +180,7 @@ const AsigOpcPerfiles = () => {
             <div className="cont-contenido-opciones">
                 <div className="picklist-demo">
                     <div className="card-1">
-                        <PickList style={{marginTop: "80px", marginLeft: "78px", marginRight: "57px"}} source={source} target={target} itemTemplate={opcionTemplate}
+                        <PickList source={source} target={target} itemTemplate={opcionTemplate}
                             sourceHeader="Opciones asignadas" targetHeader="Opciones no asignadas"
                             showSourceControls={false} showTargetControls={false} 
                             sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}

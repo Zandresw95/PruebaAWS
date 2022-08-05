@@ -1,0 +1,19 @@
+.cont-app-administrator{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: 1fr max-content;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.cont-app-administator-cont{
+    overflow-y: auto;
+    gap: 46px;
+    padding: 10px;
+    background-color: var(--color-fondo-app);
+}
