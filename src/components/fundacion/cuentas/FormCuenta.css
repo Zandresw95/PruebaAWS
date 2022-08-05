@@ -1,0 +1,38 @@
+.cont-form-cuenta {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cont-form-cuenta > form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .form-cuenta-acciones {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .form-cuenta-toggle {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    align-items: center;
+    width: 100px;
+    align-self: center;
+  }
+
+  .titulo-cuenta{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+
+    align-items: center;
+    text-align: center;
+    color: #000000;
+  }
+  

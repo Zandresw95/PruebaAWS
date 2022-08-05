@@ -105,6 +105,7 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
 
     const subirArchivo = (id_donacion) => {
         const formData = new FormData();
+        console.log(document.querySelector('#observacion_donacion').files[0]);
         formData.append('bucket', "donaciones");
         formData.append('file', document.querySelector('#observacion_donacion').files[0]);
         $.ajax({
@@ -235,13 +236,13 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
                                 name="datos_cuenta"
                                 id="datos_cuenta"
                                 value={
-                                    cuentas.map((el, i) => {
-                                        if(el.id_cuenta === donacion.id_cuenta){
-                                            return(
-                                                `Banco: ${el.banco_cuenta}\nTipo de Cuenta: ${el.tipo_cuenta}\nNúmero de cuenta: ${el.numero_cuenta}\nCédula o RUC Beneficiario: ${el.cedula_cuenta}\nNombres Beneficiario: ${el.nombre_cuenta}\nApellidos Beneficiario: ${el.apellido_cuenta}\nCorreo Beneficiario: ${el.correo_cuenta}`
-                                            );
-                                        }
-                                    })
+                                  cuentas.map((el, i) => {
+                                      if(el.id_cuenta === donacion.id_cuenta){
+                                          return(
+                                            `Banco: ${el.banco_cuenta}\nTipo de Cuenta: ${el.tipo_cuenta}\nNúmero de cuenta: ${el.numero_cuenta}\nCédula o RUC Beneficiario: ${el.cedula_cuenta}\nNombres Beneficiario: ${el.nombre_cuenta}\nApellidos Beneficiario: ${el.apellido_cuenta}\nCorreo Beneficiario: ${el.correo_cuenta}`
+                                          );
+                                      }
+                                  })
                                 }
                             >
                             </textarea>
@@ -267,7 +268,7 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
                                 onBlur={handleBlur}
                                 name="observacion_donacion"
                                 id="observacion_donacion"
-                                type={"file"}
+                                type="file"
                             />
                             {!formValidado.observacion_donacion[0] && (
                                 <div className="ico-advertencia  format-ico-form-validacion"></div>

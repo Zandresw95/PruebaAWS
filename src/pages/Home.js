@@ -11,9 +11,9 @@ function Home() {
         <Button className="p-button-rounded p-button-text ico-apadrinamiento" onClick={() => navigate("/fundacionesApadrinar")} />
         <Button className="p-button-rounded p-button-text ico-adopcion" onClick={() => navigate("/fundacionesAdoptar")} />
         <Button className="p-button-rounded p-button-text ico-donacion" onClick={() => navigate("/fundacionesDonar")} />
-        <Button className="p-button-rounded p-button-text ico-fundaciones" onClick={() => navigate("/fundacionesExistentes")} />
+        {(role === "P001") && <Button className="p-button-rounded p-button-text ico-fundaciones" onClick={() => navigate("/fundacionesExistentes")} /> }
         <Button className="p-button-rounded p-button-text ico-usurio-nav" onClick={() => {}} />
-        {(role == "P001") && <Button className="p-button-rounded p-button-text ico-administracion" onClick={() => { navigate("/administrador") }} />}
+        {(role === "P001") && <Button className="p-button-rounded p-button-text ico-administracion" onClick={() => { navigate("/administrador/inicio") }} />}
       </div>
     </div>
   );

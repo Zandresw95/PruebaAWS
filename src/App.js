@@ -22,6 +22,8 @@ import RegistroOrganizacion from "./pages/RegistrarOrganizacion";
 import Footer from "./components/Footer/Footer";
 import FundacionInfo from "./pages/FundacionInfo";
 import UsuarioDonaciones from "./components/Donacion/usuarioDonacion/UsuarioDonaciones";
+import CuentasFund from "./components/fundacion/CuentasFund";
+import CentrosAlm from "./components/fundacion/CentrosAlm";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -134,6 +136,24 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <UsuarioDonaciones />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+              <Route
+                path="/cuentas"
+                element={
+                  <ProtectedRoute>
+                    <CuentasFund />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+              <Route
+                path="/centros"
+                element={
+                  <ProtectedRoute>
+                    <CentrosAlm />
                   </ProtectedRoute>
                 }
               >
