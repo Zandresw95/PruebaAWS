@@ -40,7 +40,7 @@ function MenuSesion() {
           <div
             className={
               "ico-flecha-desplegar menu-sesion-flecha " +
-              (menuActivo ? "oculto" : "")
+              (menuActivo ? "ocultoMenu" : "")
             }
             onClick={() => {
               setMenuActivo(!menuActivo);

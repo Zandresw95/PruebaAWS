@@ -191,6 +191,9 @@
 .oculto {
   opacity: 0;
 }
+.ocultoMenu {
+  display: none;
+}
 
 .cont-btnAtras-titulo {
   display: flex;
