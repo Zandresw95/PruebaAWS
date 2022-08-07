@@ -1,13 +1,58 @@
 import React, { useEffect, useState  } from 'react';
 import { Menubar } from 'primereact/menubar';
+import { Chip } from 'primereact/chip';
+import { SplitButton } from 'primereact/splitbutton';
 import MenuSesion from './MenuSesion';
+import { dominio } from "../../helpers/Dbdata";
+import { startLogout } from "../../reduxStore/actions/auth";
+import $ from 'jquery';
 import {useNavigate} from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
 
 export const MenuBar = () => {
-    const {role} = useSelector((state) => state.auth);
+    const {uid, role} = useSelector((state) => state.auth);
+    const [usuario, setUsuario] = useState({});
     const navigate = useNavigate();
     let items;
+    const itemsButton = [
+        {
+            label: 'Cerrar sesión',
+            icon: 'pi pi-times',
+            command: () => {
+                cerrarSesion();
+            }
+        }
+    ];
+
+    useEffect(() => {
+        obtenerUsuario();
+    }, [uid]);
+
+    const dispatch = useDispatch();
+    const cerrarSesion = () => {
+      dispatch(startLogout());
+    };
+
+    const obtenerUsuario = () => {
+        $.ajax({
+            url: `${dominio}/api/tabla_usuarios/fullID/${uid}`,
+            type: "get",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({}),
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                console.log(data.data);
+                setUsuario(data.data);
+            },
+            error: function (data) {
+                console.log(data.responseJSON.data);
+            },
+        });
+    }
 
         if(role !== "P002"){
             items = [
@@ -49,7 +94,13 @@ export const MenuBar = () => {
         }
 
     const start = <img alt="logo" src="https://usuarios-fotos.s3.amazonaws.com/logoApp.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2" onClick={() => navigate("/")}></img>;
-    const end = <MenuSesion/>
+    const end = (
+        <>
+            <SplitButton label={usuario.login_usuario} image={usuario.foto_usuario} model={itemsButton} className="p-button-rounded p-button-info mr-2 mb-2">
+                <Chip label={usuario.login_usuario} image={usuario.foto_usuario} className="mr-2 mb-2" />
+            </SplitButton>
+        </>
+    )
 
     return (
         <div>
