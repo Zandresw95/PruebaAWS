@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import CardAnimal from "../components/animal/CardAnimal";
 import $ from "jquery";
 import { dominio } from "../helpers/Dbdata";
-function FundacionInfo({tipo}) {
+function FundacionInfo() {
     const [animales, setAnimales] = useState([]);
     const { name, role } = useSelector((state) => state.auth);
     const navigate = useNavigate();
-    let { idFundacion,estadoAnimal } = useParams();
+    let { idFundacion, estadoAnimal } = useParams();
     useEffect(() => {
         obtenerAnimalesFundacion();
     }, [])
@@ -39,11 +39,11 @@ function FundacionInfo({tipo}) {
             {animales.length > 0
                 ? animales.map((el, i) => {
                     return (
-                        <CardAnimal 
-                            key={"id" +i}
+                        <CardAnimal
+                            key={"id" + i}
                             animal={el}
                             idFundacion={idFundacion}
-                            tipo={tipo}
+                            tipo={"adoptar"}
                         />
                     )
                 })

@@ -3,10 +3,10 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Image } from 'primereact/image';
 import { Dialog } from 'primereact/dialog';
-import { useParams } from "react-router-dom";
 import Modal from '../generic/Modal';
 import './CardAnimal.css';
 import FormApadrinamiento from '../Apadrinamiento/FormApadrinamiento';
+import FormAdopcion from '../Adopcion/FormAdopcion';
 
 let initialStateModal = {
     form: false,
@@ -16,7 +16,7 @@ let modalTypes = {
     OPEN_FORM: "OPEN_FORM",
     CLOSE_USUARIOS: "CLOSE_FORM",
 };
-const CardAnimal = ({ animal, idFundacion }) => {
+const CardAnimal = ({ animal, idFundacion, tipo }) => {
     const [displayModal, setDisplayModal] = useState(false);
     const [animalSelected, setAnimalSelected] = useState(animal);
 
@@ -62,13 +62,17 @@ const CardAnimal = ({ animal, idFundacion }) => {
     const renderFooter = () => {
         return (
             <div>
-                <Button label="¡Quiero Apadrinarlo!" icon="pi pi-home" onClick={() => { onHide(); abrirForm(animal.id_animal) }} />
+                {tipo === "apadrinar" ?
+                    <Button label="¡Quiero Apadrinarlo!" icon="pi pi-home" onClick={() => { onHide(); abrirForm(animal.id_animal) }} />
+                    : tipo === "adoptar" ? <Button label="¡Quiero Adoptarlo!" icon="pi pi-home" onClick={() => { onHide(); abrirForm(animal.id_animal) }} /> : <></>
+                }
+
             </div>
         );
     }
 
     const header = (
-        <Image src={animal.foto_animal} alt="Image" width="250" height='180'/>
+        <Image src={animal.foto_animal} alt="Image" width="250" height='180' />
     );
 
     return (
@@ -78,8 +82,18 @@ const CardAnimal = ({ animal, idFundacion }) => {
                     <p><span className='font-bold w-10'>Edad:</span> {animal.edad_animal} meses</p>
                 </Card>
             </div>
-            <Modal activo={stateModal.form} cerrar={cerrarForm}>
+            <Modal activo={stateModal.form && tipo === "apadrinar"} cerrar={cerrarForm}>
                 <FormApadrinamiento
+                    id_fundacion={idFundacion}
+                    id_animal={animal.id_animal}
+                    cerrar={() => {
+                        cerrarForm();
+                    }}
+                    nombre={animal.nombre_animal}
+                />
+            </Modal>
+            <Modal activo={stateModal.form && tipo === "adoptar"} cerrar={cerrarForm}>
+                <FormAdopcion
                     id_fundacion={idFundacion}
                     id_animal={animal.id_animal}
                     cerrar={() => {

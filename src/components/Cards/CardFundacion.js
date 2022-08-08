@@ -66,7 +66,7 @@ const CardFundacion = ({fundacion,tipo}) => {
                     <Button label="Donar" icon="pi pi-check" className='p-button-help' onClick={() => onClick('displayModal')}/>
                     : tipo == 'adoptar' ?
                         <Button label="Adoptar" icon="pi pi-check" className="p-button-success" onClick={()=>{
-                            navigate(`/fundacionesApadrinar/${fundacion.id_fundacion}`);
+                            navigate(`/fundacionesAdoptar/${fundacion.id_fundacion}/0`);
                         }}/>
                         :
                         <></>
