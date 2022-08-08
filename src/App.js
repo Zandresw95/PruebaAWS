@@ -8,10 +8,10 @@ import {
   Outlet,useParams
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Login from "./pages/Login";
+import { Administrator } from "./pages/Administrator";
 import { MenuBar } from "./components/navbar/MenuBar";
 import Error404 from "./pages/Error404";
-import { Administrator } from "./pages/Administrator";
+import Login from "./pages/Login";
 import RegistroGeneral from "./pages/GeneralRegister";
 import UserTypeRegister from "./pages/UserTypeRegister";
 import RegistroFundacion from "./pages/RegistroFundacion";
@@ -22,8 +22,11 @@ import RegistroOrganizacion from "./pages/RegistrarOrganizacion";
 import Footer from "./components/Footer/Footer";
 import FundacionInfo from "./pages/FundacionInfo";
 import UsuarioDonaciones from "./components/Donacion/usuarioDonacion/UsuarioDonaciones";
+import UsuarioApadrinamiento from "./components/Apadrinamiento/usuarioApadrinamiento/UsuarioApadrinamiento";
 import CuentasFund from "./components/fundacion/CuentasFund";
 import CentrosAlm from "./components/fundacion/CentrosAlm";
+import Animales from "./components/fundacion/Animales";
+import DatosPerfil from "./pages/DatosPerfil";
 import { startchekLogin } from "./reduxStore/actions/auth";
 import { PopupProvider } from "./context/PopupContext";
 
@@ -132,7 +135,7 @@ const App = () => {
               </Route>
 
               <Route
-                path="/donaciones/usuario"
+                path="/usuario/donaciones"
                 element={
                   <ProtectedRoute>
                     <UsuarioDonaciones />
@@ -140,6 +143,26 @@ const App = () => {
                 }
               >
               </Route>
+              <Route
+                path="/usuario/apadrinamientos"
+                element={
+                  <ProtectedRoute>
+                    <UsuarioApadrinamiento />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+
+              <Route
+                path="/datos"
+                element={
+                  <ProtectedRoute>
+                    <DatosPerfil />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+
               <Route
                 path="/cuentas"
                 element={
@@ -154,6 +177,15 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <CentrosAlm />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+              <Route
+                path="/animales"
+                element={
+                  <ProtectedRoute>
+                    <Animales />
                   </ProtectedRoute>
                 }
               >

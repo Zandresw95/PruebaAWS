@@ -12,7 +12,7 @@ import ConfirmContext from "../../context/ConfirmContext";
 let initialDonacionM = {
     id_cuenta: "",
     id_fundacion: "",
-    id_persona: localStorage.getItem("idpersona"),
+    id_persona: "",
     observacion_donacion: "",
     descripcion_donacion: "",
     estado_donacion: 0,
@@ -103,11 +103,10 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
         }
     };
 
-    const subirArchivo = (id_donacion) => {
+    const subirArchivo = (id_donacion, imagen) => {
         const formData = new FormData();
-        console.log(document.querySelector('#observacion_donacion').files[0]);
         formData.append('bucket', "donaciones");
-        formData.append('file', document.querySelector('#observacion_donacion').files[0]);
+        formData.append('file', imagen);
         $.ajax({
             url: `${dominio}/api/tabla_donaciones/subirImagen/${id_donacion}`,
             type: "post",
@@ -136,8 +135,10 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
     }
 
     const crearDonacion = async () => {
+      const imagen = document.querySelector('#donacionFoto').files[0];
         if(await mostrarConfirm("Seguro de generar la donación")){
             donacion.id_fundacion = id_fundacion;
+            donacion.id_persona = localStorage.getItem("idpersona");
             $.ajax({
             url: `${dominio}/api/tabla_donaciones/agregar`,
             type: "post",
@@ -150,7 +151,7 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
             success: function (data) {
                 console.log(data);
                 setMostrarCargando(false);
-                subirArchivo(data.id_donacion);
+                subirArchivo(data.id_donacion, imagen);
             },
             error: function (data) {
                 setMostrarCargando(false);
@@ -230,22 +231,22 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
                           <p className="texto-validacion">{formValidado.id_cuenta[1]}</p>
                         )}
                         <div className="cont-input">
-                            <p className="etiqueta-textarea">Datos Cuenta Bancaria</p>
-                            <textarea 
-                                disabled={true}
-                                name="datos_cuenta"
-                                id="datos_cuenta"
-                                value={
-                                  cuentas.map((el, i) => {
-                                      if(el.id_cuenta === donacion.id_cuenta){
-                                          return(
-                                            `Banco: ${el.banco_cuenta}\nTipo de Cuenta: ${el.tipo_cuenta}\nNúmero de cuenta: ${el.numero_cuenta}\nCédula o RUC Beneficiario: ${el.cedula_cuenta}\nNombres Beneficiario: ${el.nombre_cuenta}\nApellidos Beneficiario: ${el.apellido_cuenta}\nCorreo Beneficiario: ${el.correo_cuenta}`
-                                          );
-                                      }
-                                  })
-                                }
-                            >
-                            </textarea>
+                          <p className="etiqueta-textarea">Datos Cuenta Bancaria</p>
+                          <textarea 
+                              disabled={true}
+                              name="datos_cuenta"
+                              id="datos_cuenta"
+                              value={
+                                cuentas.map((el, i) => {
+                                    if(el.id_cuenta === donacion.id_cuenta){
+                                        return(
+                                          `Banco: ${el.banco_cuenta}\nTipo de Cuenta: ${el.tipo_cuenta}\nNúmero de cuenta: ${el.numero_cuenta}\nCédula o RUC Beneficiario: ${el.cedula_cuenta}\nNombres Beneficiario: ${el.nombre_cuenta}\nApellidos Beneficiario: ${el.apellido_cuenta}\nCorreo Beneficiario: ${el.correo_cuenta}`
+                                        );
+                                    }
+                                })
+                              }
+                          >
+                          </textarea>
                         </div>
                         <ContInput label="Monto" icono={"ico-usuario"}>
                             <input
@@ -267,8 +268,8 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="observacion_donacion"
-                                id="observacion_donacion"
-                                type="file"
+                                id={"donacionFoto"}
+                                type={"file"}
                             />
                             {!formValidado.observacion_donacion[0] && (
                                 <div className="ico-advertencia  format-ico-form-validacion"></div>

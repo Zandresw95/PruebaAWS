@@ -1,24 +1,25 @@
-.cont-form-organizacion {
+.cont-form-fundacion {
     width: 300px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.cont-form-organizacion>form {
+  }
+  
+  .cont-form-fundacion > form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.titulo-organizacion {
+  }
+    
+  .titulo-fundacion{
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 32px;
     line-height: 39px;
-
+  
     align-items: center;
     text-align: center;
     color: #000000;
-}
+  }
+  

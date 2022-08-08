@@ -24,7 +24,7 @@ function ContDetalleApa({ apa }) {
                     <Divider align="center">
                         <div className="inline-flex align-items-center">
                             <i className="pi pi-user mr-2"></i>
-                            <b>Datos Apadrinador</b>
+                            <b>Datos Padrino</b>
                         </div>
                     </Divider>
                     <p><span className="font-bold w-10">Nombres:</span> {apa["NOMBRE_PERSONA"]}</p>
@@ -51,6 +51,7 @@ function ContDetalleApa({ apa }) {
                         <p><span className="font-bold w-10">Descripción: </span> {apa["DESCRIPCION_ANIMAL"]}</p>
                         <p><span className="font-bold w-10">Edad: </span>{apa["EDAD_ANIMAL"]}</p>
                         <p><span className="font-bold w-10">Sexo: </span>{apa["SEXO_ANIMAL"]}</p>
+                        <p><span className="font-bold w-10">Monto mensual: </span>{apa["MONTO_APADRINAMIENTO"]}</p>
                         <br />
                     </div>
                 </div>

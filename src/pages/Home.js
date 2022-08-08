@@ -12,7 +12,7 @@ function Home() {
         <Button className="p-button-rounded p-button-text ico-adopcion" onClick={() => navigate("/fundacionesAdoptar")} />
         <Button className="p-button-rounded p-button-text ico-donacion" onClick={() => navigate("/fundacionesDonar")} />
         {(role === "P001") && <Button className="p-button-rounded p-button-text ico-fundaciones" onClick={() => navigate("/fundacionesExistentes")} /> }
-        <Button className="p-button-rounded p-button-text ico-usurio-nav" onClick={() => {}} />
+        <Button className="p-button-rounded p-button-text ico-usurio-nav" onClick={() => navigate("/datos")} />
         {(role === "P001") && <Button className="p-button-rounded p-button-text ico-administracion" onClick={() => { navigate("/administrador/inicio") }} />}
       </div>
     </div>

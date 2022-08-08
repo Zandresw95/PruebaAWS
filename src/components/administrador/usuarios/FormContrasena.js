@@ -8,9 +8,13 @@ import "./FormContrasena.css";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../../reduxStore/actions/auth";
 import $ from "jquery";
-import { host, port } from "../../../helpers/Dbdata";
+import { dominio} from "../../../helpers/Dbdata";
 
-let initialDatosForm = { anterior: "", nueva: "", verificacion: "" };
+let initialDatosForm = { 
+ anterior: "",
+ nueva: "",
+ verificacion: "" 
+};
 
 let initialFormValidado = {
   anterior: [false, ""],
@@ -26,9 +30,10 @@ function FormContrasena({ cerrar }) {
 
   const { uid } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
   const guardarContrasena = () => {
     $.ajax({
-      url: `${host}:${port}/api/tabla_usuarios/edit/${uid}`,
+      url: `${dominio}/api/tabla_usuarios/changePassword/${uid}`,
       type: "put",
       dataType: "json",
       contentType: "application/json",
@@ -117,7 +122,7 @@ function FormContrasena({ cerrar }) {
       <form className="cont-flex-vertical-gap">
         <h3>Cambiar contraseña</h3>
         <div>
-          <ContInput label={"Contraseña anterior"}>
+          <ContInput label={"Contraseña anterior"} icono={"pi pi-key"}>
             <input
               type="password"
               name="anterior"
@@ -134,7 +139,7 @@ function FormContrasena({ cerrar }) {
           )}
         </div>
         <div>
-          <ContInput label={"Nueva contraseña"}>
+          <ContInput label={"Nueva contraseña"} icono={"pi pi-key"}>
             <input
               type="password"
               name="nueva"
@@ -151,7 +156,7 @@ function FormContrasena({ cerrar }) {
           )}
         </div>
         <div>
-          <ContInput label={"Verifica la nueva contraseña"}>
+          <ContInput label={"Verifica la nueva contraseña"} icono={"pi pi-key"}>
             <input
               type="password"
               name="verificacion"

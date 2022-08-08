@@ -1,6 +1,7 @@
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { Divider } from 'primereact/divider';
 import { useSelector } from "react-redux";
+import { Image } from 'primereact/image';
 
 function ContDetalleDon({don}) {
     const { name, role } = useSelector((state) => state.auth);
@@ -48,7 +49,7 @@ function ContDetalleDon({don}) {
                     <p><span className="font-bold w-10">Cuenta cepositada:</span> {don["BANCO_CUENTA"]+" "+don["NUMERO_CUENTA"]+" "+don["TIPO_CUENTA"] }</p>
                     <p><span className="font-bold w-10">Comprobante</span></p>
                     <br/>
-                    <Inplace  className="justify-content-center">
+                    <Inplace  className="justify-content-center" closable>
                         <InplaceDisplay>
                             <span className="inline-flex align-items-center">
                                 <span className="pi pi-search"></span>
@@ -56,7 +57,7 @@ function ContDetalleDon({don}) {
                             </span>
                         </InplaceDisplay>
                         <InplaceContent className="flex justify-content-center">
-                            <img alt="Comprobante" src={don["OBSERVACION_DONACION"]} onError={(e) => {e.target.src='https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width=500; e.target.height=300}} />
+                            <Image src={don["OBSERVACION_DONACION"]} alt="Comprobante" width="250" onError={(e) => {e.target.src='https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width=500; e.target.height=300}} preview />
                         </InplaceContent>
                     </Inplace>
                 </>

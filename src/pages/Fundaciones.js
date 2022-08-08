@@ -160,7 +160,7 @@ function Fundaciones({ tipo }) {
 
     return (
         <>
-            {(role === "P001" || role === "P004") ? (
+            {(role === "P001" || role === "P004" || role === "P003" ) ? (
                 <div className="flex flex-row flex-wrap gap-3">
                     {
                         fundaciones.length > 0 ?
@@ -177,11 +177,11 @@ function Fundaciones({ tipo }) {
                     }
                 </div>
             )
-                : (role === "P002") ? (
+                : (role === "P002") && (
                     <>
                         <div className="encabezado-nombre-barra-buscar">
                             <div className="cont-flex-gap">
-                                <h3 className="titulo-pagina">{tipo == "donacion" ? "Donaciones" : tipo == "adoptar" ? "Adopciones" : tipo == "apadrinamiento" ? "Apadrinaminetos" : ""}</h3>
+                                <h3 className="titulo-pagina">{tipo === "donacion" ? "Donaciones" : tipo === "adoptar" ? "Adopciones" : tipo === "apadrinamiento" ? "Apadrinaminetos" : ""}</h3>
                             </div>
                             <div style={{ width: "200px", justifySelf: "left" }}>
                                 <ContInput icono={"ico-lupa"}>
@@ -198,7 +198,7 @@ function Fundaciones({ tipo }) {
                             <div className="contenedorContenido">
                                 <div className="contenedorPagina">
                                     <div className="cont-opciones">
-                                        {tipo == "donacion" ?
+                                        {tipo === "donacion" ?
                                             donaciones.length > 0 ?
                                                 donaciones.map((el, i) => {
                                                     return (
@@ -210,7 +210,7 @@ function Fundaciones({ tipo }) {
                                                 })
                                                 : "No existen donaciones"
 
-                                            : tipo == "adoptar" ?
+                                            : tipo === "adoptar" ?
                                                 adopciones.length > 0 ?
                                                     adopciones.map((el, i) => {
                                                         return (
@@ -221,7 +221,7 @@ function Fundaciones({ tipo }) {
                                                         )
                                                     })
                                                     : "No existen adopciones"
-                                                : tipo == "apadrinamiento" ?
+                                                : tipo === "apadrinamiento" ?
                                                     apadrinamientos.length > 0 ?
                                                         apadrinamientos.map((el, i) => {
                                                             return (
@@ -239,7 +239,7 @@ function Fundaciones({ tipo }) {
                             </div>
                         </div>
                     </>
-                ) : (<></>)
+                )
             }
         </>
     );
