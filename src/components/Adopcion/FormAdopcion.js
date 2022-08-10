@@ -10,28 +10,33 @@ import PopupContext from "../../context/PopupContext";
 import ConfirmContext from "../../context/ConfirmContext";
 
 let initialAdopcion = {
-    id_persona: localStorage.getItem("idpersona"),
+    id_persona: "",
     id_fundacion: "",
     id_animal: "",
     observacion_solicitud:"",
-    archivo_solicitud:""
+    archivo_solicitud:"",
+    estado_solicitud: 0,
 };
 
 let initialFormValidado = {
-    observacion_solicitud: [false, ""],
-    archivo_solicitud: [false, ""]
+    archivo_solicitud: [false, ""],
 };
 
 const FormAdopcion = ({ id_fundacion, id_animal, cerrar, nombre }) => {
-    const [mounted, setMounted] = useState(true);
     const [mostrarCargando, setMostrarCargando] = useState(false);
-    const [disponible, setDisponible] = useState(false);
     const [adopcion, setAdopcion] = useState(initialAdopcion);
     const [formValidado, setFormValidado] = useState(initialFormValidado);
 
 
     const { mostrarPopup } = useContext(PopupContext);
     const { mostrarConfirm } = useContext(ConfirmContext);
+
+    useEffect(() => {
+        if (id_animal != 0){
+            setFormValidado(initialFormValidado);
+            setAdopcion(initialAdopcion);
+        }
+    }, [id_animal]);
 
     const handleChange = (e) => {
         setAdopcion({ ...adopcion, [e.target.name]: e.target.value });
@@ -45,7 +50,7 @@ const FormAdopcion = ({ id_fundacion, id_animal, cerrar, nombre }) => {
     const actualizarValidacion = (e) => {
         let tempCampo = {};
         switch (e.target.name) {
-            case "observacion_solicitud":
+            case "archivo_solicitud":
                 tempCampo = {
                     [e.target.name]: Validar.general(e.target.value),
                 };
@@ -58,14 +63,6 @@ const FormAdopcion = ({ id_fundacion, id_animal, cerrar, nombre }) => {
             ...tempCampo,
         });
     };
-
-
-    useEffect(() => {
-        if (id_fundacion != 0) {
-            setFormValidado(initialFormValidado);
-            setAdopcion(initialAdopcion);
-        }
-    }, [id_fundacion]);
 
     const validarForm = () => {
         for (const key in formValidado) {
@@ -81,15 +78,14 @@ const FormAdopcion = ({ id_fundacion, id_animal, cerrar, nombre }) => {
         if (validarForm()) {
             crearAdopcion();
         } else {
-            mostrarPopup(2, "Llena todos los datos");
+            mostrarPopup(2, "Sube el archivo pdf generado en el anterior paso");
         }
     };
 
-    const subirArchivo = (id_adopcion) => {
+    const subirArchivo = (id_adopcion, imagen) => {
         const formData = new FormData();
-        console.log(document.querySelector('#archivo_solicitud').files[0]);
         formData.append('bucket', "adopciones-apadrinamientos");
-        formData.append('file', document.querySelector('#archivo_solicitud').files[0]);
+        formData.append('file', imagen);
         $.ajax({
             url: `${dominio}/api/tabla_adopciones/subirImagen/${id_adopcion}`,
             type: "post",
@@ -118,8 +114,12 @@ const FormAdopcion = ({ id_fundacion, id_animal, cerrar, nombre }) => {
     }
 
     const crearAdopcion = async () => {
-        if (await mostrarConfirm("Seguro de generar la adopcion")) {
+        const img = document.querySelector("#"+id_animal).files[0];
+        console.log(img);
+        if (await mostrarConfirm("Seguro de generar la adopción")) {
             adopcion.id_fundacion = id_fundacion;
+            adopcion.id_persona = localStorage.getItem("idpersona");
+            adopcion.id_animal = id_animal;
             $.ajax({
                 url: `${dominio}/api/tabla_adopciones/agregar`,
                 type: "post",
@@ -132,7 +132,7 @@ const FormAdopcion = ({ id_fundacion, id_animal, cerrar, nombre }) => {
                 success: function (data) {
                     console.log(data);
                     setMostrarCargando(false);
-                    subirArchivo(data.id_adopcion);
+                    subirArchivo(data.id_solicitud, img);
                 },
                 error: function (data) {
                     setMostrarCargando(false);
@@ -148,35 +148,28 @@ const FormAdopcion = ({ id_fundacion, id_animal, cerrar, nombre }) => {
     };
 
     return (
-        <div className="cont-form-donacion">
-            <h3 className="titulo-donacion">{nombre}</h3>
-            <div className="cont-form-donacion">
+        <div className="cont-form-adopcion">
+            <h3 className="titulo-adopcion">{nombre}</h3>
+            <div className="cont-form-adopcion">
                 <form>
                     <>
-
                         <ContInput label="Observacion" icono={"ico-usuario"}>
                             <input
                                 value={adopcion.observacion_solicitud}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="observacion_solicitud"
-                                id="observacion_solicitud"
-                                placeholder="observacion"
+                                placeholder="ingresa mensaje"
                             />
-                            {!formValidado.observacion_solicitud[0] && (
-                                <div className="ico-advertencia  format-ico-form-validacion"></div>
-                            )}
                         </ContInput>
-                        {!formValidado.observacion_solicitud[0] && (
-                            <p className="texto-validacion">{formValidado.observacion_solicitud[1]}</p>
-                        )}
-                        <ContInput label="Formulario Adopción" icono={"ico-usuario"}>
+                        <ContInput label="Solicitud Adopción" icono={"ico-usuario"}>
                             <input
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="archivo_solicitud"
-                                id="archivo_solicitud"
-                                type="file"
+                                id={id_animal}
+                                type={"file"}
+                                className='archivo'
                             />
                             {!formValidado.archivo_solicitud[0] && (
                                 <div className="ico-advertencia  format-ico-form-validacion"></div>
@@ -187,10 +180,8 @@ const FormAdopcion = ({ id_fundacion, id_animal, cerrar, nombre }) => {
                         )}
                     </>
 
-                    <div className="form-donacion-acciones" style={{ width: "max-content", alignSelf: "center" }}>
-
+                    <div className="form-adopcion-acciones" style={{ width: "max-content", alignSelf: "center" }}>
                         <Button icono="pi pi-check" label={"Aceptar"} onClick={guardarAdopcion} aceptar={true} />
-
                         <Button icono="pi pi-ban" label={"Cancelar"} onClick={cerrar} cancelar={true} />
                     </div>
                 </form>

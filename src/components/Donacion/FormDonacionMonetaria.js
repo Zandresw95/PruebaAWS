@@ -135,7 +135,7 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
     }
 
     const crearDonacion = async () => {
-      const imagen = document.querySelector('#donacionFoto').files[0];
+      const imagen = document.querySelector('#'+id_fundacion).files[0];
         if(await mostrarConfirm("Seguro de generar la donación")){
             donacion.id_fundacion = id_fundacion;
             donacion.id_persona = localStorage.getItem("idpersona");
@@ -268,7 +268,7 @@ const FormDonacionMonetaria = ({ id_fundacion, cerrar, nombre }) => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="observacion_donacion"
-                                id={"donacionFoto"}
+                                id={id_fundacion}
                                 type={"file"}
                             />
                             {!formValidado.observacion_donacion[0] && (

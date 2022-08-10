@@ -3,10 +3,13 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Image } from 'primereact/image';
 import { Dialog } from 'primereact/dialog';
+import Pdf from "react-to-pdf";
+import { useSelector } from 'react-redux';
 import Modal from '../generic/Modal';
 import './CardAnimal.css';
 import FormApadrinamiento from '../Apadrinamiento/FormApadrinamiento';
 import FormAdopcion from '../Adopcion/FormAdopcion';
+import CuestionarioAdopcion from '../CuestionarioAdopcion/CuestionarioAdopcion';
 
 let initialStateModal = {
     form: false,
@@ -16,9 +19,14 @@ let modalTypes = {
     OPEN_FORM: "OPEN_FORM",
     CLOSE_USUARIOS: "CLOSE_FORM",
 };
+
+const ref = React.createRef();
+
 const CardAnimal = ({ animal, idFundacion, tipo }) => {
     const [displayModal, setDisplayModal] = useState(false);
+    const [displayModalAdopcion, setDisplayModalAdopcion] = useState(false);
     const [animalSelected, setAnimalSelected] = useState(animal);
+    const {uid, role} = useSelector((state) => state.auth);
 
 
     const [stateModal, dispatchModal] = useReducer(
@@ -51,8 +59,16 @@ const CardAnimal = ({ animal, idFundacion, tipo }) => {
         setDisplayModal(false);
     }
 
+    const onHideAdopcion = () => {
+        setDisplayModal(false);
+        setDisplayModalAdopcion(false);
+    }
+
     const onClick = () => {
         setDisplayModal(true);
+    }
+    const onClickAdopcion = () => {
+        setDisplayModalAdopcion(true);
     }
 
 
@@ -64,7 +80,7 @@ const CardAnimal = ({ animal, idFundacion, tipo }) => {
             <div>
                 {tipo === "apadrinar" ?
                     <Button label="¡Quiero Apadrinarlo!" icon="pi pi-home" onClick={() => { onHide(); abrirForm(animal.id_animal) }} />
-                    : tipo === "adoptar" ? <Button label="¡Quiero Adoptarlo!" icon="pi pi-home" onClick={() => { onHide(); abrirForm(animal.id_animal) }} /> : <></>
+                    : tipo === "adoptar" ? <Button label="¡Quiero Adoptarlo!" icon="pi pi-home" onClick={() => { onClickAdopcion() }} /> : <></>
                 }
 
             </div>
@@ -82,25 +98,26 @@ const CardAnimal = ({ animal, idFundacion, tipo }) => {
                     <p><span className='font-bold w-10'>Edad:</span> {animal.edad_animal} meses</p>
                 </Card>
             </div>
-            <Modal activo={stateModal.form && tipo === "apadrinar"} cerrar={cerrarForm}>
-                <FormApadrinamiento
-                    id_fundacion={idFundacion}
-                    id_animal={animal.id_animal}
-                    cerrar={() => {
-                        cerrarForm();
-                    }}
-                    nombre={animal.nombre_animal}
-                />
-            </Modal>
-            <Modal activo={stateModal.form && tipo === "adoptar"} cerrar={cerrarForm}>
-                <FormAdopcion
-                    id_fundacion={idFundacion}
-                    id_animal={animal.id_animal}
-                    cerrar={() => {
-                        cerrarForm();
-                    }}
-                    nombre={animal.nombre_animal}
-                />
+            <Modal activo={stateModal.form} cerrar={cerrarForm}>
+                {tipo === "apadrinar" ? (
+                    <FormApadrinamiento
+                        id_fundacion={idFundacion}
+                        id_animal={animal.id_animal}
+                        cerrar={() => {
+                            cerrarForm();
+                        }}
+                        nombre={animal.nombre_animal}
+                    />
+                ) : (
+                    <FormAdopcion
+                        id_fundacion={idFundacion}
+                        id_animal={animal.id_animal}
+                        cerrar={() => {
+                            cerrarForm();
+                        }}
+                        nombre={animal.nombre_animal}
+                     />
+                )}
             </Modal>
             <Dialog header={animal.nombre_animal} visible={displayModal} modal={true} style={{ width: '50vw' }} footer={renderFooter()} onHide={() => onHide()}>
                 <div className="flex flex-row justify-content-around">
@@ -114,6 +131,14 @@ const CardAnimal = ({ animal, idFundacion, tipo }) => {
                         <p>{animal.sexo_animal}</p>
                     </div>
                 </div>
+            </Dialog>
+            <Dialog header="Solicitud adopción" style={{maxWidth: "785px"}} visible={displayModalAdopcion} modal={true} onHide={() => onHideAdopcion()}>
+                <CuestionarioAdopcion 
+                    idAnimal={animal.id_animal} 
+                    cerrar = { () => onHideAdopcion()} 
+                    abrirForm = {() => abrirForm()}
+                    nombreAnimal = {animal.nombre_animal}
+                />
             </Dialog>
         </>
     );

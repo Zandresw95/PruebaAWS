@@ -13,6 +13,7 @@
 
 .cont-input > div {
   background-color: var(--color-fondo-input);
+  height: max-content;
 }
 
 .cont-input-ico {

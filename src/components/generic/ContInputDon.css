@@ -1,0 +1,21 @@
+.cont-input-don {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+  
+.cont-input-don > p {
+    color: var(--color-texto-low);
+    font-size: 0.9em;
+    margin-left: calc(var(--radio-input) / 2);
+    margin-bottom: 3px;
+}
+  
+.cont-input-cont-don {
+    display: flex;
+    align-items: center;
+    /*height: calc(var(--radio-input) * 4);*/
+    box-shadow: var(--borde-input);
+    border-radius: var(--radio-input);
+    background-color: var(--color-fondo-input);
+}

@@ -12,7 +12,7 @@ import ConfirmContext from "../../context/ConfirmContext";
 let initialDonacionF = {
     id_centro_almacenamiento: "",
     id_fundacion: "",
-    id_persona: localStorage.getItem("idpersona"),
+    id_persona: "",
     observacion_donacion: "",
     descripcion_donacion: "",
     estado_donacion: 1,
@@ -101,6 +101,7 @@ const FormDonacionFisica = ({ id_fundacion, cerrar, nombre }) => {
     const crearDonacion = async () => {
         if(await mostrarConfirm("¿Seguro de generar la donación?. Te comprometes a entregarla en el centro de almacenamiento escogido")){
             donacion.id_fundacion = id_fundacion;
+            donacion.id_persona = localStorage.getItem("idpersona");
             $.ajax({
             url: `${dominio}/api/tabla_donaciones/agregar`,
             type: "post",

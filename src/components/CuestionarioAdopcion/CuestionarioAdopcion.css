@@ -1,0 +1,23 @@
+.cont-form-cuestionario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.element-to-print {
+  max-width: 785px;
+  min-height: 595px;
+  align-self: center;
+}
+
+.page{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 8px;
+  page-break-after: always;
+}
+
+.field-radiobutton{
+  margin-bottom: 0 !important;
+}

@@ -46,7 +46,7 @@ function CardAdopcionFund({ datos }) {
 
     return (
         <>
-            <Dialog header="Datos AdopcióN" visible={displayBasic} style={{ width: '50vw' }} onHide={() => onHide('displayBasic')}>
+            <Dialog header="Datos Adopción" visible={displayBasic} style={{ width: '50vw' }} onHide={() => onHide('displayBasic')}>
                 <ContDetalleDon
                     ado={adopcion[0]}
                 />
