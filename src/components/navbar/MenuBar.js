@@ -1,6 +1,6 @@
 import React, { useEffect, useState  } from 'react';
 import { Menubar } from 'primereact/menubar';
-import { Chip } from 'primereact/chip';
+import { Avatar } from 'primereact/avatar';
 import { SplitButton } from 'primereact/splitbutton';
 import MenuSesion from './MenuSesion';
 import { dominio } from "../../helpers/Dbdata";
@@ -96,8 +96,7 @@ export const MenuBar = () => {
     const start = <img alt="logo" src="https://usuarios-fotos.s3.amazonaws.com/logoApp.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2" onClick={() => navigate("/")}></img>;
     const end = (
         <>
-            <SplitButton label={usuario.login_usuario} image={usuario.foto_usuario} model={itemsButton} className="p-button-rounded p-button-info mr-2 mb-2">
-                <Chip label={usuario.login_usuario} image={usuario.foto_usuario} className="mr-2 mb-2" />
+            <SplitButton label={<div className='flex align-items-center gap-1'><Avatar image={usuario.foto_usuario} shape="circle" onImageError={(e) => { e.target.src = 'https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width = 100; e.target.height = 80 }}/>   {usuario.login_usuario}</div>} model={itemsButton} className="p-button-rounded p-button-info mr-2 mb-2">
             </SplitButton>
         </>
     )

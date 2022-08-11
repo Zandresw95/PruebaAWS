@@ -40,7 +40,7 @@ function UsuarioApadrinamiento() {
         () =>
           apadrinamientoPer.filter(
             (el) =>
-              el.fecha_apadrinamiento.toLowerCase().includes(terminoBusqueda.toLowerCase())
+              el["NOMBRE_ANIMAL"].toLowerCase().includes(terminoBusqueda.toLowerCase())
           ),
         [terminoBusqueda, apadrinamientoPer]
       );

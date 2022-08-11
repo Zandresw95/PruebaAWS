@@ -9,10 +9,10 @@ function CuentaFund({ datos, abrirForm }) {
       {/* <p className="usuario-inicial">{datos.nombre[0].toUpperCase()}</p> */}
       <div
         className={
-          "cont-ico-usuario-card-config "+ ("borde-cuenta-" + 3)
+          "cont-ico-usuario-card-config "+ ("borde-cuenta-" + 1)
         }
       >
-        <div className="ico-configuracion format-ico-cuenta-config"></div>
+        <div className="pi pi-dollar text-3xl text-center format-ico-donacion-config"></div>
       </div>
       <div className="cuenta-textos">
         <p>{datos.banco_cuenta}</p>

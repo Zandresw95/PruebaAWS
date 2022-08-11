@@ -43,15 +43,16 @@ function ContDetalleAdo({ ado }) {
             <>
                 <div className='flex flex-row flex-wrap justify-content-around align-items-center'>
                     <div>
-                        <img alt="Comprobante" width='200' height='160' src={ado["FOTO_ANIMAL"]} onError={(e) => { e.target.src = 'https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width = 100; e.target.height = 80 }} />
+                        <img alt="Animal" width='200' height='160' src={ado["FOTO_ANIMAL"]} onError={(e) => { e.target.src = 'https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width = 100; e.target.height = 80 }} />
                     </div>
                     <div>
-                        <p><span className="font-bold w-10">Fecha:</span> {ado["FECHA_APADRINAMIENTO"]}</p>
+                        <p><span className="font-bold w-10">Fecha:</span> {ado["FECHA_SOLICITUD"]}</p>
                         <p><span className="font-bold w-10">Nombre: </span> {ado["NOMBRE_ANIMAL"]}</p>
                         <p><span className="font-bold w-10">Descripción: </span> {ado["DESCRIPCION_ANIMAL"]}</p>
                         <p><span className="font-bold w-10">Edad: </span>{ado["EDAD_ANIMAL"]}</p>
                         <p><span className="font-bold w-10">Sexo: </span>{ado["SEXO_ANIMAL"]}</p>
-                        <p><span className="font-bold w-10">Monto mensual: </span>{ado["MONTO_APADRINAMIENTO"]}</p>
+                        <p><span className="font-bold w-10">Observacion: </span>{ado["OBSERVACION_SOLICITUD"]}</p>
+                        <p><span className="font-bold w-10">Solicitud: </span><a href={ado["ARCHIVO_SOLICITUD"]}>Click para descargar solicitud!</a></p>
                         <br />
                     </div>
                 </div>

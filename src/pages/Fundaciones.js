@@ -145,7 +145,7 @@ function Fundaciones({ tipo }) {
         () =>
             apadrinamientosFund.filter(
                 (el) =>
-                    el.fecha_apadrinamiento.toLowerCase().includes(terminoBusqueda.toLowerCase())
+                    el["NOMBRE_ANIMAL"].toLowerCase().includes(terminoBusqueda.toLowerCase())
             ),
         [terminoBusqueda, apadrinamientosFund]
     );
@@ -153,7 +153,7 @@ function Fundaciones({ tipo }) {
         () =>
             adopcionesFund.filter(
                 (el) =>
-                    el.observacion_solicitud.toLowerCase().includes(terminoBusqueda.toLowerCase())
+                    el["NOMBRE_ANIMAL"].toLowerCase().includes(terminoBusqueda.toLowerCase())
             ),
         [terminoBusqueda, adopcionesFund]
     );
@@ -181,7 +181,7 @@ function Fundaciones({ tipo }) {
                     <>
                         <div className="encabezado-nombre-barra-buscar">
                             <div className="cont-flex-gap">
-                                <h3 className="titulo-pagina">{tipo === "donacion" ? "Donaciones" : tipo === "adoptar" ? "Adopciones" : tipo === "apadrinamiento" ? "Apadrinaminetos" : ""}</h3>
+                                <h3 className="titulo-pagina">{tipo === "donacion" ? "Donaciones" : tipo === "adoptar" ? "Adopciones" : tipo === "apadrinamiento" ? "Apadrinamientos" : ""}</h3>
                             </div>
                             <div style={{ width: "200px", justifySelf: "left" }}>
                                 <ContInput icono={"ico-lupa"}>

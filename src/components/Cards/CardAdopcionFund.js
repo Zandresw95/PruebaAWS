@@ -3,19 +3,22 @@ import $ from 'jquery';
 import { Dialog } from 'primereact/dialog';
 import { dominio } from '../../helpers/Dbdata'
 import ContDetalleAdo from '../Adopcion/ContDetalleAdo';
+import {Avatar} from 'primereact/avatar';
+import { useSelector } from "react-redux";
 import "./CardDonacionFund.css";
 
 function CardAdopcionFund({ datos }) {
     const [displayBasic, setDisplayBasic] = useState(false);
     const [adopcion, setAdopcion] = useState("");
+    const { name, role } = useSelector((state) => state.auth);
 
     useEffect(() => {
         obtenerAdopcionCompleta();
-    }, [datos.id_solicitud])
+    }, [datos.ID_SOLICITUD])
 
     const obtenerAdopcionCompleta = () => {
         $.ajax({
-            url: `${dominio}/api/tabla_adopciones/obtenerAdoCompleta/${datos.id_solicitud}`,
+            url: `${dominio}/api/tabla_adopciones/obtenerAdoCompleta/${datos.ID_SOLICITUD}`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
@@ -56,20 +59,17 @@ function CardAdopcionFund({ datos }) {
                 onClick={() => { onClick('displayBasic') }}
             >
                 {/* <p className="usuario-inicial">{datos.nombre[0].toUpperCase()}</p> */}
-                <div
-                    className={datos.tipo_donacion === "Monetaria" ?
-                        "cont-ico-usuario-card-config " + ("borde-donacion-" + 3) : "cont-ico-usuario-card-config " + ("borde-donacion-" + 4)
-                    }
-                >
-                    {
-                        datos.tipo_donacion === "Monetaria" ? (<div className="pi pi-money-bill text-3xl text-center format-ico-donacion-config"></div>) : (<div className="pi pi-home text-3xl w-10 format-ico-donacion-config"></div>)
-                    }
-
-                </div>
+              
+                <Avatar style={{alignSelf: "center"}} image={datos.FOTO_ANIMAL} className="mr-2" size="large" shape="circle" onImageError={(e) => { e.target.src = 'https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width = 100; e.target.height = 80 }}/>
                 <div className="donacion-textos">
                     {/* <p>{datos.tipo_donacion === "Monetaria" ? "$ " + datos.descripcion_donacion : datos.descripcion_donacion}</p> */}
                     {/* <p>{datos.tipo_donacion}</p> */}
-                    <p>{datos.fecha_solicitud}</p>
+                    <p>{datos.NOMBRE_ANIMAL}</p>
+                    {role === "P002" ?
+                        (<p>{datos.NOMBRE_PERSONA}</p>)
+                        :(<p>{datos.NOMBRE_FUNDACION}</p>)
+                    }
+                    <p>{datos.FECHA_SOLICITUD}</p>
                 </div>
             </div>
         </>

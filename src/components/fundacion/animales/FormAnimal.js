@@ -96,6 +96,11 @@ function FormAnimal({ id_fundacion, idanimal, cerrar, recargar }) {
         [e.target.name]: Validar.general(e.target.value),
       };
       break;
+      case "foto_animal":
+      tempCampo = {
+        [e.target.name]: Validar.general(e.target.value),
+      };
+      break;
       
       default:
         break;
@@ -201,8 +206,8 @@ function FormAnimal({ id_fundacion, idanimal, cerrar, recargar }) {
       },
       error: function (data) {
           setMostrarCargando(false);
-          console.log(data.responseJSON.data);
-          let mensaje = data.responseJSON.data;
+          console.log(data.responseJSON.mensaje);
+          let mensaje = data.responseJSON.mensaje;
           if (data.status === 0)
           mostrarPopup(0, "No es posible conectarse al servidor Node JS");
           else mostrarPopup(2, mensaje);
@@ -256,7 +261,7 @@ function FormAnimal({ id_fundacion, idanimal, cerrar, recargar }) {
 
   const crearanimal = () => {
     animal.id_fundacion = id_fundacion;
-    const imagen = document.querySelector('#animalFoto').files[0];
+    const imagen = document.querySelector('#animal'+idanimal).files[0];
     $.ajax({
       url: `${dominio}/api/tabla_animal/agregar`,
       type: "post",
@@ -283,7 +288,7 @@ function FormAnimal({ id_fundacion, idanimal, cerrar, recargar }) {
   };
 
   const actualizaranimal = () => {
-    const imagen = document.querySelector('#animalFoto').files[0];
+    const imagen = document.querySelector('#animal'+idanimal).files[0];
     console.log(imagen);
     $.ajax({
       url: `${dominio}/api/tabla_animal/edit/${idanimal}`,
@@ -296,7 +301,12 @@ function FormAnimal({ id_fundacion, idanimal, cerrar, recargar }) {
       },
       success: function (data) {
         setMostrarCargando(false);
-        subirArchivo(data.id_animal, imagen);
+        if(imagen === undefined || imagen === null){
+          cerrar();
+          mostrarPopup(1, "Actualizado correctamente!");
+        }else{
+          subirArchivo(data.id_animal, imagen);
+        }
       },
       error: function (data) {
         setMostrarCargando(false);
@@ -444,7 +454,7 @@ function FormAnimal({ id_fundacion, idanimal, cerrar, recargar }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 name="foto_animal"
-                id={"animalFoto"}
+                id={"animal"+idanimal}
                 disabled={!editando}
                 type={"file"}
               />

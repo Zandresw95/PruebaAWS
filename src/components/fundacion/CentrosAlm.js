@@ -113,7 +113,7 @@ function CentrosAlm() {
                 <>
                     <div className="encabezado-nombre-barra-buscar">
                         <div className="cont-flex-gap">
-                        <h3 className="titulo-pagina">Mis centros</h3>
+                        <h3 className="titulo-pagina">Mis centros de acopio</h3>
                         </div>
                         <div style={{ width: "200px", justifySelf: "left" }}>
                         <ContInput icono={"ico-lupa"}>

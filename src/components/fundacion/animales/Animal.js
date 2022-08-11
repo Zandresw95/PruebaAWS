@@ -16,7 +16,7 @@ function Animal({ datos, abrirForm }) {
       </div>
       <div className="animal-textos">
         <p>{datos.nombre_animal}</p>
-        <p>{datos.edad_animal}</p>
+        <p>Edad: {datos.edad_animal} meses</p>
       </div>
     </div>
   );

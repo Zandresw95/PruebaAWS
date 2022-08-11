@@ -12,7 +12,7 @@ function CentroAlm({ datos, abrirForm }) {
           "cont-ico-usuario-card-config "+ ("borde-centro-" + 3)
         }
       >
-        <div className="ico-configuracion format-ico-centro-config"></div>
+        <div className="pi pi-home text-3xl w-10 format-ico-donacion-config"></div>
       </div>
       <div className="centro-textos">
         <p>{datos.nombre_centro_almacenamiento}</p>

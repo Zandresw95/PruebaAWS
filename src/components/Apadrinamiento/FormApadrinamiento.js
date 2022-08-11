@@ -10,7 +10,7 @@ import PopupContext from "../../context/PopupContext";
 import ConfirmContext from "../../context/ConfirmContext";
 
 let initialApadrinamiento = {
-    id_persona: localStorage.getItem("idpersona"),
+    id_persona: "",
     id_fundacion: "",
     id_animal: "",
     monto_apadrinamiento: ""
@@ -87,6 +87,7 @@ const FormApadrinamiento = ({ id_fundacion, id_animal, cerrar, nombre }) => {
         if (await mostrarConfirm("Seguro de apadrinar al Animalito")) {
             apadrinamiento.id_fundacion = id_fundacion;
             apadrinamiento.id_animal = id_animal;
+            apadrinamiento.id_persona = localStorage.getItem("idpersona");
             $.ajax({
                 url: `${dominio}/api/tabla_apadrinamientos/agregar`,
                 type: "post",
