@@ -23,6 +23,7 @@ import Footer from "./components/Footer/Footer";
 import FundacionInfo from "./pages/FundacionInfo";
 import UsuarioDonaciones from "./components/Donacion/usuarioDonacion/UsuarioDonaciones";
 import UsuarioApadrinamiento from "./components/Apadrinamiento/usuarioApadrinamiento/UsuarioApadrinamiento";
+import UsuarioAdopcion from "./components/Adopcion/usuarioAdopcion/UsuarioAdopcion";
 import CuentasFund from "./components/fundacion/CuentasFund";
 import CentrosAlm from "./components/fundacion/CentrosAlm";
 import Animales from "./components/fundacion/Animales";
@@ -148,6 +149,15 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <UsuarioApadrinamiento />
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+              <Route
+                path="/usuario/adopciones"
+                element={
+                  <ProtectedRoute>
+                    <UsuarioAdopcion />
                   </ProtectedRoute>
                 }
               >

@@ -88,7 +88,7 @@ function Fundaciones({ tipo }) {
     }
     const obtenerAdopcionesParaFund = (id_fundacion) => {
         $.ajax({
-            url: `${dominio}/api/tabla_adopciones/obtenerAdoCompleta/${id_fundacion}`,
+            url: `${dominio}/api/tabla_adopciones/adopcion/${id_fundacion}`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
@@ -151,7 +151,7 @@ function Fundaciones({ tipo }) {
     );
     const adopciones = useMemo(
         () =>
-            apadrinamientosFund.filter(
+            adopcionesFund.filter(
                 (el) =>
                     el.observacion_solicitud.toLowerCase().includes(terminoBusqueda.toLowerCase())
             ),

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import $ from 'jquery';
 import { Dialog } from 'primereact/dialog';
 import { dominio } from '../../helpers/Dbdata'
-import ContDetalleDon from '../Donacion/ContDetalleDon'
+import ContDetalleAdo from '../Adopcion/ContDetalleAdo';
 import "./CardDonacionFund.css";
 
 function CardAdopcionFund({ datos }) {
@@ -11,11 +11,11 @@ function CardAdopcionFund({ datos }) {
 
     useEffect(() => {
         obtenerAdopcionCompleta();
-    }, [datos.id_adopcion])
+    }, [datos.id_solicitud])
 
     const obtenerAdopcionCompleta = () => {
         $.ajax({
-            url: `${dominio}/api/tabla_adopciones/obtenerDonCompleta/${datos.id_adopcion}`,
+            url: `${dominio}/api/tabla_adopciones/obtenerAdoCompleta/${datos.id_solicitud}`,
             type: "get",
             dataType: "json",
             contentType: "application/json",
@@ -47,7 +47,7 @@ function CardAdopcionFund({ datos }) {
     return (
         <>
             <Dialog header="Datos Adopción" visible={displayBasic} style={{ width: '50vw' }} onHide={() => onHide('displayBasic')}>
-                <ContDetalleDon
+                <ContDetalleAdo
                     ado={adopcion[0]}
                 />
             </Dialog>
