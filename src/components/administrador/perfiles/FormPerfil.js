@@ -267,7 +267,7 @@ function FormPerfil({ idPerfil, cerrar, recargar }) {
             )}
           </div>
           <form>
-            <ContInput label="Descripción" icono={"ico-perfil"}>
+            <ContInput label="Descripción" icono={"pi pi-comment"}>
               <input
                 value={perfil.descripcion_perfil}
                 onChange={handleChange}
@@ -284,7 +284,7 @@ function FormPerfil({ idPerfil, cerrar, recargar }) {
                 {formValidado.descripcion_perfil[1]}
               </p>
             )}
-            <ContInput label="Observación" icono={"ico-perfil"}>
+            <ContInput label="Observación" icono={"pi pi-book"}>
               <input
                 value={perfil.observacion_perfil}
                 onChange={handleChange}
@@ -302,7 +302,6 @@ function FormPerfil({ idPerfil, cerrar, recargar }) {
                 name="estado_perfil"
                 checked={perfil.estado_perfil}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 disabled={!editando}
               />
             </p>
@@ -310,8 +309,8 @@ function FormPerfil({ idPerfil, cerrar, recargar }) {
               {idPerfil && idPerfil !== 0 && editando ? (
                   <>
                   {/*Editando*/}
-                  <Button label={"Aceptar"} onClick={guardarPerfil} aceptar={true}/>
-                  <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
+                  <Button icono={"pi pi-check"} label={"Aceptar"} onClick={guardarPerfil} aceptar={true}/>
+                  <Button icono={"pi pi-ban"} label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
                   </>
                 ) : idPerfil && idPerfil !== 0 && !editando ? (
                   /*Ver la opcion*/
@@ -319,8 +318,8 @@ function FormPerfil({ idPerfil, cerrar, recargar }) {
                 ):(
                   <>
                   {/*Nueva*/}
-                  <Button label={"Aceptar"} onClick={guardarPerfil} aceptar={true}/>
-                  <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>
+                  <Button icono={"pi pi-check"} label={"Aceptar"} onClick={guardarPerfil} aceptar={true}/>
+                  <Button icono={"pi pi-ban"} label={"Cancelar"} onClick={cerrar} cancelar={true}/>
                   </>
                 )}
             </div>

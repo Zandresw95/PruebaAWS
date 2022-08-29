@@ -169,7 +169,7 @@ const AsigPerfiles = () => {
         
         <div className="cont-asignar animar-zoom-min-to-max">
             <div className="barra-acciones-title">
-                <h3 className="title">Asignar Perfiles</h3>
+                <h3 className="title">Asignar Usuarios a Perfiles</h3>
             </div>
             <div className="barra-acciones-perfil">
                 <div className="dropdown-demo">

@@ -377,7 +377,7 @@ function FormAnimal({ id_fundacion, idanimal, cerrar, recargar }) {
             )}
           </div>
           <form>
-          <ContInput label="Tipo Animal" icono={"ico-usuario"}>
+          <ContInput label="Tipo Animal" icono={"ico-asa"}>
               <select
                 onChange={handleChange}
                 onBlur={handleBlur}

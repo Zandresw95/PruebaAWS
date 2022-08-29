@@ -256,7 +256,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
         type: "delete",
         dataType: "json",
         contentType: "application/json",
-        data: JSON.stringify({ estado: 100 }),
+        data: JSON.stringify(),
         beforeSend: function () {
           setMostrarCargando(true);
         },
@@ -337,7 +337,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
             {!formValidado.apellido_persona[0] && (
               <p className="texto-validacion">{formValidado.apellido_persona[1]}</p>
             )}
-            <ContInput label="Dirección" icono={"ico-persona"}>
+            <ContInput label="Dirección" icono={"pi pi-home"}>
               <input
                 value={persona.direccion_persona}
                 onChange={handleChange}
@@ -352,7 +352,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
             {!formValidado.direccion_persona[0] && (
               <p className="texto-validacion">{formValidado.direccion_persona[1]}</p>
             )}
-            <ContInput label="Teléfono" icono={"ico-persona"}>
+            <ContInput label="Teléfono" icono={"pi pi-phone"}>
               <input
                 value={persona.telefono_persona}
                 onChange={handleChange}
@@ -367,7 +367,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
             {!formValidado.telefono_persona[0] && (
               <p className="texto-validacion">{formValidado.telefono_persona[1]}</p>
             )}
-            <ContInput label="Correo" icono={"ico-persona"}>
+            <ContInput label="Correo" icono={"pi pi-at"}>
               <input
                 value={persona.email_persona}
                 onChange={handleChange}
@@ -382,7 +382,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
             {!formValidado.email_persona[0] && (
               <p className="texto-validacion">{formValidado.email_persona[1]}</p>
             )}
-            <ContInput label="Fecha Nacimiento" icono={"ico-persona"}>
+            <ContInput label="Fecha Nacimiento" icono={"pi pi-calendar"}>
               <input
                 value={persona.fechanac_persona}
                 onChange={handleChange}
@@ -398,7 +398,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
             {!formValidado.fechanac_persona[0] && (
               <p className="texto-validacion">{formValidado.fechanac_persona[1]}</p>
             )}
-            <ContInput label="Instrucción" icono={"ico-persona"}>
+            <ContInput label="Instrucción" icono={"pi pi-briefcase"}>
               <select
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -422,7 +422,7 @@ function FormPersona({ idPersona, cerrar, recargar }) {
             {!formValidado.instruccion_persona[0] && (
               <p className="texto-validacion">{formValidado.instruccion_persona[1]}</p>
             )}
-            <ContInput label="Cédula" icono={"ico-ruc"}>
+            <ContInput label="Cédula" icono={"pi pi-id-card"}>
               <input
                 value={persona.cedula_persona}
                 onChange={handleChange}
@@ -443,8 +443,8 @@ function FormPersona({ idPersona, cerrar, recargar }) {
               {idPersona && idPersona !== 0 && editando ? (
                 <>
                  {/*Editando usuario*/}
-                 <Button label={"Aceptar"} onClick={guardarPersona} aceptar={true}/>
-                 <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
+                 <Button icono={"pi pi-check"} label={"Aceptar"} onClick={guardarPersona} aceptar={true}/>
+                 <Button icono={"pi pi-ban"} label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
                 </>
               ) : idPersona && idPersona !== 0 && !editando ? (
                 /*Ver usuario*/
@@ -452,8 +452,8 @@ function FormPersona({ idPersona, cerrar, recargar }) {
               ):(
                 <>
                 {/*Nuevo usuario*/}
-                <Button label={"Aceptar"} onClick={guardarPersona} aceptar={true}/>
-                <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>
+                <Button icono={"pi pi-check"} label={"Aceptar"} onClick={guardarPersona} aceptar={true}/>
+                <Button icono={"pi pi-ban"} label={"Cancelar"} onClick={cerrar} cancelar={true}/>
                 </>
               )}
               

@@ -81,7 +81,7 @@ const Navbar = () => {
           onClick={alertarNavegacion}
         >
           <div className="pi pi-book format-ico-navbar" style={{'fontSize': '2em'}}></div>
-          <p>Asignar Perfiles</p>
+          <p>Asignar Usuarios</p>
         </NavLink>
       </div>
     </div>

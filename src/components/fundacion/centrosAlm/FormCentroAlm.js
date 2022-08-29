@@ -221,7 +221,7 @@ function FormCentroAlm({ id_fundacion, idcentro, cerrar, recargar }) {
     if (await mostrarConfirm("¿Seguro que deseas eliminar el centro de almacenamiento?"))
       $.ajax({
         url: `${dominio}/api/tabla_centro_almacenamiento/delete/${idcentro}`,
-        type: "put",
+        type: "delete",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(),

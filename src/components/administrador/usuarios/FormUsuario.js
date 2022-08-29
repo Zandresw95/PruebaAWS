@@ -336,7 +336,7 @@ function FormUsuario({ idUsuario, cerrar}) {
               <p className="texto-validacion">{formValidado.id_persona[1]}</p>
             )}
 
-            <ContInput label="Usuario" icono={"ico-usuario"}>
+            <ContInput label="Usuario" icono={"pi pi-user-edit"}>
               <input
                 value={usuario.login_usuario}
                 onChange={handleChange}
@@ -352,7 +352,7 @@ function FormUsuario({ idUsuario, cerrar}) {
               <p className="texto-validacion">{formValidado.login_usuario[1]}</p>
             )}
 
-            <ContInput label="Clave" icono={"ico-usuario"}>
+            <ContInput label="Clave" icono={"pi pi-key"}>
               <input
                 value={usuario.clave_usuario}
                 onChange={handleChange}
@@ -386,8 +386,8 @@ function FormUsuario({ idUsuario, cerrar}) {
               {idUsuario && idUsuario !== 0 && editando ? (
                 <>
                  {/*Editando usuario*/}
-                 <Button label={"Aceptar"} onClick={guardarUsuario} aceptar={true}/>
-                 <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
+                 <Button icono={"pi pi-check"} label={"Aceptar"} onClick={guardarUsuario} aceptar={true}/>
+                 <Button icono={"pi pi-ban"} label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
                 </>
               ) : idUsuario && idUsuario !== 0 && !editando ? (
                 /*Ver usuario*/
@@ -395,8 +395,8 @@ function FormUsuario({ idUsuario, cerrar}) {
               ):(
                 <>
                 {/*Nuevo usuario*/}
-                <Button label={"Aceptar"} onClick={guardarUsuario} aceptar={true}/>
-                <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>
+                <Button icono={"pi pi-check"} label={"Aceptar"} onClick={guardarUsuario} aceptar={true}/>
+                <Button icono={"pi pi-ban"} label={"Cancelar"} onClick={cerrar} cancelar={true}/>
                 </>
               )}
               

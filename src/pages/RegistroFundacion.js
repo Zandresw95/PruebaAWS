@@ -189,7 +189,11 @@ const RegistroFundacion = () => {
 
   const guardarFundacion = () => {
     if (validarFundForm()) {
-      insertarPersona();
+      if(fundacion.clave_usuario !== fundacion.claveConfirm_usuario){
+        mostrarPopup(2, "Claves no coinciden!!");
+      }else{
+        insertarPersona();
+      }
     } else {
       mostrarPopup(2, "Llena todos los datos");
     }

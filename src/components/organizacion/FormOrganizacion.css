@@ -1,5 +1,5 @@
 .cont-form-organizacion {
-    width: 300px;
+    /*width: 300px;*/
     display: flex;
     flex-direction: column;
     gap: 10px;

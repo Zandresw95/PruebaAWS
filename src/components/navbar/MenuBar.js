@@ -96,7 +96,7 @@ export const MenuBar = () => {
     const start = <img alt="logo" src="https://usuarios-fotos.s3.amazonaws.com/logoApp.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2" onClick={() => navigate("/")}></img>;
     const end = (
         <>
-            <SplitButton label={<div className='flex align-items-center gap-1'><Avatar image={usuario.foto_usuario} shape="circle" onImageError={(e) => { e.target.src = 'https://usuarios-fotos.s3.amazonaws.com/noDisponible.png'; e.target.width = 100; e.target.height = 80 }}/>   {usuario.login_usuario}</div>} model={itemsButton} className="p-button-rounded p-button-info mr-2 mb-2">
+            <SplitButton label={<div className='flex align-items-center gap-1'><Avatar image={usuario.foto_usuario} shape="circle" onImageError={(e) => { e.target.src = 'https://usuarios-fotos.s3.amazonaws.com/janaranjo.png'; e.target.width = 100; e.target.height = 80 }}/>   {usuario.login_usuario}</div>} model={itemsButton} className="p-button-rounded p-button-info mr-2 mb-2">
             </SplitButton>
         </>
     )

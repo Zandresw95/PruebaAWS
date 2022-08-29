@@ -262,7 +262,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
             )}
           </div>
           <form>
-            <ContInput label="Descripción" icono={"ico-opcion"}>
+            <ContInput label="Descripción" icono={"pi pi-comment"}>
               <input
                 value={opcion.descripcion_opcion}
                 onChange={handleChange}
@@ -277,7 +277,7 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
             {!formValidado.descripcion_opcion[0] && (
               <p className="texto-validacion">{formValidado.descripcion_opcion[1]}</p>
             )}
-            <ContInput label="Observación" icono={"ico-opcion"}>
+            <ContInput label="Observación" icono={"pi pi-book"}>
               <input
                 value={opcion.observacion_opcion}
                 onChange={handleChange}
@@ -303,8 +303,8 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
               {idOpcion && idOpcion !== 0 && editando ? (
                 <>
                  {/*Editando la opcion*/}
-                 <Button label={"Aceptar"} onClick={guardarOpcion} aceptar={true}/>
-                 <Button label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
+                 <Button icono={"pi pi-check"} label={"Aceptar"} onClick={guardarOpcion} aceptar={true}/>
+                 <Button icono={"pi pi-ban"} label={"Cancelar"} onClick={cancelarEdicion} cancelar={true}/>
                 </>
               ) : idOpcion && idOpcion !== 0 && !editando ? (
                 /*Ver la opcion*/
@@ -312,8 +312,8 @@ function FormOpcion({ idOpcion, cerrar, recargar }) {
               ):(
                 <>
                 {/*Nueva opcion*/}
-                <Button label={"Aceptar"} onClick={guardarOpcion} aceptar={true}/>
-                <Button label={"Cancelar"} onClick={cerrar} cancelar={true}/>
+                <Button icono={"pi pi-check"} label={"Aceptar"} onClick={guardarOpcion} aceptar={true}/>
+                <Button icono={"pi pi-ban"} label={"Cancelar"} onClick={cerrar} cancelar={true}/>
                 </>
               )}
               

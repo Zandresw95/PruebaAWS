@@ -175,7 +175,11 @@ const RegistroOrganizacion = () => {
 
     const guardarOrganizacion = () => {
         if (validarFundForm()) {
-            insertarPersona();
+            if(organizacion.clave_usuario !== organizacion.claveConfirm_usuario){
+                mostrarPopup(2, "Claves no coinciden!!");
+              }else{
+                insertarPersona();
+              }
         } else {
             mostrarPopup(2, "Llena todos los datos");
         }

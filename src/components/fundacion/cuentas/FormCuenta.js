@@ -254,7 +254,7 @@ function FormCuenta({ id_fundacion, idCuenta, cerrar, recargar }) {
     if (await mostrarConfirm("¿Seguro que deseas eliminar la cuenta?"))
       $.ajax({
         url: `${dominio}/api/tabla_cuenta_bancaria/delete/${idCuenta}`,
-        type: "put",
+        type: "delete",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(),
@@ -323,7 +323,7 @@ function FormCuenta({ id_fundacion, idCuenta, cerrar, recargar }) {
             {!formValidado.banco_cuenta[0] && (
               <p className="texto-validacion">{formValidado.banco_cuenta[1]}</p>
             )}
-            <ContInput label="Tipo de Cuenta" icono={"ico-persona"}>
+            <ContInput label="Tipo de Cuenta" icono={"ico-as"}>
               <select
                   onChange={handleChange}
                   onBlur={handleBlur}
