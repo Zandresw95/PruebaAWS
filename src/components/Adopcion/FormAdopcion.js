@@ -4,7 +4,7 @@ import $ from "jquery";
 import { dominio } from "../../helpers/Dbdata";
 import { Validar } from "../../helpers/Validar";
 import { useContext, useEffect, useState } from "react";
-// import './FormDonacionMonetaria.css'
+import './FormAdop.css'
 
 import PopupContext from "../../context/PopupContext";
 import ConfirmContext from "../../context/ConfirmContext";

@@ -42,10 +42,10 @@ const preguntas = {
     pregunta10: "10. Si su animal de compañía enferma usted:",
     pregunta11: "11. Estime cuánto dinero podría gastar en su animal de compañía, mensualmente:",
     pregunta12: "12. ¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de compañía?",
-    pregunta13: "13. ¿Está de acuerdo en que se haga una visita periódica a su domicilio para ver cómo se encuentra el adoptado?",
-    pregunta14: "14. ¿Está de acuerdo en que el animal de compañía sea esterilizado? (operado para no tener más cachorros)",
+    pregunta13: "12. ¿Está de acuerdo en que se haga una visita periódica a su domicilio para ver cómo se encuentra el adoptado?",
+    pregunta14: "13. ¿Está de acuerdo en que el animal de compañía sea esterilizado? (operado para no tener más cachorros)",
     pregunta15: "15. ¿Está usted Informado y consiente sobre la ordenanza municipal acerca de la tenencia responsable de animales de compañía?",
-    pregunta16: "16. ¿La adopción fue compartida con su familia?",
+    pregunta16: "14. ¿La adopción fue compartida con su familia?",
 };
 
 let initialFormValidado = {
@@ -60,10 +60,10 @@ let initialFormValidado = {
     pregunta9: [false, ""],
     pregunta10: [false, ""],
     pregunta11: [false, ""],
-    pregunta12: [false, ""],
+    //pregunta12: [false, ""],
     pregunta13: [false, ""],
     pregunta14: [false, ""],
-    pregunta15: [false, ""],
+    //pregunta15: [false, ""],
     pregunta16: [false, ""],
 };
 
@@ -418,28 +418,6 @@ function CuestionarioAdopcion({idAnimal, cerrar, abrirForm, nombreAnimal}) {
                                 )}
                             </div>
                             <div className='col'>
-                                <ContInputDon label={preguntas.pregunta12} icono={"ico-persona"}>
-                                    <div className='flex flex-column justify-content-center w-100 gap-1'>
-                                        <div className="field-radiobutton">
-                                            <RadioButton inputId="op_12_1" name="pregunta12" value="Si" onChange={handleChange} checked={cuestionario.pregunta12 === "Si"} />
-                                            <label htmlFor="op_12_1">Si</label>
-                                        </div>
-                                        <div className="field-radiobutton">
-                                            <RadioButton inputId="op_12_2" name="pregunta12" value="No" onChange={handleChange} checked={cuestionario.pregunta12 === 'No'} />
-                                            <label htmlFor="op_12_2">No</label>
-                                        </div>
-                                    </div>
-                                {!formValidado.pregunta12[0] && (
-                                    <div className="ico-advertencia  format-ico-form-validacion"></div>
-                                )}
-                                </ContInputDon>
-                                {!formValidado.pregunta12[0] && (
-                                <p className="texto-validacion">{formValidado.pregunta12[1]}</p>
-                                )}
-                            </div>
-                        </div>
-                        <div className='grid align-items-end'>
-                            <div className='col'>
                                 <ContInputDon label={preguntas.pregunta13} icono={"ico-persona"}>
                                     <div className='flex flex-column justify-content-center w-100 gap-1'>
                                         <div className="field-radiobutton">
@@ -459,6 +437,8 @@ function CuestionarioAdopcion({idAnimal, cerrar, abrirForm, nombreAnimal}) {
                                 <p className="texto-validacion">{formValidado.pregunta13[1]}</p>
                                 )}
                             </div>
+                        </div>
+                        <div className='grid align-items-end'>
                             <div className='col'>
                                 <ContInputDon label={preguntas.pregunta14} icono={"ico-persona"}>
                                     <div className='flex flex-column justify-content-center w-100 gap-1'>
@@ -477,28 +457,6 @@ function CuestionarioAdopcion({idAnimal, cerrar, abrirForm, nombreAnimal}) {
                                 </ContInputDon>
                                 {!formValidado.pregunta14[0] && (
                                 <p className="texto-validacion">{formValidado.pregunta14[1]}</p>
-                                )}
-                            </div>
-                        </div>
-                        <div className='grid align-items-end'>
-                            <div className='col'>
-                                <ContInputDon label={preguntas.pregunta15} icono={"ico-persona"}>
-                                    <div className='flex flex-column justify-content-center w-100 gap-1'>
-                                        <div className="field-radiobutton">
-                                            <RadioButton inputId="op_15_1" name="pregunta15" value="Si" onChange={handleChange} checked={cuestionario.pregunta15 === "Si"} />
-                                            <label htmlFor="op_15_1">Si</label>
-                                        </div>
-                                        <div className="field-radiobutton">
-                                            <RadioButton inputId="op_15_2" name="pregunta15" value="No" onChange={handleChange} checked={cuestionario.pregunta15 === 'No'} />
-                                            <label htmlFor="op_15_2">No</label>
-                                        </div>
-                                    </div>
-                                    {!formValidado.pregunta15[0] && (
-                                        <div className="ico-advertencia  format-ico-form-validacion"></div>
-                                    )}
-                                </ContInputDon>
-                                {!formValidado.pregunta15[0] && (
-                                <p className="texto-validacion">{formValidado.pregunta15[1]}</p>
                                 )}
                             </div>
                             <div className='col'>
@@ -521,12 +479,11 @@ function CuestionarioAdopcion({idAnimal, cerrar, abrirForm, nombreAnimal}) {
                                 <p className="texto-validacion">{formValidado.pregunta16[1]}</p>
                                 )}
                             </div>
-                        </div>
-                        
+                        </div>                       
                     </div>
                 </div>
                 <div className='flex justify-content-evenly'>
-                    <Pdf targetRef={ref} filename={name+"-adopcion-"+nombreAnimal+".pdf"}>
+                    <Pdf targetRef={ref} filename={name+"-adop-"+nombreAnimal+".pdf"}>
                         {({ toPdf }) => <Button className="p-button-info" label="Generar Solicitud" icon="pi pi-check" onClick={() => { abrirPantalla({toPdf}); }} />}
                     </Pdf>
                     <Button className="p-button-success" label="Cerrar" icon="pi pi-ban" onClick={() => { cerrar();}} />

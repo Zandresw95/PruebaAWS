@@ -1,0 +1,44 @@
+.cont-form-adopcion {
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cont-form-adopcion>form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-adopcion-acciones {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+.form-adopcion-toggle {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    align-items: center;
+    width: 100px;
+    align-self: center;
+}
+
+.titulo-adopcion {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}
+
+.etiqueta-textarea{
+    color: var(--color-texto-low);
+    font-size: 0.9em;
+    margin-left: calc(var(--radio-input) / 2);
+}
